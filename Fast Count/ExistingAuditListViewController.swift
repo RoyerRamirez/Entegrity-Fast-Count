@@ -52,9 +52,11 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let DestViewController : ViewAudit = segue.destination as! ViewAudit
-		DestViewController.LabelText = selectedAudit!.name
-		DestViewController.currentAudit = selectedAudit!
+		if segue.identifier == "toViewAudit" {
+			let DestViewController : ViewAudit = segue.destination as! ViewAudit
+			DestViewController.LabelText = selectedAudit!.name
+			DestViewController.currentAudit = selectedAudit!
+		}
 	}
 }
 
