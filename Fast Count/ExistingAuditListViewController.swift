@@ -47,12 +47,15 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+		let index = indexPath
         selectedAudit = audits[indexPath.item]
         self.performSegue(withIdentifier: "toViewAudit", sender: self)
     }
-    
-    
-    
-    
-    }
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		let DestViewController : ViewAudit = segue.destination as! ViewAudit
+		DestViewController.LabelText = selectedAudit!.name
+		DestViewController.currentAudit = selectedAudit!
+	}
+}
 
