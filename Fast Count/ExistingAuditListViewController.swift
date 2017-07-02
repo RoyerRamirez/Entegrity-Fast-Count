@@ -63,6 +63,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         if editingStyle == .delete {
             audits.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            AuditModel.saveAuditsToUserDefaults(audits)
         }
     }
 }
