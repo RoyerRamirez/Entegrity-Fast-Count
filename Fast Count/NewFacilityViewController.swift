@@ -37,16 +37,14 @@ class NewFacilityViewController: UIViewController {
     
   //// This is the same as what was commented above
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "toHomePage" {
-            //let ViewController = segue.destination as! ViewController}
-            _ = segue.destination as! ViewController}
 
         if segue.identifier == "AddToTableViewAudit"{
         let DestViewController : ViewAudit = segue.destination as! ViewAudit
         
         DestViewController.LabelText = TextField.text!
         
+            
+            
         let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
         var audits = AuditModel.getAuditsFromUserDefaults()
         audits.append(newAudit)

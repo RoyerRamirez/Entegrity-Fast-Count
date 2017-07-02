@@ -58,5 +58,12 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 			DestViewController.currentAudit = selectedAudit!
 		}
 	}
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
+        if editingStyle == .delete {
+            audits.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
 

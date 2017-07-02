@@ -12,20 +12,23 @@ import UIKit
 /// Lists the categories
 class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
     @IBOutlet var Label: UILabel! // Facility Label
     
-    
     @IBOutlet var tableView: UITableView!
+    
+    
+    //// Variables:
     
     var LabelText = String() // Facility Label
     
     var categories : [CategoryModel]!  ///ex: ["Category1", "Category2", "Category3"]
     
+    
+    
     var currentAudit : AuditModel!
     
-    
-    
-
+    var selectedCategories : CategoryModel?
     
     
     override func viewDidLoad() {
@@ -33,13 +36,20 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         Label.text = LabelText // Facility Label
         categories = []
-//        categories = CategoryModel.getCategoriesFromUserDefaults()
+        //categories = CategoryModel.getCategoriesFromUserDefaults()
         
         
         tableView.delegate = self
         tableView.dataSource = self
         
+        
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // set number of rows to 3
@@ -52,5 +62,20 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return myCell
     }
     
+    /////////// Added in efforts to get the new table to work
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedCategories = categories[indexPath.item]
+        self.performSegue(withIdentifier: "toRoomLocationView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRoomLocationView" {
+            let DestViewController : RoomLocation = segue.destination as! RoomLocation
+            DestViewController.LabelText2 = selectedCategories!.name
+            DestViewController.currentCategories = selectedCategories!
+        }
+    }
     
 }

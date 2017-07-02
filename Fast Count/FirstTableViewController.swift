@@ -12,7 +12,7 @@ import UIKit
 class FirstTableViewController: UITableViewController {
     
     var FirstTableArray = [String]()
-    var SecondArray = [SecondView]()
+    var TEST = ["1", "2","3", "4", "5"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +38,7 @@ class FirstTableViewController: UITableViewController {
                            "Vending Machine",
                            "Air Compressor (EM)"]
         
-        
-        SecondArray = [SecondView(SecondViewArray: ["One", "Two", "Three"]),
-                      SecondView(SecondViewArray: ["One2", "Two2", "Three2"]),
-                      SecondView(SecondViewArray: ["One3", "Two3", "Three3"])]
-
-    }
+        }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -60,12 +55,8 @@ class FirstTableViewController: UITableViewController {
         return Cell
     }
     //////////
-
-        
-        
-        
     
-
+    
     
     
     

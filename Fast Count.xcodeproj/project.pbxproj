@@ -16,13 +16,12 @@
 		A4262DE91F020FE800C562A7 /* NewFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */; };
 		A4262DEB1F020FFA00C562A7 /* ViewAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */; };
 		A45E01741F0566E800794445 /* FirstTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E01731F0566E800794445 /* FirstTableViewController.swift */; };
-		A45E01761F05679000794445 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E01751F05679000794445 /* SecondViewController.swift */; };
-		A45E01781F0584D600794445 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45E01771F0584D600794445 /* SecondView.swift */; };
 		A4923B931F02B1130002C904 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B921F02B1130002C904 /* CategoryModel.swift */; };
 		A4923B951F02B1530002C904 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B941F02B1530002C904 /* LocationModel.swift */; };
 		A4923B971F02BCAB0002C904 /* AuditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B961F02BCAB0002C904 /* AuditModel.swift */; };
 		A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */; };
 		A4923B9D1F0338F40002C904 /* AuditDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B9C1F0338F40002C904 /* AuditDetailView.swift */; };
+		A4F8B6001F08CF9A0088CAC8 /* RoomLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +48,12 @@
 		A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFacilityViewController.swift; sourceTree = "<group>"; };
 		A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAudit.swift; sourceTree = "<group>"; };
 		A45E01731F0566E800794445 /* FirstTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTableViewController.swift; sourceTree = "<group>"; };
-		A45E01751F05679000794445 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		A45E01771F0584D600794445 /* SecondView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		A4923B921F02B1130002C904 /* CategoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		A4923B941F02B1530002C904 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		A4923B961F02BCAB0002C904 /* AuditModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditModel.swift; sourceTree = "<group>"; };
 		A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingAuditListViewController.swift; sourceTree = "<group>"; };
 		A4923B9C1F0338F40002C904 /* AuditDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditDetailView.swift; sourceTree = "<group>"; };
+		A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +101,9 @@
 				A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */,
 				A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */,
 				A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */,
+				A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */,
 				A4923B9C1F0338F40002C904 /* AuditDetailView.swift */,
 				A45E01731F0566E800794445 /* FirstTableViewController.swift */,
-				A45E01751F05679000794445 /* SecondViewController.swift */,
-				A45E01771F0584D600794445 /* SecondView.swift */,
 				A4262DCC1F020A4200C562A7 /* Main.storyboard */,
 				A4262DCF1F020A4200C562A7 /* Assets.xcassets */,
 				A4262DD11F020A4200C562A7 /* LaunchScreen.storyboard */,
@@ -240,7 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4923B971F02BCAB0002C904 /* AuditModel.swift in Sources */,
-				A45E01781F0584D600794445 /* SecondView.swift in Sources */,
+				A4F8B6001F08CF9A0088CAC8 /* RoomLocation.swift in Sources */,
 				A4923B9D1F0338F40002C904 /* AuditDetailView.swift in Sources */,
 				A4262DEB1F020FFA00C562A7 /* ViewAudit.swift in Sources */,
 				A4262DCB1F020A4200C562A7 /* ViewController.swift in Sources */,
@@ -248,7 +245,6 @@
 				A4923B951F02B1530002C904 /* LocationModel.swift in Sources */,
 				A4262DC91F020A4200C562A7 /* AppDelegate.swift in Sources */,
 				A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */,
-				A45E01761F05679000794445 /* SecondViewController.swift in Sources */,
 				A4923B931F02B1130002C904 /* CategoryModel.swift in Sources */,
 				A4262DE91F020FE800C562A7 /* NewFacilityViewController.swift in Sources */,
 			);

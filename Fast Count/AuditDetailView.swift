@@ -10,9 +10,16 @@ import UIKit
 
 class AuditDetailView: UIViewController {
 
+    @IBOutlet var Label: UILabel!
+    
+    var audits : [AuditModel]!
+    var nextAudit : AuditModel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+               
         // Do any additional setup after loading the view.
     }
 
@@ -22,4 +29,6 @@ class AuditDetailView: UIViewController {
     }
     
 
-    }
+
+
+}
