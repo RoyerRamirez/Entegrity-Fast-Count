@@ -64,6 +64,8 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             audits.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             AuditModel.saveAuditsToUserDefaults(audits)
+            
+            //tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.)
         }
     }
 }

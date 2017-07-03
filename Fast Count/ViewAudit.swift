@@ -39,8 +39,16 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //categories = CategoryModel.getCategoriesFromUserDefaults()
         
         
+        ///////////////////// Do something similar in Room Location /////////////////////////
+        for category in currentAudit.categories {
+            categories.append(category)
+        }
+        
+        //////////////////////////////////////////////////////////////////////////////////////
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
         
         
     }

@@ -43,12 +43,51 @@ class NewFacilityViewController: UIViewController {
         
         DestViewController.LabelText = TextField.text!
         
-            
+          
             
         let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
         var audits = AuditModel.getAuditsFromUserDefaults()
         audits.append(newAudit)
-        AuditModel.saveAuditsToUserDefaults(audits)
+            
+            ///// Set something similar here for RoomLocation //////////////////////////////////
+            let CategoriesAutoLoad = ["Air Handling Unit",
+                                      "HVAC Equipment",
+                                      "Boilers",
+                                      "Chillers",
+                                      "Condensers",
+                                      "Cooling Tower",
+                                      "Exhaust Fans",
+                                      "Fan Coils",
+                                      "Heat Pumps",
+                                      "Mixed Air Unit",
+                                      "Mixing Boxes",
+                                      "Packaged Terminal Air Conditioner",
+                                      "Pumps",
+                                      "Roof Top Handling Units",
+                                      "Steam Converter",
+                                      "Water Heaters",
+                                      "Vending Machine",
+                                      "Air Compressor (EM)"]
+            
+            for category in CategoriesAutoLoad {
+                
+                newAudit.categories.append(CategoryModel(withName: category)) //adding to categories list up above
+            }
+            
+            
+        ///////////////////////////////////////////////////////////////////////////////
+            
+
+            AuditModel.saveAuditsToUserDefaults(audits)
+            
+            
+            AuditModel.saveAuditsToUserDefaults(audits)
+
+        DestViewController.currentAudit = newAudit
+            
+            
+            
+            
         }
         
     }

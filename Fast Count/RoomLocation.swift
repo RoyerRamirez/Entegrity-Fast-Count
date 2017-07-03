@@ -26,6 +26,8 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         Label.text = LabelText2
+        
+        locations = []
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
