@@ -15,10 +15,25 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var LabelText2 = String()
     
-    var locations : [LocationModel]!
-    
     var currentCategories : CategoryModel!
     
+    var RoomsinBuilding : [LocationModel]!
+    
+    var selectedLocations : LocationModel?
+    
+    ///// Added variables...they maybe unnecessary.  
+    
+    var audits : [AuditModel]! //##########
+    
+    var currentStepAudit : AuditModel!
+    
+    var categories : [CategoryModel]! = []
+    
+    
+
+    
+
+        
     
     
     
@@ -27,7 +42,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         Label.text = LabelText2
         
-        locations = []
+        RoomsinBuilding = []
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -37,27 +52,30 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        locations = []
-        // Dispose of any resources that can be recreated.
+        
     }
 
  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // set number of rows to 3
-        return locations.count
+        return RoomsinBuilding.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
-        myCell.textLabel!.text = "\(locations[indexPath.item])"
+        myCell.textLabel!.text = "\(RoomsinBuilding[indexPath.item])"
         return myCell
     }
+    
+
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

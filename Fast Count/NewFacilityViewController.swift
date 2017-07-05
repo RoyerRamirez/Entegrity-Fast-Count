@@ -16,7 +16,6 @@ class NewFacilityViewController: UIViewController {
     
     override func viewDidLoad(){
        
-        
     }
     
     
@@ -68,20 +67,17 @@ class NewFacilityViewController: UIViewController {
                                       "Water Heaters",
                                       "Vending Machine",
                                       "Air Compressor (EM)"]
+
             
             for category in CategoriesAutoLoad {
                 
                 newAudit.categories.append(CategoryModel(withName: category)) //adding to categories list up above
             }
-            
-            
-        ///////////////////////////////////////////////////////////////////////////////
-            
 
-            AuditModel.saveAuditsToUserDefaults(audits)
-            
             
             AuditModel.saveAuditsToUserDefaults(audits)
+            
+            TextField.text = ""
 
         DestViewController.currentAudit = newAudit
             
