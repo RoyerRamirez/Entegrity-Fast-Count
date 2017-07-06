@@ -17,6 +17,8 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Existing Audits Page"
 
         audits = AuditModel.getAuditsFromUserDefaults()
         
@@ -70,31 +72,45 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexPath) in
             self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
         })
-        editAction.backgroundColor = UIColor.blue
-        
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            self.audits.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            AuditModel.saveAuditsToUserDefaults(self.audits)
+            
+            /// Implementing Warning Message
+            let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                self.audits.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                AuditModel.saveAuditsToUserDefaults(self.audits)
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            
+            self.present(refreshAlert, animated: true, completion: nil)
+            /// End of Warning Message
             
         })
+        // Colors
+        editAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red
-        
         return [editAction, deleteAction]
     }
 
-    // The method below works for deleting rows
     
-    //func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
-       // if editingStyle == .delete {
-          //  audits.remove(at: indexPath.row)
-          //  tableView.deleteRows(at: [indexPath], with: .fade)
-          //  AuditModel.saveAuditsToUserDefaults(audits)
+    /* The method below works for deleting rows
     
-            //tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
+        if editingStyle == .delete {
+            audits.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            AuditModel.saveAuditsToUserDefaults(audits)
+    
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.)
             
-       // }
-   // }
+        }
+    }*/
+    
 }
 

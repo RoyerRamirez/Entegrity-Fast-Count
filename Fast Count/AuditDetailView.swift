@@ -6,19 +6,22 @@
 //  Copyright © 2017 EntegrityEnergyPartners. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class AuditDetailView: UIViewController {
 
     @IBOutlet var Label: UILabel!
     
-    var audits : [AuditModel]!
+    var audits : [AuditModel]! 
     var nextAudit : AuditModel!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Audit Inputs Page"
                
         // Do any additional setup after loading the view.
     }

@@ -56,4 +56,5 @@ class AuditModel: NSObject, NSCoding {
         let data = NSKeyedArchiver.archivedData(withRootObject: audits)
         UserDefaults.standard.set(data, forKey: "audits")
     }
+
 }

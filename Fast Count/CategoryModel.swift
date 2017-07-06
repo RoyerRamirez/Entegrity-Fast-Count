@@ -43,5 +43,6 @@ class CategoryModel: NSObject, NSCoding {
         aCoder.encode(locations, forKey: "locations")
     }
 
-
+    
+    
 }

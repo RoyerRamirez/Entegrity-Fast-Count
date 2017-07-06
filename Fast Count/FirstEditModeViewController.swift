@@ -17,7 +17,7 @@ class FirstEditModeViewController: UIViewController {
         override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navigationItem.title = "Renaming Facility Page"
         
     }
 

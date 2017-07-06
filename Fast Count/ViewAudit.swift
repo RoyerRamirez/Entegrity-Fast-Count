@@ -38,6 +38,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
 
+        navigationItem.title = "Audit Details Page"
         
         Label.text = LabelText // Facility Label
         categories = []
@@ -105,7 +106,10 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let DestViewController : RoomLocation = segue.destination as! RoomLocation
             DestViewController.LabelText2 = selectedCategories!.name
             DestViewController.currentCategories = selectedCategories!
+            
+
             }
+        
         
     }
     
@@ -117,21 +121,40 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
             self.performSegue(withIdentifier: "toEditMode2", sender: Any?.self)
         })
-        editAction.backgroundColor = UIColor.blue
         
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            self.categories.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            //AuditModel.saveAuditsToUserDefaults(self.categories)
             
+            /// Implementing Warning Message
+            let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                self.categories.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            
+            self.present(refreshAlert, animated: true, completion: nil)
+            /// End of Warning Message
             
         })
+        // action three
+        let addAction = UITableViewRowAction(style: .default, title: "insert", handler: { (action, indexPath) in
+            print("yas")
+
+         })
+        
+        //Colors
+        editAction.backgroundColor = UIColor.blue
+        addAction.backgroundColor = UIColor.lightGray
         deleteAction.backgroundColor = UIColor.red
         
-        return [editAction, deleteAction]
+        return [addAction, editAction, deleteAction]
+        
     }
 
-    
     
 }

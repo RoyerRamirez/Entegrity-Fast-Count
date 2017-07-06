@@ -14,7 +14,10 @@ class NewFacilityViewController: UIViewController {
     
     @IBOutlet var TextField: UITextField!
     
+    
     override func viewDidLoad(){
+        
+        navigationItem.title = "New Audit Page"
        
     }
     
@@ -48,6 +51,8 @@ class NewFacilityViewController: UIViewController {
         var audits = AuditModel.getAuditsFromUserDefaults()
         audits.append(newAudit)
             
+            
+
             ///// Set something similar here for RoomLocation //////////////////////////////////
             let CategoriesAutoLoad = ["Air Handling Unit",
                                       "HVAC Equipment",
@@ -73,7 +78,6 @@ class NewFacilityViewController: UIViewController {
                 
                 newAudit.categories.append(CategoryModel(withName: category)) //adding to categories list up above
             }
-
             
             AuditModel.saveAuditsToUserDefaults(audits)
             
