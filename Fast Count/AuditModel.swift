@@ -11,6 +11,7 @@ import UIKit
 class AuditModel: NSObject, NSCoding {
     var name : String
     var categories : [CategoryModel]
+    var locations : [LocationModel]
     
     // Retreving the name associated with the string
     override var description: String {
@@ -22,6 +23,7 @@ class AuditModel: NSObject, NSCoding {
     init(withName name : String) {
         self.name = name
         self.categories = []
+        self.locations = []
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,11 +38,17 @@ class AuditModel: NSObject, NSCoding {
         } else {
             categories = []
         }
+        if let locations = aDecoder.decodeObject(forKey: "locations") as? [LocationModel] {
+            self.locations = locations
+        } else {
+            locations = []
+        }
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(categories, forKey: "categories")
+        aCoder.encode(locations, forKey: "locations")
     }
     
     class func getAuditsFromUserDefaults() -> [AuditModel] {

@@ -92,10 +92,17 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             /// End of Warning Message
             
         })
+        // action three
+        let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
+            print("yas")
+            
+        })
         // Colors
         editAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red
-        return [editAction, deleteAction]
+        emailAction.backgroundColor = UIColor.black
+        
+        return [emailAction, editAction, deleteAction]
     }
 
     

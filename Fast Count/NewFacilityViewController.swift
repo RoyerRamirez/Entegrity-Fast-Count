@@ -79,6 +79,12 @@ class NewFacilityViewController: UIViewController {
                 newAudit.categories.append(CategoryModel(withName: category)) //adding to categories list up above
             }
             
+            let LocationsAutoLoad = ["room 1", "room 2", "room 3"]
+            
+            for location in LocationsAutoLoad {
+                newAudit.locations.append(LocationModel(withName: location))
+            }
+            
             AuditModel.saveAuditsToUserDefaults(audits)
             
             TextField.text = ""

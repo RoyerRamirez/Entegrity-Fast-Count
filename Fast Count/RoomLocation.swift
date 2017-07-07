@@ -15,17 +15,17 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var LabelText2 = String()
     
-    var categories : [CategoryModel]! = [] //##########
-    
-    var currentCategories : CategoryModel?
-    
-    var RoomsinBuilding : [LocationModel]!
+    var locations : [LocationModel]!
     
     var selectedLocations : LocationModel?
     
-    var audits : [AuditModel]! //##########
+    var categories : [CategoryModel]!
     
-    var currentStepAudit : AuditModel! //############
+    var currentCategories : CategoryModel?
+    
+    var audits : [AuditModel]!
+    
+    var currentStepAudit : AuditModel!
     
     
 
@@ -37,7 +37,11 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         Label.text = LabelText2
         
-        RoomsinBuilding = []
+        locations = []
+        
+        for location in currentStepAudit.locations {
+            locations.append(location)
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -55,12 +59,12 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // set number of rows to 3
-        return RoomsinBuilding.count
+        return locations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
-        myCell.textLabel!.text = "\(RoomsinBuilding[indexPath.item])"
+        myCell.textLabel!.text = "\(locations[indexPath.item])"
         return myCell
     }
     
@@ -76,8 +80,22 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            self.categories.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            /// Implementing Warning Message
+            let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+                self.locations.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            
+            self.present(refreshAlert, animated: true, completion: nil)
+            /// End of Warning Message
+            
         })
         // action three
         let addAction = UITableViewRowAction(style: .default, title: "insert", handler: { (action, indexPath) in

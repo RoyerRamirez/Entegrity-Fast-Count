@@ -106,7 +106,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let DestViewController : RoomLocation = segue.destination as! RoomLocation
             DestViewController.LabelText2 = selectedCategories!.name
             DestViewController.currentCategories = selectedCategories!
-            
+            DestViewController.currentStepAudit = currentAudit!
 
             }
         
@@ -142,7 +142,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         })
         // action three
-        let addAction = UITableViewRowAction(style: .default, title: "insert", handler: { (action, indexPath) in
+        let addAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
             print("yas")
 
          })
