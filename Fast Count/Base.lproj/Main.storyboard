@@ -97,14 +97,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="Piu-Xx-AA8">
-                                <rect key="frame" x="0.0" y="64" width="768" height="142"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="142"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="142" id="xwJ-ZV-lRx"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Facility Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EuZ-vt-xtW">
-                                <rect key="frame" x="49" y="333" width="495" height="30"/>
+                                <rect key="frame" x="49" y="289" width="495" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="495" id="vGx-bJ-BoG"/>
                                 </constraints>
@@ -113,7 +113,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8n-Ez-nVK">
-                                <rect key="frame" x="614" y="333" width="93" height="30"/>
+                                <rect key="frame" x="614" y="289" width="93" height="30"/>
                                 <color key="backgroundColor" red="0.69427204129999998" green="0.80741065739999995" blue="0.20862406489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" title="Add">
@@ -124,7 +124,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Audit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53R-8l-5rj">
-                                <rect key="frame" x="0.0" y="214" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="170" width="768" height="44"/>
                                 <color key="backgroundColor" red="0.69427204129999998" green="0.80741065739999995" blue="0.20862406489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="nSM-LK-bxJ"/>
@@ -172,7 +172,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="k0F-KO-Jl6">
-                                <rect key="frame" x="0.0" y="64" width="768" height="143"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="187"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Jma-nv-LeQ">
@@ -186,11 +186,11 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jPw-gU-AwR" id="ZEs-4t-Ega">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dtg-gM-2FS">
-                                                    <rect key="frame" x="48" y="0.0" width="672" height="43"/>
+                                                    <rect key="frame" x="48" y="0.0" width="672" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -246,19 +246,16 @@
                         <viewControllerLayoutGuide type="bottom" id="oE1-Yy-zlB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Dg9-k5-LQ7">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="2500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="Jpv-ak-Vti">
-                                <rect key="frame" x="0.0" y="64" width="768" height="143"/>
+                                <rect key="frame" x="0.0" y="17" width="768" height="153"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXv-aj-QmE">
-                                <rect key="frame" x="0.0" y="215" width="768" height="44"/>
+                                <rect key="frame" x="-2" y="178" width="770" height="27"/>
                                 <color key="backgroundColor" red="0.69427204129999998" green="0.80741065739999995" blue="0.20862406489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="kRD-DP-Djh"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -266,22 +263,23 @@
                         </subviews>
                         <color key="backgroundColor" red="0.44304919242858887" green="0.44294434785842896" blue="0.45532065629959106" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Jpv-ak-Vti" firstAttribute="top" secondItem="KIg-QK-V88" secondAttribute="bottom" id="L8r-m6-ErR"/>
+                            <constraint firstItem="Jpv-ak-Vti" firstAttribute="top" secondItem="KIg-QK-V88" secondAttribute="bottom" constant="-3" id="L8r-m6-ErR"/>
                             <constraint firstItem="Jpv-ak-Vti" firstAttribute="trailing" secondItem="OXv-aj-QmE" secondAttribute="trailing" id="QvU-94-Xm7"/>
-                            <constraint firstItem="OXv-aj-QmE" firstAttribute="top" secondItem="Dg9-k5-LQ7" secondAttribute="top" constant="215" id="UZ3-ID-3al"/>
-                            <constraint firstItem="OXv-aj-QmE" firstAttribute="leading" secondItem="Dg9-k5-LQ7" secondAttribute="leading" id="YJT-5O-p5T"/>
-                            <constraint firstItem="Jpv-ak-Vti" firstAttribute="leading" secondItem="OXv-aj-QmE" secondAttribute="leading" id="cu7-kf-2WO"/>
+                            <constraint firstItem="OXv-aj-QmE" firstAttribute="leading" secondItem="Dg9-k5-LQ7" secondAttribute="leading" constant="-2" id="YJT-5O-p5T"/>
+                            <constraint firstItem="Jpv-ak-Vti" firstAttribute="leading" secondItem="OXv-aj-QmE" secondAttribute="leading" constant="2" id="cu7-kf-2WO"/>
                             <constraint firstAttribute="trailing" secondItem="OXv-aj-QmE" secondAttribute="trailing" id="rxA-LQ-90M"/>
                             <constraint firstItem="OXv-aj-QmE" firstAttribute="top" secondItem="Jpv-ak-Vti" secondAttribute="bottom" constant="8" symbolic="YES" id="tLN-QW-gus"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="2500"/>
                     <connections>
-                        <outlet property="Label2" destination="OXv-aj-QmE" id="FlP-Px-dGq"/>
+                        <outlet property="Label2" destination="OXv-aj-QmE" id="nrL-Mu-kWC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8Y-YD-eKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3700" y="373"/>
+            <point key="canvasLocation" x="4123" y="645"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0MA-jJ-rQ8">
@@ -333,11 +331,11 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="goF-hg-vvl" id="pfv-pd-B8P">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5So-Xa-e0i">
-                                                    <rect key="frame" x="48" y="0.0" width="672" height="43"/>
+                                                    <rect key="frame" x="48" y="0.0" width="672" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -349,7 +347,7 @@
                                 </prototypes>
                             </tableView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="qwn-IR-65R">
-                                <rect key="frame" x="0.0" y="64" width="768" height="143"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="187"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSN-4z-ugQ">
@@ -408,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CE6-d0-IxM">
-                                <rect key="frame" x="0.0" y="133" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="89" width="768" height="44"/>
                                 <color key="backgroundColor" red="0.69427204129999998" green="0.80741065739999995" blue="0.20862406489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="flf-7X-8l0"/>
@@ -418,7 +416,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter New Facility Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7gQ-qm-2xg">
-                                <rect key="frame" x="175" y="270" width="419" height="30"/>
+                                <rect key="frame" x="175" y="226" width="419" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="419" id="49s-4F-dWX"/>
                                 </constraints>
@@ -439,7 +437,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Facility Name:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="En7-bL-3rt">
-                                <rect key="frame" x="307" y="230" width="156" height="21"/>
+                                <rect key="frame" x="307" y="186" width="156" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="156" id="DTX-HQ-DKj"/>
                                 </constraints>
@@ -504,11 +502,11 @@
                                         <rect key="frame" x="0.0" y="28" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LCc-JI-MQO" id="fMn-Au-4Db">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Nf-2C-f3l">
-                                                    <rect key="frame" x="48" y="0.0" width="672" height="43"/>
+                                                    <rect key="frame" x="48" y="0.0" width="672" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -548,6 +546,7 @@
                         <outlet property="Label" destination="JSv-7W-ewb" id="zHB-yc-1HO"/>
                         <outlet property="tableView" destination="qZv-ZJ-1tp" id="8Db-I3-J5W"/>
                         <segue destination="uUb-Tg-8B7" kind="show" identifier="toFinalView" id="zEM-L3-dOi"/>
+                        <segue destination="ooc-hv-kyy" kind="show" identifier="toAddLocation" id="qA3-2Z-Y8X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBt-Ah-Rn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -671,9 +670,6 @@
                                 <state key="normal" title="Add">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Nv6-Bw-OJt" kind="show" identifier="toRoomLocationView2" id="YFX-1d-DAZ"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Location Name: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOz-YC-yXo">
                                 <rect key="frame" x="251" y="228" width="266" height="21"/>
@@ -699,12 +695,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="LabelText" destination="EpV-fR-dCB" id="xYj-gp-rJx"/>
-                        <outlet property="LocationAddButton" destination="48J-k3-Xeu" id="ylY-Wc-9Yq"/>
-                        <outlet property="LocationLabel" destination="EpV-fR-dCB" id="kJi-I8-eWu"/>
-                        <outlet property="NewLocationName" destination="7EW-o8-2yH" id="Yil-5y-13i"/>
-                        <outlet property="SaveButton" destination="48J-k3-Xeu" id="Wac-V5-zAP"/>
-                        <outlet property="SubCategoryRenaming" destination="7EW-o8-2yH" id="Rbc-yG-CEN"/>
+                        <outlet property="Button" destination="48J-k3-Xeu" id="Vey-cz-owX"/>
                         <outlet property="TextField" destination="7EW-o8-2yH" id="OVK-bl-PzE"/>
                     </connections>
                 </viewController>
@@ -720,6 +711,5 @@
         <segue reference="nML-Hs-GlM"/>
         <segue reference="f2N-Bs-ZqF"/>
         <segue reference="yHM-yX-eMi"/>
-        <segue reference="W29-mn-1no"/>
     </inferredMetricsTieBreakers>
 </document>

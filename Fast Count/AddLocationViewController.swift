@@ -6,12 +6,12 @@
 //  Copyright © 2017 EntegrityEnergyPartners. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class AddLocationViewController: UIViewController {
     
     @IBOutlet var TextField: UITextField!
+    @IBOutlet var Button: UIButton!
     
     
    
@@ -28,5 +28,7 @@ class AddLocationViewController: UIViewController {
         
         
 }
+
+
 
 

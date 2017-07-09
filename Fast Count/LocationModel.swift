@@ -42,5 +42,6 @@ class LocationModel: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(data, forKey: "data")
     }
+    
 }
 

@@ -72,11 +72,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    ///// ################################## Making Table Editable ##################################################
-
-    ///// ######################################################################################################
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // set number of rows to 3
         return categories.count

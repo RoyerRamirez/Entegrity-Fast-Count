@@ -68,13 +68,31 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         return myCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedLocations = locations[indexPath.item]
+        self.performSegue(withIdentifier: "toFinalView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toFinalView" {
+            
+            let DestViewController : AuditDetailView = segue.destination as! AuditDetailView
+            DestViewController.LabelText3 = selectedLocations!.name
+            DestViewController.currentStepCategories = currentCategories!
+            DestViewController.nextAudit = currentStepAudit!
+            DestViewController.selectedStepLocations = selectedLocations!
+            
+        }
+        
+    }
+
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // action one
         let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexPath) in
-            
-            
-            self.performSegue(withIdentifier: "toEditMode2", sender: Any?.self)
+            self.performSegue(withIdentifier: "toAddLocation", sender: Any?.self)
         })
         editAction.backgroundColor = UIColor.blue
         
