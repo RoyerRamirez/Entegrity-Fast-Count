@@ -16,12 +16,8 @@ class NewFacilityViewController: UIViewController {
     
     
     override func viewDidLoad(){
-        
         navigationItem.title = "New Audit Page"
-       
     }
-    
-    
     
     //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
@@ -41,18 +37,14 @@ class NewFacilityViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "AddToTableViewAudit"{
-        let DestViewController : ViewAudit = segue.destination as! ViewAudit
-        
-        DestViewController.LabelText = TextField.text!
-        
-          
+			let DestViewController : ViewAudit = segue.destination as! ViewAudit
+			
+			DestViewController.LabelText = TextField.text!
             
-        let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
-        var audits = AuditModel.getAuditsFromUserDefaults()
-        audits.append(newAudit)
-            
-            
-
+			let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
+			var audits = AuditModel.getAuditsFromUserDefaults()
+			audits.append(newAudit)
+			
             ///// Set something similar here for RoomLocation //////////////////////////////////
             let CategoriesAutoLoad = ["Air Handling Unit",
                                       "HVAC Equipment",
@@ -72,35 +64,22 @@ class NewFacilityViewController: UIViewController {
                                       "Water Heaters",
                                       "Vending Machine",
                                       "Air Compressor (EM)"]
-
             
             for category in CategoriesAutoLoad {
-                
-                newAudit.categories.append(CategoryModel(withName: category)) //adding to categories list up above
+				newAudit.categories.append(CategoryModel(withName: category, parent: newAudit)) //adding to categories list up above
             }
             
             let LocationsAutoLoad = ["room 1", "room 2", "room 3"]
             
             for location in LocationsAutoLoad {
-                newAudit.locations.append(LocationModel(withName: location))
+				newAudit.locations.append(LocationModel(withName: location))
             }
             
             AuditModel.saveAuditsToUserDefaults(audits)
-            
             TextField.text = ""
-
-        DestViewController.currentAudit = newAudit
-            
-            
-            
-            
+			DestViewController.currentAudit = newAudit
         }
-        
     }
-    
-    
-    
-    
 }
 
 
