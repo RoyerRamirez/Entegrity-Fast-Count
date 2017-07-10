@@ -9,6 +9,14 @@
 import UIKit
 
 class AuditModel: NSObject, NSCoding {
+	
+	// "static" does the same thing as when you put "class" in front of a function. It is accessible
+	// from other classes without having to create a new instance of it. The array below can be 
+	// accessed by "AuditModel.audits". We can then modify our save and load methods to read/write
+	// to this list, and when our ExistingAuditViewController loads the list up, it'll reference 
+	// this list rather than one that it has.
+	static var audits : [AuditModel] = []
+	
     var name : String
     var categories : [CategoryModel]
     var locations : [LocationModel]
@@ -38,6 +46,7 @@ class AuditModel: NSObject, NSCoding {
         } else {
             categories = []
         }
+		
         if let locations = aDecoder.decodeObject(forKey: "locations") as? [LocationModel] {
             self.locations = locations
         } else {
@@ -50,17 +59,17 @@ class AuditModel: NSObject, NSCoding {
         aCoder.encode(categories, forKey: "categories")
         aCoder.encode(locations, forKey: "locations")
     }
-    
-    class func getAuditsFromUserDefaults() -> [AuditModel] {
+	
+    class func loadAuditsFromUserDefaults() {
         if let data = UserDefaults.standard.object(forKey: "audits") as? Data{
-            return NSKeyedUnarchiver.unarchiveObject(with: data) as! [AuditModel]
+            self.audits = NSKeyedUnarchiver.unarchiveObject(with: data) as! [AuditModel]
         } else {
             print("Unable to retrieve audits")
-            return []
+            audits = []
         }
     }
     
-    class func saveAuditsToUserDefaults(_ audits: [AuditModel]){
+    class func saveAuditsToUserDefaults(){
         let data = NSKeyedArchiver.archivedData(withRootObject: audits)
         UserDefaults.standard.set(data, forKey: "audits")
     }

@@ -12,6 +12,7 @@ class CategoryModel: NSObject, NSCoding {
 
     var name : String
     var locations : [LocationModel]
+	var parentAudit : AuditModel?
     
     override var description: String {
         get {
@@ -19,9 +20,10 @@ class CategoryModel: NSObject, NSCoding {
         }
     }
     
-    init(withName name : String) {
+	init(withName name : String, parent: AuditModel) {
         self.name = name
         self.locations = []
+		self.parentAudit = parent
     }
     
     required init?(coder aDecoder: NSCoder) {

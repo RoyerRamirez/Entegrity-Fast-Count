@@ -42,8 +42,7 @@ class NewFacilityViewController: UIViewController {
 			DestViewController.LabelText = TextField.text!
             
 			let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
-			var audits = AuditModel.getAuditsFromUserDefaults()
-			audits.append(newAudit)
+			AuditModel.audits.append(newAudit)
 			
             ///// Set something similar here for RoomLocation //////////////////////////////////
             let CategoriesAutoLoad = ["Air Handling Unit",
@@ -75,7 +74,7 @@ class NewFacilityViewController: UIViewController {
 				newAudit.locations.append(LocationModel(withName: location))
             }
             
-            AuditModel.saveAuditsToUserDefaults(audits)
+            AuditModel.saveAuditsToUserDefaults()
             TextField.text = ""
 			DestViewController.currentAudit = newAudit
         }

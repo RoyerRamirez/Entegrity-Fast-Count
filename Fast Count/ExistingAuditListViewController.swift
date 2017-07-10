@@ -12,7 +12,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 
     @IBOutlet var tableView: UITableView!
     
-    var audits : [AuditModel]!
+    //var audits : [AuditModel]!
     var selectedAudit : AuditModel?
     
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         
         navigationItem.title = "Existing Audits Page"
 
-        audits = AuditModel.getAuditsFromUserDefaults()
+        AuditModel.loadAuditsFromUserDefaults()
         
         
         tableView.delegate = self
@@ -42,19 +42,19 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // set number of rows to 3
-        return audits.count
+        return AuditModel.audits.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
-        myCell.textLabel!.text = "\(audits[indexPath.item])"
+        myCell.textLabel!.text = "\(AuditModel.audits[indexPath.item])"
         return myCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedAudit = audits[indexPath.item]
+        selectedAudit = AuditModel.audits[indexPath.item]
         self.performSegue(withIdentifier: "toViewAudit", sender: self)
     }
 	
@@ -63,6 +63,9 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 			let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
+		} else if segue.identifier == "toEdit" {
+			let destVC = segue.destination as! FirstEditModeViewController
+			destVC.currentAudit = selectedAudit
 		}
 	}
 
@@ -70,8 +73,10 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         
         // action one
         let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexPath) in
+			self.selectedAudit = AuditModel.audits[indexPath.row]
             self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
         })
+		
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
             
@@ -79,9 +84,9 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                self.audits.remove(at: indexPath.row)
+                AuditModel.audits.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                AuditModel.saveAuditsToUserDefaults(self.audits)
+                AuditModel.saveAuditsToUserDefaults()
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
@@ -92,11 +97,13 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             /// End of Warning Message
             
         })
+		
         // action three
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
             print("yas")
             
         })
+		
         // Colors
         editAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red

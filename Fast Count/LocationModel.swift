@@ -19,11 +19,11 @@ class LocationModel: NSObject, NSCoding {
         }
     }
     
-    init(withName name:String) {
+	init(withName name:String) {
         self.name = name
         data = [:]
     }
-    
+	
     required init?(coder aDecoder: NSCoder) {
         if let name = aDecoder.decodeObject(forKey: "name") as? String {
             self.name = name
