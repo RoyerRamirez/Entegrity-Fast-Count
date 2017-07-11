@@ -72,11 +72,27 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // action one
-        let editAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+		let editAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
 			self.selectedAudit = AuditModel.audits[indexPath.row]
-            //self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
-            
-        })
+			//self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
+			
+			let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedAudit!.name): ", preferredStyle: UIAlertControllerStyle.alert)
+			
+			renameAlert.addTextField(configurationHandler: nil)
+			
+			renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+				// Do nothing
+			}))
+			
+			renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+				let newName = renameAlert.textFields![0].attributedText?.string
+				AuditModel.audits[indexPath.row].name = newName!
+				tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
+				AuditModel.saveAuditsToUserDefaults()
+			}))
+			
+			self.present(renameAlert, animated: true, completion: nil)
+		})
 		
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
