@@ -22,13 +22,14 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var LabelText = String() // Facility Label
     
-    var categories : [CategoryModel]!  ///ex: ["Category1", "Category2", "Category3"]
+   // var categories : [CategoryModel]!  ///ex: ["Category1", "Category2", "Category3"]
     
-    var audits : [AuditModel]! //##########
+    //var audits : [AuditModel]! //##########
     
     var currentAudit : AuditModel!
     
-    var selectedCategories : CategoryModel?
+    var selectedCategory : CategoryModel?
+    
     
     
     
@@ -41,15 +42,18 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         navigationItem.title = "Audit Details Page"
         
         Label.text = LabelText // Facility Label
-        categories = []
+        //categories = []
         //categories = CategoryModel.getCategoriesFromUserDefaults()
         
-        
-        ///////////////////// Loading List of Categories /////////////////////////
-        for category in currentAudit.categories {
-            categories.append(category)
+        for cat in currentAudit.categories {
+            cat.parentAudit = currentAudit
         }
         
+        ///////////////////// Loading List of Categories /////////////////////////
+       /* for category in currentAudit.categories {
+            AuditModel.categories.append(category)
+        }
+        */
         //////////////////////////////////////////////////////////////////////////////////////
         
         tableView.delegate = self
@@ -58,9 +62,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //////////////////// Implimenting the Edit & Done Button on the Navigation /////////
         
         //self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,13 +74,13 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // set number of rows to 3
-        return categories.count
+        // set number of rows 
+        return currentAudit.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
-        myCell.textLabel!.text = "\(categories[indexPath.item])"
+        myCell.textLabel!.text = "\(currentAudit.categories[indexPath.item])"
         
         return myCell
     }
@@ -88,7 +89,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedCategories = categories[indexPath.item]
+        selectedCategory = currentAudit.categories[indexPath.item]
         self.performSegue(withIdentifier: "toRoomLocationView", sender: self)
 
         
@@ -99,9 +100,9 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if segue.identifier == "toRoomLocationView" {
 
             let DestViewController : RoomLocation = segue.destination as! RoomLocation
-            DestViewController.LabelText2 = selectedCategories!.name
-            DestViewController.currentCategories = selectedCategories!
-            DestViewController.currentStepAudit = currentAudit!
+            DestViewController.LabelText2 = selectedCategory!.name
+            DestViewController.currentCategory = selectedCategory!
+            //DestViewController.currentStepAudit = currentAudit!
 
             }
         
@@ -124,8 +125,10 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                self.categories.remove(at: indexPath.row)
+               self.currentAudit.categories.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                AuditModel.saveAuditsToUserDefaults()
+                
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in

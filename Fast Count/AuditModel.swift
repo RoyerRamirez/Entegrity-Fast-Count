@@ -14,8 +14,9 @@ class AuditModel: NSObject, NSCoding {
 	// from other classes without having to create a new instance of it. The array below can be 
 	// accessed by "AuditModel.audits". We can then modify our save and load methods to read/write
 	// to this list, and when our ExistingAuditViewController loads the list up, it'll reference 
-	// this list rather than one that it has.
+	// this list rather than one that it has. 
 	static var audits : [AuditModel] = []
+        
 	
     var name : String
     var categories : [CategoryModel]

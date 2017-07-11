@@ -72,9 +72,10 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // action one
-        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexPath) in
+        let editAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
 			self.selectedAudit = AuditModel.audits[indexPath.row]
-            self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
+            //self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
+            
         })
 		
         // action two

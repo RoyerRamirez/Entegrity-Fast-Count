@@ -9,7 +9,8 @@
 import UIKit
 
 class CategoryModel: NSObject, NSCoding {
-
+    
+    
     var name : String
     var locations : [LocationModel]
 	var parentAudit : AuditModel?
@@ -44,7 +45,6 @@ class CategoryModel: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(locations, forKey: "locations")
     }
-
     
     
 }

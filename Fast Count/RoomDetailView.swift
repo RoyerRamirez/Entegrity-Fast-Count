@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuditDetailView: UIViewController {
+class RoomDetailView: UIViewController {
 
     @IBOutlet var Label2: UILabel!
         

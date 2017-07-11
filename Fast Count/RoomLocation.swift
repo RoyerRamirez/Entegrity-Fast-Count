@@ -15,17 +15,17 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var LabelText2 = String()
     
-    var locations : [LocationModel]!
+   // var locations : [LocationModel]!
     
-    var selectedLocations : LocationModel?
+    var selectedLocation : LocationModel?
     
-    var categories : [CategoryModel]!
+    //var categories : [CategoryModel]!
     
-    var currentCategories : CategoryModel?
+    var currentCategory : CategoryModel!
     
-    var audits : [AuditModel]!
+    //var audits : [AuditModel]!
     
-    var currentStepAudit : AuditModel!
+    //var currentStepAudit : AuditModel!
     
     
 
@@ -37,10 +37,14 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         Label.text = LabelText2
         
-        locations = []
+        //locations = []
         
-        for location in currentStepAudit.locations {
+        /*for location in currentStepAudit.locations {
             locations.append(location)
+        }*/
+        
+        for room in currentCategory.locations {
+            room.parentCategory = currentCategory
         }
         
         tableView.delegate = self
@@ -59,29 +63,29 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // set number of rows to 3
-        return locations.count
+        return currentCategory.locations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
-        myCell.textLabel!.text = "\(locations[indexPath.item])"
+        myCell.textLabel!.text = "\(currentCategory.locations[indexPath.item])"
         return myCell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedLocations = locations[indexPath.item]
+        selectedLocation = currentCategory.locations[indexPath.item]
         self.performSegue(withIdentifier: "toFinalView", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFinalView" {
             
-            let DestViewController : AuditDetailView = segue.destination as! AuditDetailView
-            DestViewController.LabelText3 = selectedLocations!.name
-            DestViewController.currentStepCategories = currentCategories!
-            DestViewController.nextAudit = currentStepAudit!
-            DestViewController.selectedStepLocations = selectedLocations!
+            let DestViewController : RoomDetailView = segue.destination as! RoomDetailView
+            DestViewController.LabelText3 = selectedLocation!.name
+            //DestViewController.currentStepCategories = currentCategories!
+            //DestViewController.nextAudit = currentStepAudit!
+            DestViewController.selectedStepLocations = selectedLocation!
             
         }
         
@@ -103,8 +107,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                self.locations.remove(at: indexPath.row)
+                self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                AuditModel.saveAuditsToUserDefaults()
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in

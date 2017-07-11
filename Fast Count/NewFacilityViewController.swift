@@ -65,13 +65,12 @@ class NewFacilityViewController: UIViewController {
                                       "Air Compressor (EM)"]
             
             for category in CategoriesAutoLoad {
-				newAudit.categories.append(CategoryModel(withName: category, parent: newAudit)) //adding to categories list up above
-            }
-            
-            let LocationsAutoLoad = ["room 1", "room 2", "room 3"]
-            
-            for location in LocationsAutoLoad {
-				newAudit.locations.append(LocationModel(withName: location))
+                let newCat = CategoryModel(withName: category, parent: newAudit)
+				newAudit.categories.append(newCat) //adding to categories list up above
+                
+                for location in ["room 1", "room 2", "room 3"] {
+                    newCat.locations.append(LocationModel(withName: location))
+                }
             }
             
             AuditModel.saveAuditsToUserDefaults()

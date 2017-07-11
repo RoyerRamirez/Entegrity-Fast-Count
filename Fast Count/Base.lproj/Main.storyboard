@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cxt-uV-mFu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Cxt-uV-mFu">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -237,10 +237,10 @@
             </objects>
             <point key="canvasLocation" x="1967.96875" y="373.828125"/>
         </scene>
-        <!--Audit Detail View-->
+        <!--Room Detail View-->
         <scene sceneID="z83-k7-hBW">
             <objects>
-                <viewController id="uUb-Tg-8B7" customClass="AuditDetailView" customModule="Fast_Count" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uUb-Tg-8B7" customClass="RoomDetailView" customModule="Fast_Count" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KIg-QK-V88"/>
                         <viewControllerLayoutGuide type="bottom" id="oE1-Yy-zlB"/>
