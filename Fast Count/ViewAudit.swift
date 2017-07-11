@@ -12,61 +12,31 @@ import UIKit
 /// Lists the categories
 class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet var Label: UILabel! // Facility Label
-    
     @IBOutlet var tableView: UITableView!
     
-    
-    //// Variables:
-    
     var LabelText = String() // Facility Label
-    
-   // var categories : [CategoryModel]!  ///ex: ["Category1", "Category2", "Category3"]
-    
-    //var audits : [AuditModel]! //##########
-    
     var currentAudit : AuditModel!
-    
     var selectedCategory : CategoryModel?
-    
-    
-    
-    
-    
-   
-    
     
     override func viewDidLoad() {
 
-        navigationItem.title = "Audit Details Page"
-        
+        navigationItem.title = "Categories Page"
         Label.text = LabelText // Facility Label
-        //categories = []
-        //categories = CategoryModel.getCategoriesFromUserDefaults()
-        
-        for cat in currentAudit.categories {
+       for cat in currentAudit.categories {
+           
             cat.parentAudit = currentAudit
         }
-        
-        ///////////////////// Loading List of Categories /////////////////////////
-       /* for category in currentAudit.categories {
-            AuditModel.categories.append(category)
-        }
-        */
-        //////////////////////////////////////////////////////////////////////////////////////
         
         tableView.delegate = self
         tableView.dataSource = self
         
-        //////////////////// Implimenting the Edit & Done Button on the Navigation /////////
-        
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
 
     public func setEditing(editing: Bool, animated: Bool){
@@ -74,25 +44,24 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // set number of rows 
+        
         return currentAudit.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
         myCell.textLabel!.text = "\(currentAudit.categories[indexPath.item])"
-        
         return myCell
     }
     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         selectedCategory = currentAudit.categories[indexPath.item]
         self.performSegue(withIdentifier: "toRoomLocationView", sender: self)
-
-        
     }
 
     
@@ -104,53 +73,66 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             DestViewController.currentCategory = selectedCategory!
             //DestViewController.currentStepAudit = currentAudit!
 
-            }
-        
-        
+        }
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // action one
-        let editAction = UITableViewRowAction(style: .default, title: "Edit", handler: { (action, indexPath) in
-           
+        let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+           self.selectedCategory = self.currentAudit.categories[indexPath.row]
             
-            self.performSegue(withIdentifier: "toEditMode2", sender: Any?.self)
+            let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedCategory!.name): ", preferredStyle: UIAlertControllerStyle.alert)
+            renameAlert.addTextField(configurationHandler: nil)
+            renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
+            
+            renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+                let newName = renameAlert.textFields![0].attributedText?.string
+                self.currentAudit.categories[indexPath.row].name = newName!
+                tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
+                AuditModel.saveAuditsToUserDefaults()
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
+            
+            self.present(renameAlert, animated: true, completion: nil)
         })
         
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
             
             /// Implementing Warning Message
-            let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
+            let deleteAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
-            refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+            deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                self.currentAudit.categories.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 AuditModel.saveAuditsToUserDefaults()
-                
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+
             }))
-            
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
-            
-            self.present(refreshAlert, animated: true, completion: nil)
+            self.present(deleteAlert, animated: true, completion: nil)
             /// End of Warning Message
             
         })
         // action three
-        let addAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
-            print("yas")
+        let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
+            print("Handle Insert Logic here")
+            tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
 
          })
         
         //Colors
-        editAction.backgroundColor = UIColor.blue
-        addAction.backgroundColor = UIColor.lightGray
+        renameAction.backgroundColor = UIColor.blue
+        insertAction.backgroundColor = UIColor.lightGray
         deleteAction.backgroundColor = UIColor.red
         
-        return [addAction, editAction, deleteAction]
+        return [insertAction, renameAction, deleteAction]
         
     }
 

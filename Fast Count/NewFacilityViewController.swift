@@ -16,35 +16,18 @@ class NewFacilityViewController: UIViewController {
     
     
     override func viewDidLoad(){
+        
         navigationItem.title = "New Audit Page"
     }
     
-    //override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-        //let DestViewController : ViewAudit = segue.destination as! ViewAudit
-        
-        //DestViewController.LabelText = TextField.text!
-        
-        //let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
-        //var audits = AuditModel.getAuditsFromUserDefaults()
-        //audits.append(newAudit)
-       // AuditModel.saveAuditsToUserDefaults(audits)
-        
-   // }
-    
-    
-  //// This is the same as what was commented above
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "AddToTableViewAudit"{
-			let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			
+            let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = TextField.text!
-            
-			let newAudit = AuditModel(withName: TextField.text!) ///replaced var with let
+			let newAudit = AuditModel(withName: TextField.text!)
 			AuditModel.audits.append(newAudit)
-			
-            ///// Set something similar here for RoomLocation //////////////////////////////////
             let CategoriesAutoLoad = ["Air Handling Unit",
                                       "HVAC Equipment",
                                       "Boilers",
@@ -64,14 +47,16 @@ class NewFacilityViewController: UIViewController {
                                       "Vending Machine",
                                       "Air Compressor (EM)"]
             
-            for category in CategoriesAutoLoad {
-                let newCat = CategoryModel(withName: category, parent: newAudit)
-				newAudit.categories.append(newCat) //adding to categories list up above
+                for category in CategoriesAutoLoad {
+                    
+                    let newCat = CategoryModel(withName: category, parent: newAudit)
+                    newAudit.categories.append(newCat) //adding to categories list up above
                 
-                for location in ["room 1", "room 2", "room 3"] {
-                    newCat.locations.append(LocationModel(withName: location))
+                        for location in ["room 1", "room 2", "room 3"] {
+                            
+                            newCat.locations.append(LocationModel(withName: location))
+                        }
                 }
-            }
             
             AuditModel.saveAuditsToUserDefaults()
             TextField.text = ""

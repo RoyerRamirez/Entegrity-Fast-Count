@@ -16,72 +16,73 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     var selectedAudit : AuditModel?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        
         navigationItem.title = "Existing Audits Page"
-
         AuditModel.loadAuditsFromUserDefaults()
-        
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
-        //////////////////// Implimenting the Edit & Done Button on the Navigation /////////
-        
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
-
-        
         
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
     }
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // set number of rows to 3
+        
         return AuditModel.audits.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
         myCell.textLabel!.text = "\(AuditModel.audits[indexPath.item])"
         return myCell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         selectedAudit = AuditModel.audits[indexPath.item]
         self.performSegue(withIdentifier: "toViewAudit", sender: self)
+        
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == "toViewAudit" {
-			let DestViewController : ViewAudit = segue.destination as! ViewAudit
+		
+        if segue.identifier == "toViewAudit" {
+			
+            let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
-		} else if segue.identifier == "toEdit" {
-			let destVC = segue.destination as! FirstEditModeViewController
+
+		}
+        
+        else if segue.identifier == "toEdit" {
+			
+            let destVC = segue.destination as! FirstEditModeViewController
 			destVC.currentAudit = selectedAudit
+            
 		}
 	}
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // action one
-		let editAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
-			self.selectedAudit = AuditModel.audits[indexPath.row]
-			//self.performSegue(withIdentifier: "toEdit", sender: Any?.self)
+		let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
 			
-			let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedAudit!.name): ", preferredStyle: UIAlertControllerStyle.alert)
-			
+            self.selectedAudit = AuditModel.audits[indexPath.row]
+            let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedAudit!.name): ", preferredStyle: UIAlertControllerStyle.alert)
 			renameAlert.addTextField(configurationHandler: nil)
 			
-			renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
-				// Do nothing
+            renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+				 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
 			}))
 			
 			renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
@@ -89,7 +90,8 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 				AuditModel.audits[indexPath.row].name = newName!
 				tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
 				AuditModel.saveAuditsToUserDefaults()
-			}))
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
 			
 			self.present(renameAlert, animated: true, completion: nil)
 		})
@@ -104,10 +106,12 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
                 AuditModel.audits.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 AuditModel.saveAuditsToUserDefaults()
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
             self.present(refreshAlert, animated: true, completion: nil)
@@ -117,31 +121,17 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 		
         // action three
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
-            print("yas")
+            print("Handle email Logic here")
+            tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             
         })
 		
         // Colors
-        editAction.backgroundColor = UIColor.blue
+        renameAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red
         emailAction.backgroundColor = UIColor.black
         
-        return [emailAction, editAction, deleteAction]
+        return [emailAction, renameAction, deleteAction]
     }
-
-    
-    /* The method below works for deleting rows
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath){
-        if editingStyle == .delete {
-            audits.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            AuditModel.saveAuditsToUserDefaults(audits)
-    
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.)
-            
-        }
-    }*/
-    
 }
 
