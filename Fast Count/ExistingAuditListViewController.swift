@@ -18,7 +18,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        navigationItem.title = "Existing Audits Page"
+        navigationItem.title = "Existing Audits"
         AuditModel.loadAuditsFromUserDefaults()
         tableView.delegate = self
         tableView.dataSource = self

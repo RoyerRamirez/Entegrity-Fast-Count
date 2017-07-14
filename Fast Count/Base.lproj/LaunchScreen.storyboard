@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,12 +22,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="anq-9z-UlO">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="anq-9z-UlO">
                                 <rect key="frame" x="20" y="346" width="728" height="237"/>
-                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="anq-9z-UlO" secondAttribute="bottom" constant="441" id="7sV-K4-YIB"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="anq-9z-UlO" secondAttribute="bottom" constant="441" id="Ggy-9H-r1X"/>
+                            <constraint firstItem="anq-9z-UlO" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="KZX-BS-VrE"/>
+                            <constraint firstItem="anq-9z-UlO" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="326" id="NCm-OC-t2Y"/>
+                            <constraint firstItem="anq-9z-UlO" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="bdP-4w-Ywr"/>
+                            <constraint firstItem="anq-9z-UlO" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="326" id="czK-l4-gqs"/>
+                            <constraint firstItem="anq-9z-UlO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="hma-j0-v2p"/>
+                            <constraint firstItem="anq-9z-UlO" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="uvI-0r-8xd"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

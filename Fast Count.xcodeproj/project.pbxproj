@@ -20,6 +20,22 @@
 		A4923B971F02BCAB0002C904 /* AuditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B961F02BCAB0002C904 /* AuditModel.swift */; };
 		A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */; };
 		A4923B9D1F0338F40002C904 /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B9C1F0338F40002C904 /* RoomDetailView.swift */; };
+		A4EA704C1F16C7A300FB895A /* AuditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B961F02BCAB0002C904 /* AuditModel.swift */; };
+		A4EA704D1F16C7A300FB895A /* RoomLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */; };
+		A4EA704E1F16C7A300FB895A /* SecondEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B6031F0D862D0088CAC8 /* SecondEditMode.swift */; };
+		A4EA704F1F16C7A300FB895A /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B9C1F0338F40002C904 /* RoomDetailView.swift */; };
+		A4EA70501F16C7A300FB895A /* ViewAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */; };
+		A4EA70511F16C7A300FB895A /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B6071F0EB41B0088CAC8 /* AddLocationViewController.swift */; };
+		A4EA70521F16C7A300FB895A /* FirstEditModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B6011F0D86160088CAC8 /* FirstEditModeViewController.swift */; };
+		A4EA70531F16C7A300FB895A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DCA1F020A4200C562A7 /* ViewController.swift */; };
+		A4EA70541F16C7A300FB895A /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B941F02B1530002C904 /* LocationModel.swift */; };
+		A4EA70551F16C7A300FB895A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DC81F020A4200C562A7 /* AppDelegate.swift */; };
+		A4EA70561F16C7A300FB895A /* ExistingAuditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */; };
+		A4EA70571F16C7A300FB895A /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B921F02B1130002C904 /* CategoryModel.swift */; };
+		A4EA70581F16C7A300FB895A /* NewFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */; };
+		A4EA705B1F16C7A300FB895A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4262DD11F020A4200C562A7 /* LaunchScreen.storyboard */; };
+		A4EA705C1F16C7A300FB895A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4262DCF1F020A4200C562A7 /* Assets.xcassets */; };
+		A4EA705D1F16C7A300FB895A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4262DCC1F020A4200C562A7 /* Main.storyboard */; };
 		A4F8B6001F08CF9A0088CAC8 /* RoomLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */; };
 		A4F8B6021F0D86160088CAC8 /* FirstEditModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B6011F0D86160088CAC8 /* FirstEditModeViewController.swift */; };
 		A4F8B6041F0D862D0088CAC8 /* SecondEditMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B6031F0D862D0088CAC8 /* SecondEditMode.swift */; };
@@ -54,6 +70,8 @@
 		A4923B961F02BCAB0002C904 /* AuditModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditModel.swift; sourceTree = "<group>"; };
 		A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingAuditListViewController.swift; sourceTree = "<group>"; };
 		A4923B9C1F0338F40002C904 /* RoomDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailView.swift; sourceTree = "<group>"; };
+		A4EA70611F16C7A300FB895A /* Fast Count copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fast Count copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4EA70621F16C7A300FB895A /* Fast Count copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Fast Count copy-Info.plist"; path = "/Users/RoyerRamirezRuiz/Desktop/Entegrity Fast-Count/Fast Count /Entegrity-Fast-Count/Fast Count copy-Info.plist"; sourceTree = "<absolute>"; };
 		A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomLocation.swift; sourceTree = "<group>"; };
 		A4F8B6011F0D86160088CAC8 /* FirstEditModeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstEditModeViewController.swift; sourceTree = "<group>"; };
 		A4F8B6031F0D862D0088CAC8 /* SecondEditMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondEditMode.swift; sourceTree = "<group>"; };
@@ -75,6 +93,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4EA70591F16C7A300FB895A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -84,6 +109,7 @@
 				A4262DC71F020A4200C562A7 /* Fast Count */,
 				A4262DDC1F020A4200C562A7 /* Fast CountTests */,
 				A4262DC61F020A4200C562A7 /* Products */,
+				A4EA70621F16C7A300FB895A /* Fast Count copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +118,7 @@
 			children = (
 				A4262DC51F020A4200C562A7 /* Fast Count.app */,
 				A4262DD91F020A4200C562A7 /* Fast CountTests.xctest */,
+				A4EA70611F16C7A300FB895A /* Fast Count copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,6 +202,23 @@
 			productReference = A4262DD91F020A4200C562A7 /* Fast CountTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A4EA704A1F16C7A300FB895A /* Fast Count copy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4EA705E1F16C7A300FB895A /* Build configuration list for PBXNativeTarget "Fast Count copy" */;
+			buildPhases = (
+				A4EA704B1F16C7A300FB895A /* Sources */,
+				A4EA70591F16C7A300FB895A /* Frameworks */,
+				A4EA705A1F16C7A300FB895A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fast Count copy";
+			productName = "Fast Count";
+			productReference = A4EA70611F16C7A300FB895A /* Fast Count copy.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -196,6 +240,9 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = A4262DC41F020A4200C562A7;
 					};
+					A4EA704A1F16C7A300FB895A = {
+						DevelopmentTeam = 5LQQ26GHE3;
+					};
 				};
 			};
 			buildConfigurationList = A4262DC01F020A4200C562A7 /* Build configuration list for PBXProject "Fast Count" */;
@@ -213,6 +260,7 @@
 			targets = (
 				A4262DC41F020A4200C562A7 /* Fast Count */,
 				A4262DD81F020A4200C562A7 /* Fast CountTests */,
+				A4EA704A1F16C7A300FB895A /* Fast Count copy */,
 			);
 		};
 /* End PBXProject section */
@@ -232,6 +280,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4EA705A1F16C7A300FB895A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4EA705B1F16C7A300FB895A /* LaunchScreen.storyboard in Resources */,
+				A4EA705C1F16C7A300FB895A /* Assets.xcassets in Resources */,
+				A4EA705D1F16C7A300FB895A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +321,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4262DDE1F020A4200C562A7 /* Fast_CountTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4EA704B1F16C7A300FB895A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4EA704C1F16C7A300FB895A /* AuditModel.swift in Sources */,
+				A4EA704D1F16C7A300FB895A /* RoomLocation.swift in Sources */,
+				A4EA704E1F16C7A300FB895A /* SecondEditMode.swift in Sources */,
+				A4EA704F1F16C7A300FB895A /* RoomDetailView.swift in Sources */,
+				A4EA70501F16C7A300FB895A /* ViewAudit.swift in Sources */,
+				A4EA70511F16C7A300FB895A /* AddLocationViewController.swift in Sources */,
+				A4EA70521F16C7A300FB895A /* FirstEditModeViewController.swift in Sources */,
+				A4EA70531F16C7A300FB895A /* ViewController.swift in Sources */,
+				A4EA70541F16C7A300FB895A /* LocationModel.swift in Sources */,
+				A4EA70551F16C7A300FB895A /* AppDelegate.swift in Sources */,
+				A4EA70561F16C7A300FB895A /* ExistingAuditListViewController.swift in Sources */,
+				A4EA70571F16C7A300FB895A /* CategoryModel.swift in Sources */,
+				A4EA70581F16C7A300FB895A /* NewFacilityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +523,33 @@
 			};
 			name = Release;
 		};
+		A4EA705F1F16C7A300FB895A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				INFOPLIST_FILE = "Fast Count copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A4EA70601F16C7A300FB895A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "";
+				INFOPLIST_FILE = "Fast Count copy-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -471,6 +576,15 @@
 			buildConfigurations = (
 				A4262DE61F020A4300C562A7 /* Debug */,
 				A4262DE71F020A4300C562A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4EA705E1F16C7A300FB895A /* Build configuration list for PBXNativeTarget "Fast Count copy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4EA705F1F16C7A300FB895A /* Debug */,
+				A4EA70601F16C7A300FB895A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

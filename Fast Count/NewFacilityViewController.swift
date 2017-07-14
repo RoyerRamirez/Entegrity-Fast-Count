@@ -13,11 +13,12 @@ class NewFacilityViewController: UIViewController {
     
     
     @IBOutlet var TextField: UITextField!
+    @IBOutlet var textField2: UITextField!
     
     
     override func viewDidLoad(){
         
-        navigationItem.title = "New Audit Page"
+        navigationItem.title = "New Audit"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -26,6 +27,7 @@ class NewFacilityViewController: UIViewController {
 			
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = TextField.text!
+            DestViewController.auditorText = textField2.text!
 			let newAudit = AuditModel(withName: TextField.text!)
 			AuditModel.audits.append(newAudit)
             let CategoriesAutoLoad = ["Air Handling Unit",
@@ -60,6 +62,7 @@ class NewFacilityViewController: UIViewController {
             
             AuditModel.saveAuditsToUserDefaults()
             TextField.text = ""
+            textField2.text = ""
 			DestViewController.currentAudit = newAudit
         }
     }

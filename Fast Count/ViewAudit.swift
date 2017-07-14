@@ -16,12 +16,13 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var tableView: UITableView!
     
     var LabelText = String() // Facility Label
+    var auditorText = String()
     var currentAudit : AuditModel!
     var selectedCategory : CategoryModel?
     
     override func viewDidLoad() {
 
-        navigationItem.title = "Categories Page"
+        navigationItem.title = "Categories"
         Label.text = LabelText // Facility Label
        for cat in currentAudit.categories {
            
@@ -70,12 +71,13 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
             let DestViewController : RoomLocation = segue.destination as! RoomLocation
             DestViewController.LabelText2 = selectedCategory!.name
+            DestViewController.auditorText2 = auditorText
             DestViewController.currentCategory = selectedCategory!
             //DestViewController.currentStepAudit = currentAudit!
 
         }
     }
-    
+
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // action one

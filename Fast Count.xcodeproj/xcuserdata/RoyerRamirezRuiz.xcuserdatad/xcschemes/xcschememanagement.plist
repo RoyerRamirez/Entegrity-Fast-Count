@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Fast Count copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Fast Count.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,21 @@
 			<true/>
 		</dict>
 		<key>A4262DD81F020A4200C562A7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4EA70181F16C71100FB895A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4EA70311F16C75300FB895A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4EA704A1F16C7A300FB895A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

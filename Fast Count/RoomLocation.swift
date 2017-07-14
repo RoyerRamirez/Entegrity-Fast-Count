@@ -14,6 +14,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet var tableView: UITableView!
     
     var LabelText2 = String()
+    var auditorText2 = String()
     var selectedLocation : LocationModel?
     var currentCategory : CategoryModel!
     
@@ -21,7 +22,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Rooms Page"
+        navigationItem.title = "Locations"
         
         Label.text = LabelText2
         
@@ -65,10 +66,10 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         if segue.identifier == "toFinalView" {
             
             let DestViewController : RoomDetailView = segue.destination as! RoomDetailView
-            DestViewController.LabelText3 = selectedLocation!.name
-            //DestViewController.currentStepCategories = currentCategories!
-            //DestViewController.nextAudit = currentStepAudit!
-            DestViewController.selectedStepLocations = selectedLocation!
+            DestViewController.labelText3 = selectedLocation!.name
+            DestViewController.labelText4 = LabelText2
+            DestViewController.auditorText3 = auditorText2
+            DestViewController.currentLocation = selectedLocation!
             
         }
         
