@@ -78,7 +78,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        // action one
+        // Renaming Action
         let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
             self.selectedLocation = self.currentCategory.locations[indexPath.row]
             let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedLocation!.name): ", preferredStyle: UIAlertControllerStyle.alert)
@@ -98,7 +98,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.present(renameAlert, animated: true, completion: nil)
         })
         
-        // action two
+        // Delete Action
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
             
             /// Implementing Warning Message
@@ -121,10 +121,30 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             
         })
         
-        // action three
+        // Insert Action
         let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
-            print("Handle Insert Logic Here")
-            tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            
+            /*
+            // Inserting Alert
+            let newLocAlert = UIAlertController(title: "New Location", message: "Please input a new location name:", preferredStyle: UIAlertControllerStyle.alert)
+            newLocAlert.addTextField(configurationHandler: nil)
+            newLocAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
+            
+            newLocAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+                let newLocName = newLocAlert.textFields![0].attributedText?.string
+                let newLoc = CategoryModel(withName: newLocName!, parent: currentCategory)
+                self.currentCategory.locations.append(newLoc) //adding to categories list up above
+                
+                AuditModel.saveAuditsToUserDefaults()
+                tableView.reloadData()
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
+            
+ 
+            
+            self.present(newLocAlert, animated: true, completion: nil) */
         })
         
         // determing the colors of each button
@@ -139,3 +159,5 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     
 }
+
+    

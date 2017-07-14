@@ -10,9 +10,24 @@ import UIKit
 
 class RoomDetailView: UITableViewController  {
 
-    @IBOutlet var labels: [UILabel]!
-    @IBOutlet var label2: UILabel!
-    @IBOutlet var auditorName: UIView!
+    @IBOutlet var labels: [UILabel]! //Photo Gallary Label
+    @IBOutlet var label2: UILabel! // Header Label
+    
+   // var for every input:
+    @IBOutlet var servesTextField: UITextField!
+    @IBOutlet var idTextField: UITextField!
+    @IBOutlet var makeTextField: UITextField!
+    @IBOutlet var modelTextField: UITextField!
+    @IBOutlet var serialTextField: UITextField!
+    @IBOutlet var yearTextField: UITextField!
+    @IBOutlet var voltageTextField: UITextField!
+    @IBOutlet var phaseTextField: UITextField!
+    @IBOutlet var descriptionTextField: UITextField!
+    @IBOutlet var conditionTextField: UITextField!
+    @IBOutlet var auditorTextField: UITextField!
+    @IBOutlet var efficiencyTextField: UITextField!
+    @IBOutlet var notesTextField: UITextField!
+    
     
     
     var labelText3 = String() //This string has the Room Location Name
@@ -26,7 +41,8 @@ class RoomDetailView: UITableViewController  {
         
         let totalLabel = labelText4 + ":  " + labelText3
         label2.text = totalLabel
-        navigationItem.title = "Audit Inputs Page"
+        auditorTextField.text = auditorText3
+        navigationItem.title = "Audit Detailed Inputs"
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +52,6 @@ class RoomDetailView: UITableViewController  {
     // method below calculates the label width
     private func calculateLabelWidth(label: UILabel) -> CGFloat {
         let labelSize = label.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: label.frame.height))
-        
         return labelSize.width
     }
     
@@ -61,4 +76,22 @@ class RoomDetailView: UITableViewController  {
         }
     }
     
+    // This method should loop through each text field then hide the keyboard (pressing enter key)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case servesTextField: idTextField.becomeFirstResponder() // passes each textField to next
+        case idTextField: makeTextField.becomeFirstResponder()
+        case makeTextField: modelTextField.becomeFirstResponder()
+        case modelTextField: serialTextField.becomeFirstResponder()
+        case serialTextField: yearTextField.becomeFirstResponder()
+        case yearTextField: voltageTextField.becomeFirstResponder()
+        case voltageTextField: phaseTextField.becomeFirstResponder()
+        case phaseTextField: descriptionTextField.becomeFirstResponder()
+        case descriptionTextField: conditionTextField.becomeFirstResponder()
+        case conditionTextField: efficiencyTextField.becomeFirstResponder()
+        case efficiencyTextField: notesTextField.becomeFirstResponder()
+        default: efficiencyTextField.resignFirstResponder() //closes out the keyboard at the end
+        }
+        return true
+    }
 }

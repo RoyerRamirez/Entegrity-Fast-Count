@@ -63,13 +63,6 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 			DestViewController.currentAudit = selectedAudit!
 
 		}
-        
-        else if segue.identifier == "toEdit" {
-			
-            let destVC = segue.destination as! FirstEditModeViewController
-			destVC.currentAudit = selectedAudit
-            
-		}
 	}
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

@@ -80,7 +80,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        // action one
+        // Renaming Action
         let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
            self.selectedCategory = self.currentAudit.categories[indexPath.row]
             
@@ -101,11 +101,11 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             self.present(renameAlert, animated: true, completion: nil)
         })
         
-        // action two
+        // Delete Action
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
             
             /// Implementing Warning Message
-            let deleteAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
+            let deleteAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete?", preferredStyle: UIAlertControllerStyle.alert)
             
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                self.currentAudit.categories.remove(at: indexPath.row)
@@ -122,21 +122,33 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             /// End of Warning Message
             
         })
-        // action three
+        // Insert Action
         let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
-            print("Handle Insert Logic here")
-            tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            
+            // Inserting Alert
+            let newCatAlert = UIAlertController(title: "New Category", message: "Please input a new category name:", preferredStyle: UIAlertControllerStyle.alert)
+            newCatAlert.addTextField(configurationHandler: nil)
+            newCatAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
+            
+            newCatAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+                let newCatName = newCatAlert.textFields![0].attributedText?.string
+                let newCat = CategoryModel(withName: newCatName!, parent: self.currentAudit)
+                self.currentAudit.categories.append(newCat) //adding to categories list up above
 
+                AuditModel.saveAuditsToUserDefaults()
+                tableView.reloadData()
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+            }))
+            self.present(newCatAlert, animated: true, completion: nil)
          })
         
-        //Colors
+        //Colors & returning actions
         renameAction.backgroundColor = UIColor.blue
         insertAction.backgroundColor = UIColor.lightGray
         deleteAction.backgroundColor = UIColor.red
-        
         return [insertAction, renameAction, deleteAction]
         
     }
-
-    
 }
