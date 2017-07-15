@@ -29,11 +29,11 @@ class RoomDetailView: UITableViewController  {
     @IBOutlet var notesTextField: UITextField!
     
     
-    
+    var currentLocation : LocationModel!
     var labelText3 = String() //This string has the Room Location Name
     var labelText4 = String() // This string has the category Name
     var auditorText3 = String() //This string has the auditor name
-    var currentLocation : LocationModel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,4 +94,10 @@ class RoomDetailView: UITableViewController  {
         }
         return true
     }
+    
+    // This method should autosave the text
+    func textFieldDidChange(_ textField: UITextField) {
+        AuditModel.saveAuditsToUserDefaults()
+    }
+    
 }

@@ -34,6 +34,8 @@
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="186" id="Iq0-9A-Dt9"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="186" id="JQb-I5-CbN"/>
+                                    <constraint firstAttribute="height" constant="48" id="gPn-D6-Yd6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <state key="normal" title="View Audits">
@@ -55,10 +57,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asM-Ft-ybk">
-                                <rect key="frame" x="139" y="587" width="164" height="48"/>
+                                <rect key="frame" x="139" y="587" width="186" height="48"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="164" id="bMa-Di-HnJ"/>
+                                    <constraint firstAttribute="height" constant="48" id="6l5-bx-i7Z"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="186" id="GsY-gu-PMC"/>
+                                    <constraint firstAttribute="width" constant="186" id="bMa-Di-HnJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <state key="normal" title="New Audit">
@@ -961,7 +965,7 @@
         <image name="Entegrity Logo - Cover" width="450" height="153"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Rji-It-piH"/>
         <segue reference="dDj-kI-MK3"/>
-        <segue reference="f2N-Bs-ZqF"/>
     </inferredMetricsTieBreakers>
 </document>

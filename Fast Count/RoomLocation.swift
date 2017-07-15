@@ -17,6 +17,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     var auditorText2 = String()
     var selectedLocation : LocationModel?
     var currentCategory : CategoryModel!
+    var audits : AuditModel!
     
 
     override func viewDidLoad() {
@@ -124,27 +125,23 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Insert Action
         let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
             
-            /*
+            
             // Inserting Alert
             let newLocAlert = UIAlertController(title: "New Location", message: "Please input a new location name:", preferredStyle: UIAlertControllerStyle.alert)
             newLocAlert.addTextField(configurationHandler: nil)
+            
             newLocAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
             newLocAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
-                let newLoc = CategoryModel(withName: newLocName!, parent: currentCategory)
-                self.currentCategory.locations.append(newLoc) //adding to categories list up above
-                
+                self.currentCategory.locations.append(LocationModel(withName: newLocName!))
                 AuditModel.saveAuditsToUserDefaults()
                 tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
-            
- 
-            
-            self.present(newLocAlert, animated: true, completion: nil) */
+            self.present(newLocAlert, animated: true, completion: nil)
         })
         
         // determing the colors of each button
