@@ -24,20 +24,19 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         navigationItem.title = "Categories"
         Label.text = LabelText // Facility Label
-       for cat in currentAudit.categories {
-           
+       
+        for cat in currentAudit.categories {
             cat.parentAudit = currentAudit
         }
-        
         tableView.delegate = self
         tableView.dataSource = self
-        
+        // Sorting the Category List by name:
+        currentAudit.categories.sort(by :{$0.name < $1.name})
+        NSLog("\(currentAudit.categories)")
     }
     
     override func didReceiveMemoryWarning() {
-        
         super.didReceiveMemoryWarning()
-        
     }
 
     public func setEditing(editing: Bool, animated: Bool){
@@ -45,30 +44,23 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return currentAudit.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
         myCell.textLabel!.text = "\(currentAudit.categories[indexPath.item])"
         return myCell
     }
     
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         selectedCategory = currentAudit.categories[indexPath.item]
         self.performSegue(withIdentifier: "toRoomLocationView", sender: self)
     }
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRoomLocationView" {
-
             let DestViewController : RoomLocation = segue.destination as! RoomLocation
             DestViewController.LabelText2 = selectedCategory!.name
             DestViewController.auditorText2 = auditorText
@@ -79,7 +71,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         // Renaming Action
         let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
            self.selectedCategory = self.currentAudit.categories[indexPath.row]
@@ -95,6 +86,10 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.currentAudit.categories[indexPath.row].name = newName!
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
                 AuditModel.saveAuditsToUserDefaults()
+                // Sorting the Category List by name & reloading the data
+                self.currentAudit.categories.sort(by :{$0.name < $1.name})
+                NSLog("\(self.currentAudit.categories)")
+                tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
@@ -136,8 +131,15 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let newCatName = newCatAlert.textFields![0].attributedText?.string
                 let newCat = CategoryModel(withName: newCatName!, parent: self.currentAudit)
                 self.currentAudit.categories.append(newCat) //adding to categories list up above
-
+                // Creating New Rooms for this Category
+                for location in ["Room 1", "Room 2", "Room 3"] {
+                    newCat.locations.append(LocationModel(withName: location))
+                }
+                // Saving the new category
                 AuditModel.saveAuditsToUserDefaults()
+                // Sorting the Category List by name & reloading the data
+                self.currentAudit.categories.sort(by :{$0.name < $1.name})
+                NSLog("\(self.currentAudit.categories)")
                 tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))

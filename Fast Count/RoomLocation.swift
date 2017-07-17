@@ -35,6 +35,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.delegate = self
         tableView.dataSource = self
         
+        // Sorting the Rooms by name:
+        currentCategory.locations.sort(by :{$0.name < $1.name})
+        NSLog("\(currentCategory.locations)")
 
     }
 
@@ -93,6 +96,10 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations[indexPath.row].name = newName!
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
                 AuditModel.saveAuditsToUserDefaults()
+                // Sorting the Rooms by name & reloading the list:
+                self.currentCategory.locations.sort(by :{$0.name < $1.name})
+                NSLog("\(self.currentCategory.locations)")
+                tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
@@ -138,6 +145,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
                 self.currentCategory.locations.append(LocationModel(withName: newLocName!))
                 AuditModel.saveAuditsToUserDefaults()
+                // Sorting the Rooms by name & reloading the List:
+                self.currentCategory.locations.sort(by :{$0.name < $1.name})
+                NSLog("\(self.currentCategory.locations)")
                 tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))

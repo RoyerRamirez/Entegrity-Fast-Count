@@ -13,7 +13,7 @@ class RoomDetailView: UITableViewController  {
     @IBOutlet var labels: [UILabel]! //Photo Gallary Label
     @IBOutlet var label2: UILabel! // Header Label
     
-   // var for every input:
+   // var for every Text Field:
     @IBOutlet var servesTextField: UITextField!
     @IBOutlet var idTextField: UITextField!
     @IBOutlet var makeTextField: UITextField!
@@ -27,6 +27,9 @@ class RoomDetailView: UITableViewController  {
     @IBOutlet var auditorTextField: UITextField!
     @IBOutlet var efficiencyTextField: UITextField!
     @IBOutlet var notesTextField: UITextField!
+    @IBOutlet var imageTextField1: UITextField!
+    @IBOutlet var imageTextField2: UITextField!
+    @IBOutlet var imageTextField3: UITextField!
     
     
     var currentLocation : LocationModel!
@@ -42,6 +45,14 @@ class RoomDetailView: UITableViewController  {
         let totalLabel = labelText4 + ":  " + labelText3
         label2.text = totalLabel
         auditorTextField.text = auditorText3
+        
+        //Giving each picture a unique name
+        let totalImageLabel = labelText4 + "." + labelText3
+        let totalImageLabelTrim = String(totalImageLabel.characters.filter { !" \n\t\r".characters.contains($0) })
+        imageTextField1.text = totalImageLabelTrim + ".1"
+        imageTextField2.text = totalImageLabelTrim + ".2"
+        imageTextField3.text = totalImageLabelTrim + ".3"
+        
         navigationItem.title = "Audit Detailed Inputs"
     }
 
@@ -99,5 +110,5 @@ class RoomDetailView: UITableViewController  {
     func textFieldDidChange(_ textField: UITextField) {
         AuditModel.saveAuditsToUserDefaults()
     }
-    
+
 }

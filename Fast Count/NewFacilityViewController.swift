@@ -54,7 +54,7 @@ class NewFacilityViewController: UIViewController {
                     let newCat = CategoryModel(withName: category, parent: newAudit)
                     newAudit.categories.append(newCat) //adding to categories list up above
                 
-                        for location in ["room 1", "room 2", "room 3"] {
+                        for location in ["Room 1", "Room 2", "Room 3"] {
                             
                             newCat.locations.append(LocationModel(withName: location))
                         }

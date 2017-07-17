@@ -11,43 +11,35 @@ import UIKit
 class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
-    
-    //var audits : [AuditModel]!
     var selectedAudit : AuditModel?
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         navigationItem.title = "Existing Audits"
         AuditModel.loadAuditsFromUserDefaults()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        // Sorting the Category List by name:
+        AuditModel.audits.sort(by :{$0.name < $1.name})
+        NSLog("\(AuditModel.audits)")
     }
 
     override func didReceiveMemoryWarning() {
-        
         super.didReceiveMemoryWarning()
-
     }
     
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return AuditModel.audits.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let myCell = tableView.dequeueReusableCell(withIdentifier: "BasicCell")!
         myCell.textLabel!.text = "\(AuditModel.audits[indexPath.item])"
         return myCell
         
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         selectedAudit = AuditModel.audits[indexPath.item]
         self.performSegue(withIdentifier: "toViewAudit", sender: self)
@@ -55,21 +47,16 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		
         if segue.identifier == "toViewAudit" {
-			
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
-
 		}
 	}
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         // action one
 		let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
-			
             self.selectedAudit = AuditModel.audits[indexPath.row]
             let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedAudit!.name): ", preferredStyle: UIAlertControllerStyle.alert)
 			renameAlert.addTextField(configurationHandler: nil)
@@ -83,6 +70,10 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 				AuditModel.audits[indexPath.row].name = newName!
 				tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
 				AuditModel.saveAuditsToUserDefaults()
+                // Sorting the Audit List by name & reloading all Audits:
+                AuditModel.audits.sort(by :{$0.name < $1.name})
+                NSLog("\(AuditModel.audits)")
+                tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
 			
