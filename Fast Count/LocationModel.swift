@@ -14,7 +14,6 @@ class LocationModel: NSObject, NSCoding {
     var data : [String:String] // Dictioary
     var parentCategory : CategoryModel?
     
-    
     override var description: String {
         get {
             return self.name
