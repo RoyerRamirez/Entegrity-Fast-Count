@@ -7,11 +7,22 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class RoomDetailView: UITableViewController, UITextFieldDelegate {
+class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    // Labels:
     @IBOutlet var labels: [UILabel]! //Photo Gallary Label
     @IBOutlet var label2: UILabel! // Header Label
+    
+    // Buttons:
+    @IBOutlet var takePhotoButton: UIButton!
+    
+    
+    // Image Views:
+    @IBOutlet var imageView1: UIImageView!
+    @IBOutlet var imageView2: UIImageView!
+    @IBOutlet var imageView3: UIImageView!
     
    // var for every Text Field:
     @IBOutlet var servesTextField: AttributeTextField!
@@ -43,11 +54,14 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate {
     var labelText3 = String() //This string has the Room Location Name
     var labelText4 = String() // This string has the category Name
     var auditorText3 = String() //This string has the auditor name
+    //var imagePicker: UIImagePickerController!
+    var newMedia : Bool?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+        
+        
 		servesTextField.delegate = self
 		idTextField.delegate = self
 		makeTextField.delegate = self
@@ -64,10 +78,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate {
 		
         updateWidthsForLabels(labels: labels)
         
-        let totalLabel = labelText4 + ":  " + labelText3
-        label2.text = totalLabel
-        auditorTextField.text = auditorText3
-        
         //Giving each picture a unique name
         let totalImageLabel = labelText4 + "." + labelText3
         let totalImageLabelTrim = String(totalImageLabel.characters.filter { !" \n\t\r".characters.contains($0) })
@@ -79,7 +89,11 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate {
 		for field in fieldArray {
 			field.text = (currentLocation.data[field.attributeKey] == nil ? "" : currentLocation.data[field.attributeKey]!)
 		}
-		
+        
+        let totalLabel = labelText4 + ":  " + labelText3
+        label2.text = totalLabel
+        auditorTextField.text = auditorText3
+        
         navigationItem.title = "Audit Detailed Inputs"
     }
 
@@ -141,10 +155,81 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate {
 			// Only need to update currentLocation for the attribute just edited.
 			currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
 			AuditModel.saveAuditsToUserDefaults()
+
 		}
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
+    
+    
+    
+    // ******************************************* Needs some Work: Camera Features ******************************************************************************
+    
+    
+    // The method below will launch the camera
+
+    @IBAction func takePhotoAction(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) { // checks to see if the camera is avaiable
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false // prevents black screen with a square frame to appear after taking pic
+            self.present(imagePicker, animated: true, completion: nil) // presents picture after taking picture
+            newMedia = true
+        }
+
+    }
+    
+    // The method below will open the Photo Library...button needs to be added
+    @IBAction func useCameraRoll(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
+            let imagePicker = UIImagePickerController()
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+            newMedia = false
+        }
+    }
+    
+    // The method below will tell the app to select the picture choosen from above
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! NSString
+        self.dismiss(animated: true, completion: nil)
+        if mediaType.isEqual(to: kUTTypeImage as String){
+            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            imageView1.image = image
+        
+            if (newMedia == true) {
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(RoomDetailView.image(image:didFinishSavingWithError:contextInfo:)), nil)
+                
+            }
+            else if mediaType.isEqual(to: kUTTypeMovie as String) {
+                // Code for video here
+            }
+        }
+    }
+    
+    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
+        if error != nil {
+            let alert = UIAlertController(title: "Save Failed", message: "Failed to save image", preferredStyle: UIAlertControllerStyle.alert)
+            let cancelAction = UIAlertAction(title: "OK",style: .cancel, handler: nil)
+            
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true,completion: nil)
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
+
+
+
+
+

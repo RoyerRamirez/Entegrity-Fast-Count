@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -105,7 +106,59 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 		
         // action three
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
-            print("Handle email Logic here")
+            
+            //******************************************* Stil Needs Work: Email CSV Strings **************************************************************************************
+            let fileName = "\(AuditModel.audits[indexPath.item]).csv"
+            let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+            
+            var csvText = "Entegrity,Energy,Partners\n\(AuditModel.audits),\(self.selectedAudit?.categories),\(self.selectedAudit?.locations)\n\nDate,Mileage,Gallons,Price,Price per gallon,Miles between fillups,MPG\n"
+            
+            self.selectedAudit?.categories.sort(by: { $0.name.compare($1.name) == .orderedDescending })
+            
+            
+            let count = self.selectedAudit?.categories.count
+            
+            if count! >= 0 {
+                
+                
+                    
+                    let newLine = "\(self.selectedAudit?.categories),\(self.selectedAudit?.locations)\n"
+                    
+                    csvText.append(newLine)
+            
+                
+                do {
+                    try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+                    
+                    let vc = UIActivityViewController(activityItems: [path!], applicationActivities: [])
+                    vc.excludedActivityTypes = [
+                        UIActivityType.assignToContact,
+                        UIActivityType.saveToCameraRoll,
+                        UIActivityType.postToFlickr,
+                        UIActivityType.postToVimeo,
+                        UIActivityType.postToTencentWeibo,
+                        UIActivityType.postToTwitter,
+                        UIActivityType.postToFacebook,
+                        UIActivityType.openInIBooks
+                    ]
+                    self.present(vc, animated: true, completion: nil)
+                    
+                } catch {
+                    
+                    print("Failed to create CSV file")
+                    print("\(error)")
+                }
+                
+            }
+            else {
+                let alertController = UIAlertController(title: "Error", message: "There is no data to export", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (action: UIAlertAction!) in
+                }))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            
+            //****************************************************************************************************************************************************************************
+            
             tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             
         })
@@ -117,5 +170,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         
         return [emailAction, renameAction, deleteAction]
     }
+    
 }
+
 
