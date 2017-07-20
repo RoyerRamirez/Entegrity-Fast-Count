@@ -9,14 +9,15 @@
 import UIKit
 import MobileCoreServices
 
-class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
     // Labels:
     @IBOutlet var labels: [UILabel]! //Photo Gallary Label
     @IBOutlet var label2: UILabel! // Header Label
     
-    // Buttons:
-    @IBOutlet var takePhotoButton: UIButton!
+    // Images that turn into Buttons:
+    @IBOutlet var galleryImageView: UIImageView!
+    @IBOutlet var cameraImageView: UIImageView!
     
     
     // Image Views:
@@ -42,6 +43,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet var imageTextField2: UITextField!
     @IBOutlet var imageTextField3: UITextField!
     
+    // Other Variables
 	var fieldArray : [AttributeTextField] {
 		get {
 			return [servesTextField, idTextField, makeTextField, modelTextField, serialTextField, yearTextField,
@@ -49,7 +51,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 					efficiencyTextField, notesTextField]
 		}
 	}
-	
     var currentLocation : LocationModel!
     var labelText3 = String() //This string has the Room Location Name
     var labelText4 = String() // This string has the category Name
@@ -60,8 +61,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        // The method below will set up the table view
 		servesTextField.delegate = self
 		idTextField.delegate = self
 		makeTextField.delegate = self
@@ -75,7 +75,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		auditorTextField.delegate = self
 		efficiencyTextField.delegate = self
 		notesTextField.delegate = self
-		
         updateWidthsForLabels(labels: labels)
         
         //Giving each picture a unique name
@@ -90,11 +89,27 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 			field.text = (currentLocation.data[field.attributeKey] == nil ? "" : currentLocation.data[field.attributeKey]!)
 		}
         
+        // the method below will provide the text that was inputed when a new audit was created
         let totalLabel = labelText4 + ":  " + labelText3
         label2.text = totalLabel
         auditorTextField.text = auditorText3
         
+        // the method below creates the title for the page
         navigationItem.title = "Audit Detailed Inputs"
+        
+        // the method below will transform ios camera image into a button:
+        let UICameraButton = UITapGestureRecognizer(target: self, action: #selector(RoomDetailView.tappedCamera(_:)))
+        UICameraButton.delegate = self
+        cameraImageView.addGestureRecognizer(UICameraButton)
+        cameraImageView.isUserInteractionEnabled = true
+
+        
+        // the method below will transform ios photo gallary image into a button:
+        let UIGalleryButton = UITapGestureRecognizer(target: self, action: #selector(RoomDetailView.tappedPhotoGallery(_:)))
+        UIGalleryButton.delegate = self
+        galleryImageView.addGestureRecognizer(UIGalleryButton)
+        galleryImageView.isUserInteractionEnabled = true
+        
     }
 
 	override func didReceiveMemoryWarning() {
@@ -128,7 +143,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         }
     }
     
-    // This method should loop through each text field then hide the keyboard (pressing enter key)
+    // This method should loop through each text field (except auditor) then hide the keyboard (pressing enter key)
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
 			case servesTextField: idTextField.becomeFirstResponder() // passes each textField to next
@@ -144,7 +159,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 			case efficiencyTextField: notesTextField.becomeFirstResponder()
 			default: efficiencyTextField.resignFirstResponder() //closes out the keyboard at the end
         }
-		
         return true
     }
     
@@ -155,22 +169,21 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 			// Only need to update currentLocation for the attribute just edited.
 			currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
 			AuditModel.saveAuditsToUserDefaults()
-
 		}
 	}
 	
+ /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.indexPathForSelectedRow
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+    } */
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
     
-    
-    
-    // ******************************************* Needs some Work: Camera Features ******************************************************************************
-    
-    
-    // The method below will launch the camera
-
-    @IBAction func takePhotoAction(_ sender: Any) {
+// ************************************************ Camera Features ******************************************************************************
+    // the method below will calls methods for pulling up the camera when tapping on the camera icon
+    func tappedCamera(_ sender: UIImageView){
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) { // checks to see if the camera is avaiable
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -180,24 +193,23 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             self.present(imagePicker, animated: true, completion: nil) // presents picture after taking picture
             newMedia = true
         }
-
     }
     
-    // The method below will open the Photo Library...button needs to be added
-    @IBAction func useCameraRoll(sender: AnyObject) {
+    // The method below will open the Photo Library and bring the picture selected to a view controller
+    func tappedPhotoGallery(_ sender: UIImageView) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
             let imagePicker = UIImagePickerController()
-            
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
             imagePicker.mediaTypes = [kUTTypeImage as String]
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
             newMedia = false
+            
         }
     }
     
-    // The method below will tell the app to select the picture choosen from above
+    // The method below will tell the app to select the picture choosen from above whether it came from photo gallery or camera
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         self.dismiss(animated: true, completion: nil)
@@ -215,6 +227,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         }
     }
     
+    // the method below will run if there was an error while attempting to pull the camera or photo gallery up
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
         if error != nil {
             let alert = UIAlertController(title: "Save Failed", message: "Failed to save image", preferredStyle: UIAlertControllerStyle.alert)
