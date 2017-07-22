@@ -24,6 +24,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet var imageView1: UIImageView!
     @IBOutlet var imageView2: UIImageView!
     @IBOutlet var imageView3: UIImageView!
+    @IBOutlet var imageView4: UIImageView!
     
    // var for every Text Field:
     @IBOutlet var servesTextField: AttributeTextField!
@@ -42,6 +43,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet var imageTextField1: UITextField!
     @IBOutlet var imageTextField2: UITextField!
     @IBOutlet var imageTextField3: UITextField!
+    @IBOutlet var imageTextField4: UITextField!
     
     // Other Variables
 	var fieldArray : [AttributeTextField] {
@@ -52,8 +54,9 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		}
 	}
     var currentLocation : LocationModel!
-    var labelText3 = String() //This string has the Room Location Name
-    var labelText4 = String() // This string has the category Name
+    var RoomLocationLabel = String() //This string has the Room Location Name
+    var CategoryLabel = String() // This string has the category Name
+    var AuditNameLabel = String() // This string has the Audit Name
     var auditorText3 = String() //This string has the auditor name
     //var imagePicker: UIImagePickerController!
     var newMedia : Bool?
@@ -78,11 +81,12 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         updateWidthsForLabels(labels: labels)
         
         //Giving each picture a unique name
-        let totalImageLabel = labelText4 + "." + labelText3
+        let totalImageLabel = AuditNameLabel + "." + CategoryLabel + "." + RoomLocationLabel
         let totalImageLabelTrim = String(totalImageLabel.characters.filter { !" \n\t\r".characters.contains($0) })
         imageTextField1.text = totalImageLabelTrim + ".1"
         imageTextField2.text = totalImageLabelTrim + ".2"
         imageTextField3.text = totalImageLabelTrim + ".3"
+        imageTextField4.text = totalImageLabelTrim + ".4"
 		
 		// Load currentLocation.data
 		for field in fieldArray {
@@ -90,7 +94,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		}
         
         // the method below will provide the text that was inputed when a new audit was created
-        let totalLabel = labelText4 + ":  " + labelText3
+        let totalLabel = CategoryLabel + ":  " + RoomLocationLabel
         label2.text = totalLabel
         auditorTextField.text = auditorText3
         
@@ -110,6 +114,29 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         galleryImageView.addGestureRecognizer(UIGalleryButton)
         galleryImageView.isUserInteractionEnabled = true
         
+        // The method below will retreve pictures taken before
+        let selectingImage1 = "image_\(imageTextField1.text!).png"
+        let selectingImage2 = "image_\(imageTextField2.text!).png"
+        let selectingImage3 = "image_\(imageTextField3.text!).png"
+        let selectingImage4 = "image_\(imageTextField4.text!).png"
+        if self.imageView1.image == nil {
+            if let image = getSavedImage(named: selectingImage1){
+                imageView1.image = image
+                imageView1.contentMode = .scaleAspectFit
+            }
+            if let image = getSavedImage(named: selectingImage2){
+                imageView2.image = image
+                imageView2.contentMode = .scaleAspectFit
+            }
+            if let image = getSavedImage(named: selectingImage3){
+                imageView3.image = image
+                imageView3.contentMode = .scaleAspectFit
+            }
+            if let image = getSavedImage(named: selectingImage4){
+                imageView4.image = image
+                imageView4.contentMode = .scaleAspectFit
+            }
+        }
     }
 
 	override func didReceiveMemoryWarning() {
@@ -172,11 +199,8 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		}
 	}
 	
- /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.indexPathForSelectedRow
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-    } */
+ 
+
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
@@ -215,8 +239,75 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         self.dismiss(animated: true, completion: nil)
         if mediaType.isEqual(to: kUTTypeImage as String){
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            imageView1.image = image
-        
+            // The methods below are attempting to determine if a viewImage is empty to place the pic
+            if self.imageView1.image == nil {
+                // Begining of saving image to Documents Directory
+                
+                // encoding the image:
+                let imagePath = "image_\(imageTextField1.text!).png"
+                let data = UIImagePNGRepresentation(image)
+                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
+                try? data?.write(to: filename)
+                // pulling image back
+                let retrevedImage = UIImage(contentsOfFile: filename.path)!
+                imageView1.image = retrevedImage
+                
+                // End of saving image to Documents Directory
+            }
+            else if (self.imageView2.image == nil) {
+                // Begining of saving image to Documents Directory
+                
+                // encoding the image:
+                let imagePath = "image_\(imageTextField2.text!).png"
+                let data = UIImagePNGRepresentation(image)
+                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
+                try? data?.write(to: filename)
+                // pulling image back
+                let retrevedImage = UIImage(contentsOfFile: filename.path)!
+                imageView2.image = retrevedImage
+                
+                // End of saving image to Documents Directory
+            }
+            else if (self.imageView3.image == nil){
+                // Begining of saving image to Documents Directory
+                
+                // encoding the image:
+                let imagePath = "image_\(imageTextField3.text!).png"
+                let data = UIImagePNGRepresentation(image)
+                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
+                try? data?.write(to: filename)
+                // pulling image back
+                let retrevedImage = UIImage(contentsOfFile: filename.path)!
+                imageView3.image = retrevedImage
+                
+                // End of saving image to Documents Directory
+            }
+            else if (self.imageView4.image == nil) {
+                // Begining of saving image to Documents Directory
+                
+                // encoding the image:
+                let imagePath = "image_\(imageTextField4.text!).png"
+                let data = UIImagePNGRepresentation(image)
+                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
+                try? data?.write(to: filename)
+                // pulling image back
+                let retrevedImage = UIImage(contentsOfFile: filename.path)!
+                imageView4.image = retrevedImage
+                
+                // End of saving image to Documents Directory
+            }
+            else if (self.imageView1.image != nil) && (self.imageView2.image != nil) && (self.imageView3.image != nil) && (self.imageView4.image != nil) {
+                /// Implementing Warning Message
+                let picAlert = UIAlertController(title: "Error", message: "Image capacity has been reached. No more images can be displayed. Please contact your App Developer for further assistance.", preferredStyle: UIAlertControllerStyle.alert)
+                
+                picAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { (action: UIAlertAction!) in
+                    print("Error logic is functioning properly")
+                    
+                }))
+                self.present(picAlert, animated: true, completion: nil)
+                /// End of Warning Message
+            }
+            // the method below saves a new picture taken by the camera to the photo gallery
             if (newMedia == true) {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(RoomDetailView.image(image:didFinishSavingWithError:contextInfo:)), nil)
                 
@@ -237,10 +328,28 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             self.present(alert, animated: true,completion: nil)
         }
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // The method below will get the Document Directory so pictures can be saved there
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    // The method below will get retreve saved images
+    func getSavedImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
+    
 }
+
 
 
 

@@ -13,8 +13,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet var Label: UILabel!
     @IBOutlet var tableView: UITableView!
     
-    var LabelText2 = String()
+    var categoryNameLabel = String()
     var auditorText2 = String()
+    var auditNameLabel = String()
     var selectedLocation : LocationModel?
     var currentCategory : CategoryModel!
     var audits : AuditModel!
@@ -25,7 +26,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         navigationItem.title = "Locations"
         
-        Label.text = LabelText2
+        Label.text = categoryNameLabel
         
         
         for room in currentCategory.locations {
@@ -70,9 +71,10 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         if segue.identifier == "toFinalView" {
             
             let DestViewController : RoomDetailView = segue.destination as! RoomDetailView
-            DestViewController.labelText3 = selectedLocation!.name
-            DestViewController.labelText4 = LabelText2
+            DestViewController.RoomLocationLabel = selectedLocation!.name
+            DestViewController.CategoryLabel = categoryNameLabel
             DestViewController.auditorText3 = auditorText2
+            DestViewController.AuditNameLabel = auditNameLabel
             DestViewController.currentLocation = selectedLocation!
             
         }
@@ -93,6 +95,82 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             }))
             renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                 let newName = renameAlert.textFields![0].attributedText?.string
+                
+                /// Recreating old Name
+                let totalImageLabel1 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".1"
+                let totalImageLabel2 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".2"
+                let totalImageLabel3 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".3"
+                let totalImageLabel4 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".4"
+                print("how much time left")
+                let totalImageLabelTrim1 = String(totalImageLabel1.characters.filter { !" \n\t\r".characters.contains($0) })
+                let totalImageLabelTrim2 = String(totalImageLabel2.characters.filter { !" \n\t\r".characters.contains($0) })
+                let totalImageLabelTrim3 = String(totalImageLabel3.characters.filter { !" \n\t\r".characters.contains($0) })
+                let totalImageLabelTrim4 = String(totalImageLabel4.characters.filter { !" \n\t\r".characters.contains($0) })
+                let oldImageName1 = "image_\(totalImageLabelTrim1).png"
+                let oldImageName2 = "image_\(totalImageLabelTrim2).png"
+                let oldImageName3 = "image_\(totalImageLabelTrim3).png"
+                let oldImageName4 = "image_\(totalImageLabelTrim4).png"
+                print("Just Finished Making old Names")
+                
+                // If the image exist it will go into the loop
+                if let image = self.getSavedImage(named: oldImageName1){
+                    //let originPath = self.getDocumentsDirectory().appendingPathComponent(oldImageName1)
+                    // creating new name
+                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + newName! + ".1"
+                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
+                    let newImageName1 = "image_\(newImageNameTrim).png"
+                    
+                    // Over writing old image name with new one:
+                    let data = UIImagePNGRepresentation(image)
+                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
+                    try? data?.write(to: filename)
+                    print("Just Finished 1st loop")
+                }
+                // Seond Image Loop
+                if let image = self.getSavedImage(named: oldImageName2){
+                    // creating new name
+                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + newName! + ".2"
+                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
+                    let newImageName1 = "image_\(newImageNameTrim).png"
+                    
+                    // Over writing old image name with new one:
+                    let data = UIImagePNGRepresentation(image)
+                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
+                    try? data?.write(to: filename)
+                    print("Just Finished 2nd loop")
+                }
+                // Third Image Loop
+                if let image = self.getSavedImage(named: oldImageName3){
+                    // creating new name
+                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + newName! + ".3"
+                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
+                    let newImageName1 = "image_\(newImageNameTrim).png"
+                    
+                    // Over writing old image name with new one:
+                    let data = UIImagePNGRepresentation(image)
+                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
+                    try? data?.write(to: filename)
+                    print("Just Finished 3rd loop")
+                }
+                // Third Image Loop
+                if let image = self.getSavedImage(named: oldImageName4){
+                    // creating new name
+                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + newName! + ".4"
+                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
+                    let newImageName1 = "image_\(newImageNameTrim).png"
+                    
+                    // Over writing old image name with new one:
+                    let data = UIImagePNGRepresentation(image)
+                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
+                    try? data?.write(to: filename)
+                    print("Just Finished 4th loop")
+                }
+
+                
+
+                
+                ///
+                
                 self.currentCategory.locations[indexPath.row].name = newName!
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
                 AuditModel.saveAuditsToUserDefaults()
@@ -116,6 +194,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 AuditModel.saveAuditsToUserDefaults()
+                // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
@@ -163,7 +242,21 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
 
+    // The method below will get the Document Directory so pictures can be saved there
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
     
+    // The method below will get retreve saved images
+    func getSavedImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
+
     
 }
 

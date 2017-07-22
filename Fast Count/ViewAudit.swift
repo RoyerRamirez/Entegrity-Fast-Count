@@ -62,8 +62,9 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRoomLocationView" {
             let DestViewController : RoomLocation = segue.destination as! RoomLocation
-            DestViewController.LabelText2 = selectedCategory!.name
+            DestViewController.categoryNameLabel = selectedCategory!.name
             DestViewController.auditorText2 = auditorText
+            DestViewController.auditNameLabel = Label.text!
             DestViewController.currentCategory = selectedCategory!
             //DestViewController.currentStepAudit = currentAudit!
 
@@ -106,6 +107,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                self.currentAudit.categories.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 AuditModel.saveAuditsToUserDefaults()
+                // INSERT DELETE LOGIC HERE FOR PICTURES
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
 
             }))
