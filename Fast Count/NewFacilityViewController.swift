@@ -66,6 +66,27 @@ class NewFacilityViewController: UIViewController {
 			DestViewController.currentAudit = newAudit
         }
     }
+    
+    /*
+    // Creating a New Image Directory for every new Audit
+    private func createImagesFolder() {
+        // path to documents directory
+        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+        if let documentDirectoryPath = documentDirectoryPath {
+            // create the custom folder path
+            let imagesDirectoryPath = documentDirectoryPath.appending(TextField.text!)
+            let fileManager = FileManager.default
+            if !fileManager.fileExists(atPath: imagesDirectoryPath) {
+                do {
+                    try fileManager.createDirectory(atPath: imagesDirectoryPath,
+                                                    withIntermediateDirectories: false,
+                                                    attributes: nil)
+                } catch {
+                    print("Error creating new folder for this audit failed in documents dir: \(error)")
+                }
+            }
+        }
+    }*/
 }
 
 

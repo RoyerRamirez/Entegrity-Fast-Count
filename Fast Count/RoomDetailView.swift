@@ -9,11 +9,15 @@
 import UIKit
 import MobileCoreServices
 
-class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UICollectionViewDataSource {
 
     // Labels:
     @IBOutlet var labels: [UILabel]! //Photo Gallary Label
     @IBOutlet var label2: UILabel! // Header Label
+    
+    // Copy Button:
+    @IBOutlet var copyRows: UIButton!
+    
     
     // Images that turn into Buttons:
     @IBOutlet var galleryImageView: UIImageView!
@@ -58,11 +62,14 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     var CategoryLabel = String() // This string has the category Name
     var AuditNameLabel = String() // This string has the Audit Name
     var auditorText3 = String() //This string has the auditor name
+    //var auditNameChange = String() ################################
     //var imagePicker: UIImagePickerController!
     var newMedia : Bool?
     
     
+    
     override func viewDidLoad() {
+        //print(auditNameChange) ################################
         super.viewDidLoad()
         // The method below will set up the table view
 		servesTextField.delegate = self
@@ -119,22 +126,28 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         let selectingImage2 = "image_\(imageTextField2.text!).png"
         let selectingImage3 = "image_\(imageTextField3.text!).png"
         let selectingImage4 = "image_\(imageTextField4.text!).png"
+        
         if self.imageView1.image == nil {
             if let image = getSavedImage(named: selectingImage1){
                 imageView1.image = image
                 imageView1.contentMode = .scaleAspectFit
+                imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
             }
             if let image = getSavedImage(named: selectingImage2){
                 imageView2.image = image
                 imageView2.contentMode = .scaleAspectFit
+                imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                
             }
             if let image = getSavedImage(named: selectingImage3){
                 imageView3.image = image
                 imageView3.contentMode = .scaleAspectFit
+                imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
             }
             if let image = getSavedImage(named: selectingImage4){
                 imageView4.image = image
                 imageView4.contentMode = .scaleAspectFit
+                imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
             }
         }
     }
@@ -199,11 +212,14 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		}
 	}
 	
- 
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
+    
+
+    
+    
     
 // ************************************************ Camera Features ******************************************************************************
     // the method below will calls methods for pulling up the camera when tapping on the camera icon
@@ -242,7 +258,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             // The methods below are attempting to determine if a viewImage is empty to place the pic
             if self.imageView1.image == nil {
                 // Begining of saving image to Documents Directory
-                
+         
                 // encoding the image:
                 let imagePath = "image_\(imageTextField1.text!).png"
                 let data = UIImagePNGRepresentation(image)
@@ -251,6 +267,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
                 // pulling image back
                 let retrevedImage = UIImage(contentsOfFile: filename.path)!
                 imageView1.image = retrevedImage
+                imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 
                 // End of saving image to Documents Directory
             }
@@ -265,6 +282,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
                 // pulling image back
                 let retrevedImage = UIImage(contentsOfFile: filename.path)!
                 imageView2.image = retrevedImage
+                imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 
                 // End of saving image to Documents Directory
             }
@@ -279,6 +297,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
                 // pulling image back
                 let retrevedImage = UIImage(contentsOfFile: filename.path)!
                 imageView3.image = retrevedImage
+                //imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 
                 // End of saving image to Documents Directory
             }
@@ -348,8 +367,19 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         return nil
     }
     
-}
+    //######################### Attempting to append more Custom Cells to tableView
 
+    
+
+    
+    @IBAction func tappedCopy(_ sender: Any) {
+        print("The loop works")
+        
+    }
+    
+    
+    //#########################################
+}
 
 
 

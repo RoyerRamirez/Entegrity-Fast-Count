@@ -17,11 +17,13 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var LabelText = String() // Facility Label
     var auditorText = String()
+    //var auditNameChange = String() ################################
     var currentAudit : AuditModel!
     var selectedCategory : CategoryModel?
     
+    
     override func viewDidLoad() {
-
+        //print(auditNameChange) ################################
         navigationItem.title = "Categories"
         Label.text = LabelText // Facility Label
        
@@ -33,6 +35,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Sorting the Category List by name:
         currentAudit.categories.sort(by :{$0.name < $1.name})
         NSLog("\(currentAudit.categories)")
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +68,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             DestViewController.categoryNameLabel = selectedCategory!.name
             DestViewController.auditorText2 = auditorText
             DestViewController.auditNameLabel = Label.text!
+            //DestViewController.auditNAmeChange = auditNameChange ################################
             DestViewController.currentCategory = selectedCategory!
             //DestViewController.currentStepAudit = currentAudit!
 
@@ -92,6 +96,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 NSLog("\(self.currentAudit.categories)")
                 tableView.reloadData()
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+                
             }))
             
             self.present(renameAlert, animated: true, completion: nil)

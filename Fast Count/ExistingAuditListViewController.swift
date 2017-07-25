@@ -13,8 +13,10 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 
     @IBOutlet var tableView: UITableView!
     var selectedAudit : AuditModel?
+    // var auditNAmeChange = String() ##############
     
     override func viewDidLoad() {
+        //print(auditNAmeChange) ###################
         super.viewDidLoad()
         navigationItem.title = "Existing Audits"
         AuditModel.loadAuditsFromUserDefaults()
@@ -23,6 +25,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         // Sorting the Category List by name:
         AuditModel.audits.sort(by :{$0.name < $1.name})
         NSLog("\(AuditModel.audits)")
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +55,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
+            //DestViewController.auditNameChange = auditNAmeChange ##########################
 		}
 	}
 
@@ -71,6 +75,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 				AuditModel.audits[indexPath.row].name = newName!
 				tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
 				AuditModel.saveAuditsToUserDefaults()
+                //self.auditNAmeChange = "TRUE" #############################
                 // Sorting the Audit List by name & reloading all Audits:
                 AuditModel.audits.sort(by :{$0.name < $1.name})
                 NSLog("\(AuditModel.audits)")
