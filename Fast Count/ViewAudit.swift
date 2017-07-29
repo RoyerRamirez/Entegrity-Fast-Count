@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 /// Lists the categories
 class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -17,13 +18,11 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var LabelText = String() // Facility Label
     var auditorText = String()
-    //var auditNameChange = String() ################################
     var currentAudit : AuditModel!
     var selectedCategory : CategoryModel?
     
     
     override func viewDidLoad() {
-        //print(auditNameChange) ################################
         navigationItem.title = "Categories"
         Label.text = LabelText // Facility Label
        
@@ -36,6 +35,49 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         currentAudit.categories.sort(by :{$0.name < $1.name})
         NSLog("\(currentAudit.categories)")
         
+        // ########################################### Updating core Data ########################################################################
+        
+        let audit: Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
+        audit.auditName = LabelText
+        
+        let category: Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
+        var namesInCategory = String()
+        namesInCategory = "\(currentAudit.categories)"
+        category.categoryName = namesInCategory
+        
+        //let connection = audit.value(forKeyPath: "categories.audits")
+        
+        
+        
+        
+        //try? DatabaseController.saveContext()
+        
+        DatabaseController.saveContext()
+        
+        
+        
+        // fetching the Database
+        
+        let fetchRequest: NSFetchRequest<Audit> = Audit.fetchRequest()
+        let fetchRequestCat: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
+        print("Audit \(searchResults) saved in our Database sucessfully")
+        for result in searchResults! as [Audit]{
+            print("\(result.auditName!)")
+        }
+        
+        let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestCat)
+        print("Category \(searchResults2) saved in our Database sucessfully")
+        for result in searchResults2! as [Category]{
+            print("\(result.categoryName!)")
+        }
+        
+
+
+        
+
+        //#######################################################################################################################################
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,9 +110,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             DestViewController.categoryNameLabel = selectedCategory!.name
             DestViewController.auditorText2 = auditorText
             DestViewController.auditNameLabel = Label.text!
-            //DestViewController.auditNAmeChange = auditNameChange ################################
             DestViewController.currentCategory = selectedCategory!
-            //DestViewController.currentStepAudit = currentAudit!
 
         }
     }

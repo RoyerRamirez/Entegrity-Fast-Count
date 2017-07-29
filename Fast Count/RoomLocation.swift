@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -16,17 +17,14 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     var categoryNameLabel = String()
     var auditorText2 = String()
     var auditNameLabel = String()
-    //var auditNAmeChange = String() ################################
     var selectedLocation : LocationModel?
     var currentCategory : CategoryModel!
     var audits : AuditModel!
     var newName = String()
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
-    //var backgroundTasks : UIBackgroundTaskIdentifier!
     
 
     override func viewDidLoad() {
-        //print(auditNAmeChange) ################################
         super.viewDidLoad()
         navigationItem.title = "Locations"
         Label.text = categoryNameLabel
@@ -38,6 +36,30 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Sorting the Rooms by name:
         currentCategory.locations.sort(by :{$0.name < $1.name})
         NSLog("\(currentCategory.locations)")
+        
+        //###################### Updating CoreData ###########################
+        let roomLocation : Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
+        
+        var namesInRoomLocation = String()
+        namesInRoomLocation = "\(currentCategory.locations)"
+        roomLocation.locationName = namesInRoomLocation
+        DatabaseController.saveContext()
+        
+        
+        
+        // fetching the Database
+        
+        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        
+        let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
+        print("Location \(searchResults) saved in our Database sucessfully")
+        for result in searchResults! as [Location]{
+            print("\(result.locationName!)")
+        }
+        
+
+        
+        //####################################################################
         
         
     }

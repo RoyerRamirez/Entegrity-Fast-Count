@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Audit" representedClassName=".Audit" syncable="YES">
+        <attribute name="auditName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="audits" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <entity name="AuditDetails" representedClassName=".AuditDetails" syncable="YES">
+        <attribute name="auditor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="efficiency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="make" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phase" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serves" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="voltage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="roomLocations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="auditDetails" inverseEntity="Location" syncable="YES"/>
+    </entity>
+    <entity name="Category" representedClassName=".Category" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="audits" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Audit" inverseName="categories" inverseEntity="Audit" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="categories" inverseEntity="Location" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName=".Location" syncable="YES">
+        <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="auditDetails" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AuditDetails" inverseName="roomLocations" inverseEntity="AuditDetails" syncable="YES"/>
+        <relationship name="categories" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="locations" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Audit" positionX="-288" positionY="18" width="117" height="75"/>
+        <element name="AuditDetails" positionX="367" positionY="8" width="128" height="253"/>
+        <element name="Category" positionX="-99" positionY="-16" width="128" height="88"/>
+        <element name="Location" positionX="124" positionY="53" width="128" height="88"/>
+    </elements>
+</model>

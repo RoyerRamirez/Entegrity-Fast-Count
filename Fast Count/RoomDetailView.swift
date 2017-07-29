@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 import MobileCoreServices
 
-class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, UICollectionViewDataSource {
+class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
 
     // Labels:
     @IBOutlet var labels: [UILabel]! //Photo Gallary Label
@@ -65,6 +66,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     //var auditNameChange = String() ################################
     //var imagePicker: UIImagePickerController!
     var newMedia : Bool?
+    var newDataCoreAdd : Bool?
     
     
     
@@ -209,7 +211,72 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 			// Only need to update currentLocation for the attribute just edited.
 			currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
 			AuditModel.saveAuditsToUserDefaults()
+            
+            //############# Adding changed TextField to Core Data ############################
+            newDataCoreAdd = false
+            let entityAuditDetail : AuditDetails = NSEntityDescription.insertNewObject(forEntityName: "AuditDetails", into: DatabaseController.getContext()) as! AuditDetails
+            
+            if textField  == servesTextField {
+                entityAuditDetail.serves = servesTextField.text
+                newDataCoreAdd = true
+                print("Saved Serves sucessfully")
+            }
+            if textField  == idTextField {
+                entityAuditDetail.id = idTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == makeTextField {
+                entityAuditDetail.make = makeTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == modelTextField {
+                entityAuditDetail.model = modelTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == serialTextField {
+                entityAuditDetail.serial = serialTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == yearTextField {
+                entityAuditDetail.year = yearTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == voltageTextField {
+                entityAuditDetail.voltage = voltageTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == phaseTextField {
+                entityAuditDetail.phase = phaseTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == descriptionTextField {
+                entityAuditDetail.discription = descriptionTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == conditionTextField {
+                entityAuditDetail.condition = conditionTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == auditorTextField {
+                entityAuditDetail.auditor = auditorTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == efficiencyTextField {
+                entityAuditDetail.efficiency = efficiencyTextField.text
+                newDataCoreAdd = true
+            }
+            if textField  == notesTextField {
+                entityAuditDetail.notes = notesTextField.text
+                newDataCoreAdd = true
+            }
+            if (newDataCoreAdd == true) {
+            DatabaseController.saveContext()
+            }
+            
+            
+            // ###############################################################################
 		}
+        
 	}
 	
 
@@ -368,13 +435,9 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     //######################### Attempting to append more Custom Cells to tableView
-
-    
-
     
     @IBAction func tappedCopy(_ sender: Any) {
         print("The loop works")
-        
     }
     
     

@@ -19,6 +19,8 @@ class NewFacilityViewController: UIViewController {
     override func viewDidLoad(){
         
         navigationItem.title = "New Audit"
+        /*TextField.autocapitalizationType = .words
+        textField2.autocapitalizationType = .words*/
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

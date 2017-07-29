@@ -8,15 +8,15 @@
 
 import UIKit
 import MessageUI
+import CoreData
 
 class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet var tableView: UITableView!
     var selectedAudit : AuditModel?
-    // var auditNAmeChange = String() ##############
+    
     
     override func viewDidLoad() {
-        //print(auditNAmeChange) ###################
         super.viewDidLoad()
         navigationItem.title = "Existing Audits"
         AuditModel.loadAuditsFromUserDefaults()
@@ -55,7 +55,6 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
-            //DestViewController.auditNameChange = auditNAmeChange ##########################
 		}
 	}
 
@@ -71,11 +70,10 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 			}))
 			
 			renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
-				let newName = renameAlert.textFields![0].attributedText?.string
+                let newName = renameAlert.textFields![0].attributedText?.string
 				AuditModel.audits[indexPath.row].name = newName!
 				tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
 				AuditModel.saveAuditsToUserDefaults()
-                //self.auditNAmeChange = "TRUE" #############################
                 // Sorting the Audit List by name & reloading all Audits:
                 AuditModel.audits.sort(by :{$0.name < $1.name})
                 NSLog("\(AuditModel.audits)")
@@ -112,57 +110,47 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         // action three
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
             
-            //******************************************* Stil Needs Work: Email CSV Strings **************************************************************************************
-            let fileName = "\(AuditModel.audits[indexPath.item]).csv"
-            let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
-            
-            var csvText = "Entegrity,Energy,Partners\n\(AuditModel.audits),\(self.selectedAudit?.categories),\(self.selectedAudit?.locations)\n\nDate,Mileage,Gallons,Price,Price per gallon,Miles between fillups,MPG\n"
-            
-            self.selectedAudit?.categories.sort(by: { $0.name.compare($1.name) == .orderedDescending })
+            //############################# Working with Core Data ###################################################
+            let audit:Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
+            audit.auditName = self.selectedAudit?.name
             
             
-            let count = self.selectedAudit?.categories.count
+            /*
+            var categoriesInAudit = String()
+            categoriesInAudit = "\(self.selectedAudit?.categories[indexPath.item])"
+            let category:Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
+            category.categoryName =  categoriesInAudit
             
-            if count! >= 0 {
-                
-                
-                    
-                    let newLine = "\(self.selectedAudit?.categories),\(self.selectedAudit?.locations)\n"
-                    
-                    csvText.append(newLine)
+            var locationsInAudit = String()
+            locationsInAudit = "\(self.selectedAudit?.locations[indexPath.item])"
+            let location:Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
+            location.locationName =  locationsInAudit
             
-                
-                do {
-                    try csvText.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
-                    
-                    let vc = UIActivityViewController(activityItems: [path!], applicationActivities: [])
-                    vc.excludedActivityTypes = [
-                        UIActivityType.assignToContact,
-                        UIActivityType.saveToCameraRoll,
-                        UIActivityType.postToFlickr,
-                        UIActivityType.postToVimeo,
-                        UIActivityType.postToTencentWeibo,
-                        UIActivityType.postToTwitter,
-                        UIActivityType.postToFacebook,
-                        UIActivityType.openInIBooks
-                    ]
-                    self.present(vc, animated: true, completion: nil)
-                    
-                } catch {
-                    
-                    print("Failed to create CSV file")
-                    print("\(error)")
-                }
-                
+            */
+            
+            
+            
+            // Saving to Database
+            DatabaseController.saveContext()
+            
+            // fetching the Database
+            let fetchRequest: NSFetchRequest<Audit> = Audit.fetchRequest()
+            
+            let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
+            print("Audit \(searchResults) saved in our Database sucessfully")
+            for result in searchResults! as [Audit]{
+                print("\(result.auditName!)")
             }
-            else {
-                let alertController = UIAlertController(title: "Error", message: "There is no data to export", preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: { (action: UIAlertAction!) in
-                }))
-                self.present(alertController, animated: true, completion: nil)
-            }
+
             
-            //****************************************************************************************************************************************************************************
+            
+            
+            
+            
+//******************************************* Stil Needs Work: Email CSV Strings **************************************************************************************
+            
+            
+//*********************************************************************************************************************************************************************
             
             tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             
