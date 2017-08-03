@@ -46,7 +46,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Fetch Request:
         let fetchRequestCat: NSFetchRequest<Category> = Category.fetchRequest()
         let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestCat)
-        do {
+        
             if searchResults2?.count != 0 {
                 for result in searchResults2! as [Category]{
                     for item in result.entity.attributesByName.keys{
@@ -64,11 +64,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 DatabaseController.saveContext()
             }
             
-        } catch let err as NSError {
-            print(err.debugDescription)
-            // error logic goes here
-        }
- 
+        
         /*
         let audit: Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
         audit.auditName = LabelText */
@@ -171,7 +167,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 print("preparing to enter 'do' loop")
 
                 //let itemBeingRequested = self.selectedCategory!.name
-                do {
+                
                     let request: NSFetchRequest<Category> = Category.fetchRequest()
                     request.predicate = NSPredicate(format:"categoryName == %@", itemBeingRequested)
                     let searchResults = try? DatabaseController.getContext().fetch(request)
@@ -186,9 +182,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                     
-                } catch {
-                    print ("fetch task failed", error)
-                }
                 
                 // ###### End of Deleting Logic for Core Data #######
                 

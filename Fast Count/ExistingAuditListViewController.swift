@@ -117,12 +117,13 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             
             if MFMailComposeViewController.canSendMail(){
                 self.present(mailComposeViewController, animated: true, completion: nil)
+                
+                
             } else{
                 // error logic goes here
             }
             
             //*********************************************************************************************************************************************************************
-            
             tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             
         })
@@ -141,8 +142,8 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         mailComposerVC.mailComposeDelegate = self
         
         // Set preset information included in the email
-        mailComposerVC.setSubject("Generic Subject")
-        mailComposerVC.setMessageBody("Generic Email Body", isHTML: false)
+        mailComposerVC.setSubject("Audit CSV")
+        mailComposerVC.setMessageBody("The Audit CSV File is attached to this email.", isHTML: false)
         
         // Turn core data for responses into a .csv file
         
@@ -193,7 +194,9 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         }
         return mailString
     }
-
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
     
 }
 

@@ -48,7 +48,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Fetch Request:
         let fetchRequestLoc: NSFetchRequest<Location> = Location.fetchRequest()
         let searchResults = try? DatabaseController.getContext().fetch(fetchRequestLoc)
-        do {
+        
             if searchResults?.count != 0 {
                 for result in searchResults! as [Location]{
                     for item in result.entity.attributesByName.keys{
@@ -66,10 +66,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 DatabaseController.saveContext()
             }
             
-        } catch let err as NSError {
-            print(err.debugDescription)
-            // error logic goes here
-        }
+        
         
         /// Fetching Data to make sure no duplicates were formed...Delete the next 5 lines when finished making all the necessary updates
         let fetchRequestLoc2: NSFetchRequest<Location> = Location.fetchRequest()
