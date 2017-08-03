@@ -37,31 +37,50 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         currentCategory.locations.sort(by :{$0.name < $1.name})
         NSLog("\(currentCategory.locations)")
         
-        //###################### Updating CoreData ###########################
-        let roomLocation : Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
-        
+        // ########################################### Updating core Data ########################################################################
         var namesInRoomLocation = String()
         namesInRoomLocation = "\(currentCategory.locations)"
-        roomLocation.locationName = namesInRoomLocation
-        DatabaseController.saveContext()
         
+        var duplicates = String()
         
+        ////// Must Fetch Data in order to be able to determine if object is already in data base or if it needs to be created.
         
-        // fetching the Database
-        
-        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-        
-        let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
-        print("Location \(searchResults) saved in our Database sucessfully")
-        for result in searchResults! as [Location]{
-            print("\(result.locationName!)")
+        // Fetch Request:
+        let fetchRequestLoc: NSFetchRequest<Location> = Location.fetchRequest()
+        let searchResults = try? DatabaseController.getContext().fetch(fetchRequestLoc)
+        do {
+            if searchResults?.count != 0 {
+                for result in searchResults! as [Location]{
+                    for item in result.entity.attributesByName.keys{
+                        duplicates.append(item)
+                    }
+                }
+                if namesInRoomLocation != duplicates {
+                    let entityLocation: Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
+                    entityLocation.locationName = namesInRoomLocation
+                    DatabaseController.saveContext()
+                }
+            } else {
+                let entityLocation: Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
+                entityLocation.locationName = namesInRoomLocation
+                DatabaseController.saveContext()
+            }
+            
+        } catch let err as NSError {
+            print(err.debugDescription)
+            // error logic goes here
         }
         
-
+        /// Fetching Data to make sure no duplicates were formed...Delete the next 5 lines when finished making all the necessary updates
+        let fetchRequestLoc2: NSFetchRequest<Location> = Location.fetchRequest()
+        let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestLoc2)
+        print("Locations \(searchResults2) saved in our Database sucessfully")
+        for result in searchResults2! as [Location]{
+            print("TEST123Location \(result.locationName!)")
+        }
         
-        //####################################################################
-        
-        
+        //#######################################################################################################################################
+         
     }
 
     override func didReceiveMemoryWarning() {

@@ -36,47 +36,62 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         NSLog("\(currentAudit.categories)")
         
         // ########################################### Updating core Data ########################################################################
-        
-        let audit: Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
-        audit.auditName = LabelText
-        
-        let category: Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
         var namesInCategory = String()
         namesInCategory = "\(currentAudit.categories)"
-        category.categoryName = namesInCategory
         
-        //let connection = audit.value(forKeyPath: "categories.audits")
+        var duplicates = String()
         
+        ////// Must Fetch Data in order to be able to determine if object is already in data base or if it needs to be created.
         
-        
-        
-        //try? DatabaseController.saveContext()
-        
-        DatabaseController.saveContext()
-        
+        // Fetch Request:
+        let fetchRequestCat: NSFetchRequest<Category> = Category.fetchRequest()
+        let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestCat)
+        do {
+            if searchResults2?.count != 0 {
+                for result in searchResults2! as [Category]{
+                    for item in result.entity.attributesByName.keys{
+                    duplicates.append(item)
+                    }
+                }
+                if namesInCategory != duplicates {
+                    let entityCategory: Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
+                    entityCategory.categoryName = namesInCategory
+                    DatabaseController.saveContext()
+                }
+            } else {
+                let entityCategory: Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
+                entityCategory.categoryName = namesInCategory
+                DatabaseController.saveContext()
+            }
+            
+        } catch let err as NSError {
+            print(err.debugDescription)
+            // error logic goes here
+        }
+ 
+        /*
+        let audit: Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
+        audit.auditName = LabelText */
+        //DatabaseController.saveContext()
         
         
         // fetching the Database
-        
-        let fetchRequest: NSFetchRequest<Audit> = Audit.fetchRequest()
-        let fetchRequestCat: NSFetchRequest<Category> = Category.fetchRequest()
-        
+        //let fetchRequest: NSFetchRequest<Audit> = Audit.fetchRequest()
+        let fetchRequestCat2: NSFetchRequest<Category> = Category.fetchRequest()
+        /*
         let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
         print("Audit \(searchResults) saved in our Database sucessfully")
         for result in searchResults! as [Audit]{
             print("\(result.auditName!)")
+        }*/
+        
+        // Pulling up what is being saving in CoreDate to make sure everything is correct. Delete the next 5 lines when finished making all the necessary updates
+        let searchResults3 = try? DatabaseController.getContext().fetch(fetchRequestCat2)
+        print("Category \(searchResults3) saved in our Database sucessfully")
+        for result in searchResults3! as [Category]{
+            print("TEST123 \(result.categoryName!)")
         }
         
-        let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestCat)
-        print("Category \(searchResults2) saved in our Database sucessfully")
-        for result in searchResults2! as [Category]{
-            print("\(result.categoryName!)")
-        }
-        
-
-
-        
-
         //#######################################################################################################################################
     }
     
@@ -85,7 +100,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     public func setEditing(editing: Bool, animated: Bool){
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,7 +125,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             DestViewController.auditorText2 = auditorText
             DestViewController.auditNameLabel = Label.text!
             DestViewController.currentCategory = selectedCategory!
-
         }
     }
 
@@ -119,7 +132,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Renaming Action
         let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
            self.selectedCategory = self.currentAudit.categories[indexPath.row]
-            
             let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedCategory!.name): ", preferredStyle: UIAlertControllerStyle.alert)
             renameAlert.addTextField(configurationHandler: nil)
             renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
@@ -152,6 +164,34 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                self.currentAudit.categories.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 AuditModel.saveAuditsToUserDefaults()
+                
+                // ###### Delete Logic for Core Data is below (Currently Not working properly) #######
+                var itemBeingRequested = String()
+                itemBeingRequested = "\(self.selectedCategory)"
+                print("preparing to enter 'do' loop")
+
+                //let itemBeingRequested = self.selectedCategory!.name
+                do {
+                    let request: NSFetchRequest<Category> = Category.fetchRequest()
+                    request.predicate = NSPredicate(format:"categoryName == %@", itemBeingRequested)
+                    let searchResults = try? DatabaseController.getContext().fetch(request)
+                    if searchResults?.count != 0 {
+                        for result in searchResults! as [Category]{
+                            for item in result.entity.attributesByName.keys{
+                                //DatabaseController.getContext().delete(item)
+                                //DatabaseController.saveContext()
+
+                                print("YASS!!!")
+                            }
+                        }
+                    }
+                    
+                } catch {
+                    print ("fetch task failed", error)
+                }
+                
+                // ###### End of Deleting Logic for Core Data #######
+                
                 // INSERT DELETE LOGIC HERE FOR PICTURES
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
 

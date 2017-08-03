@@ -273,8 +273,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             DatabaseController.saveContext()
             }
             
-            
-            // ###############################################################################
 		}
         
 	}

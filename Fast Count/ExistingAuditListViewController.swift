@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import CoreData
 
-class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
     @IBOutlet var tableView: UITableView!
     var selectedAudit : AuditModel?
@@ -111,46 +111,17 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
             
             //############################# Working with Core Data ###################################################
-            let audit:Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
-            audit.auditName = self.selectedAudit?.name
             
+            //******************************************* Stil Needs Work: Email CSV Strings **************************************************************************************
+            let mailComposeViewController = self.configuredMailComposeViewController()
             
-            /*
-            var categoriesInAudit = String()
-            categoriesInAudit = "\(self.selectedAudit?.categories[indexPath.item])"
-            let category:Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
-            category.categoryName =  categoriesInAudit
-            
-            var locationsInAudit = String()
-            locationsInAudit = "\(self.selectedAudit?.locations[indexPath.item])"
-            let location:Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
-            location.locationName =  locationsInAudit
-            
-            */
-            
-            
-            
-            // Saving to Database
-            DatabaseController.saveContext()
-            
-            // fetching the Database
-            let fetchRequest: NSFetchRequest<Audit> = Audit.fetchRequest()
-            
-            let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
-            print("Audit \(searchResults) saved in our Database sucessfully")
-            for result in searchResults! as [Audit]{
-                print("\(result.auditName!)")
+            if MFMailComposeViewController.canSendMail(){
+                self.present(mailComposeViewController, animated: true, completion: nil)
+            } else{
+                // error logic goes here
             }
-
             
-            
-            
-            
-            
-//******************************************* Stil Needs Work: Email CSV Strings **************************************************************************************
-            
-            
-//*********************************************************************************************************************************************************************
+            //*********************************************************************************************************************************************************************
             
             tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             
@@ -163,6 +134,66 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         
         return [emailAction, renameAction, deleteAction]
     }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        // Establish the controller from scratch
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        // Set preset information included in the email
+        mailComposerVC.setSubject("Generic Subject")
+        mailComposerVC.setMessageBody("Generic Email Body", isHTML: false)
+        
+        // Turn core data for responses into a .csv file
+        
+        // Pull core data in
+        var CoreDataResultsList = [NSManagedObject]()
+        
+        // Register the proper delegate and managed context
+        let appDelegate =
+            UIApplication.shared.delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        // Pull the data from core data
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
+        do {
+            let results =
+                try managedContext.fetch(fetchRequest)
+            CoreDataResultsList = results as! [NSManagedObject]
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        // Take the managed object array and turn it into a .csv sring to write in the file
+        // In doing this, we are writing just like we would to any string
+        let csvString = writeCoreObjectsToCSV(objects: CoreDataResultsList)
+        let data = csvString.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
+        mailComposerVC.addAttachmentData(data!, mimeType: "text/csv", fileName: "GenericFilename.csv")
+        
+        return mailComposerVC
+    }
+    func writeCoreObjectsToCSV(objects: [NSManagedObject]) -> NSMutableString {
+        // Make sure we have some data to export
+        guard objects.count > 0 else
+        {
+            
+            return ""
+        }
+        
+        let mailString = NSMutableString()
+        
+        
+        mailString.append("Generic Header 1, Generic Header 2, Generic Header 3")
+        
+        for object in objects
+        {
+            // Put "\n" at the beginning so you don't have an extra row at the end
+            mailString.append("\n\(object.value(forKey: "Generic Core Data Key 1")!),\(object.value(forKey: "Generic Core Data Key 2")!), \(object.value(forKey: "Generic Core Data Key 3")!)")
+        }
+        return mailString
+    }
+
     
 }
 
