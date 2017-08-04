@@ -138,7 +138,9 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let newName = renameAlert.textFields![0].attributedText?.string
                 self.currentAudit.categories[indexPath.row].name = newName!
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
-                AuditModel.saveAuditsToUserDefaults()
+               
+                // INSERT SAVING LOGIC HERE
+                
                 // Sorting the Category List by name & reloading the data
                 self.currentAudit.categories.sort(by :{$0.name < $1.name})
                 NSLog("\(self.currentAudit.categories)")
@@ -159,7 +161,8 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                self.currentAudit.categories.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                AuditModel.saveAuditsToUserDefaults()
+                
+                // INSERT SAVING LOGIC HERE
                 
                 // ###### Delete Logic for Core Data is below (Currently Not working properly) #######
                 var itemBeingRequested = String()
@@ -216,7 +219,9 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     newCat.locations.append(LocationModel(withName: location))
                 }
                 // Saving the new category
-                AuditModel.saveAuditsToUserDefaults()
+                
+                // INSERT SAVING LOGIC HERE
+                
                 // Sorting the Category List by name & reloading the data
                 self.currentAudit.categories.sort(by :{$0.name < $1.name})
                 NSLog("\(self.currentAudit.categories)")

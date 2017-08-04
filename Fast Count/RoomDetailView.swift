@@ -210,7 +210,9 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		if let field = textField as? AttributeTextField {
 			// Only need to update currentLocation for the attribute just edited.
 			currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
-			AuditModel.saveAuditsToUserDefaults()
+			
+            //AuditModel.saveAuditsToUserDefaults()
+            // INSERT SAVING LOGIC HERE
             
             //############# Adding changed TextField to Core Data ############################
             newDataCoreAdd = false
@@ -314,6 +316,8 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         }
     }
     
+    // NEEDS UPDATING
+    /*
     // The method below will tell the app to select the picture choosen from above whether it came from photo gallery or camera
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
@@ -327,7 +331,9 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
                 // encoding the image:
                 let imagePath = "image_\(imageTextField1.text!).png"
                 let data = UIImagePNGRepresentation(image)
+                
                 let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
+                
                 try? data?.write(to: filename)
                 // pulling image back
                 let retrevedImage = UIImage(contentsOfFile: filename.path)!
@@ -400,7 +406,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
                 // Code for video here
             }
         }
-    }
+    } */
     
     // the method below will run if there was an error while attempting to pull the camera or photo gallery up
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
@@ -418,11 +424,11 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     // The method below will get the Document Directory so pictures can be saved there
-    func getDocumentsDirectory() -> URL {
+    /*func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory
-    }
+    }*/
     
     // The method below will get retreve saved images
     func getSavedImage(named: String) -> UIImage? {

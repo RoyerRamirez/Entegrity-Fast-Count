@@ -30,7 +30,7 @@ class NewFacilityViewController: UIViewController {
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = TextField.text!
             DestViewController.auditorText = textField2.text!
-			let newAudit = AuditModel(withName: TextField.text!)
+			let newAudit = AuditModel(withName: TextField.text!, uid: AuditModel.audits.count)
 			AuditModel.audits.append(newAudit)
             let CategoriesAutoLoad = ["Air Handling Unit",
                                       "HVAC Equipment",
@@ -51,44 +51,20 @@ class NewFacilityViewController: UIViewController {
                                       "Vending Machine",
                                       "Air Compressor (EM)"]
             
-                for category in CategoriesAutoLoad {
-                    
+            for category in CategoriesAutoLoad {
                     let newCat = CategoryModel(withName: category, parent: newAudit)
                     newAudit.categories.append(newCat) //adding to categories list up above
-                
                         for location in ["Room 1", "Room 2", "Room 3"] {
-                            
                             newCat.locations.append(LocationModel(withName: location))
                         }
-                }
-            
-            AuditModel.saveAuditsToUserDefaults()
+            }
+            //AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count)
+            print("This is the output after saving: \(AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count))")
             TextField.text = ""
             textField2.text = ""
 			DestViewController.currentAudit = newAudit
         }
     }
-    
-    /*
-    // Creating a New Image Directory for every new Audit
-    private func createImagesFolder() {
-        // path to documents directory
-        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
-        if let documentDirectoryPath = documentDirectoryPath {
-            // create the custom folder path
-            let imagesDirectoryPath = documentDirectoryPath.appending(TextField.text!)
-            let fileManager = FileManager.default
-            if !fileManager.fileExists(atPath: imagesDirectoryPath) {
-                do {
-                    try fileManager.createDirectory(atPath: imagesDirectoryPath,
-                                                    withIntermediateDirectories: false,
-                                                    attributes: nil)
-                } catch {
-                    print("Error creating new folder for this audit failed in documents dir: \(error)")
-                }
-            }
-        }
-    }*/
 }
 
 

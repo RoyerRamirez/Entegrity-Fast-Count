@@ -213,7 +213,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
-                AuditModel.saveAuditsToUserDefaults()
+                
+                // INSERT SAVING LOGIC HERE
+                
                 // Sorting the Rooms by name & reloading the list:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
                 NSLog("\(self.currentCategory.locations)")
@@ -235,7 +237,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                AuditModel.saveAuditsToUserDefaults()
+                
+                // INSERT SAVING LOGIC HERE
+                
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
@@ -265,7 +269,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             newLocAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
                 self.currentCategory.locations.append(LocationModel(withName: newLocName!))
-                AuditModel.saveAuditsToUserDefaults()
+                
+                // INSERT SAVING LOGIC HERE
+                
                 // Sorting the Rooms by name & reloading the List:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
                 NSLog("\(self.currentCategory.locations)")
@@ -298,120 +304,6 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         return nil
     }
-    
-    // The method below will run tasks in the background to help save time
-    
-    /*
-    func appDidEnterBackground(_ application: UIApplication) {
-        beginBackgroundTask()
-    }
-    func beginBackgroundTask(){
-        print("App entered Background")
-        /// Recreating Old Names for Images
-        let totalImageLabel1 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".1"
-        let totalImageLabel2 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".2"
-        let totalImageLabel3 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".3"
-        let totalImageLabel4 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".4"
-        print("how much time left")
-        let totalImageLabelTrim1 = String(totalImageLabel1.characters.filter { !" \n\t\r".characters.contains($0) })
-        let totalImageLabelTrim2 = String(totalImageLabel2.characters.filter { !" \n\t\r".characters.contains($0) })
-        let totalImageLabelTrim3 = String(totalImageLabel3.characters.filter { !" \n\t\r".characters.contains($0) })
-        let totalImageLabelTrim4 = String(totalImageLabel4.characters.filter { !" \n\t\r".characters.contains($0) })
-        let oldImageName1 = "image_\(totalImageLabelTrim1).png"
-        let oldImageName2 = "image_\(totalImageLabelTrim2).png"
-        let oldImageName3 = "image_\(totalImageLabelTrim3).png"
-        let oldImageName4 = "image_\(totalImageLabelTrim4).png"
-        print("Just Finished Making old Names")
-        
-        // If the image exist it will go into the loop
-        if let image = self.getSavedImage(named: oldImageName1){
-            // creating new name
-            let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".1"
-            let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-            let newImageName1 = "image_\(newImageNameTrim).png"
-            
-            // Over writing old image name with new one:
-            let data = UIImagePNGRepresentation(image)
-            let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
-            try? data?.write(to: filename)
-            print("Just Finished 1st loop")
-        }
-        
-        
-        // Seond Image Loop
-        if let image = self.getSavedImage(named: oldImageName2){
-            // creating new name
-            let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".2"
-            let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-            let newImageName1 = "image_\(newImageNameTrim).png"
-            
-            // Over writing old image name with new one:
-            let data = UIImagePNGRepresentation(image)
-            let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
-            try? data?.write(to: filename)
-            print("Just Finished 2nd loop")
-        }
-        // Third Image Loop
-        if let image = self.getSavedImage(named: oldImageName3){
-            // creating new name
-            let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".3"
-            let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-            let newImageName1 = "image_\(newImageNameTrim).png"
-            
-            // Over writing old image name with new one:
-            let data = UIImagePNGRepresentation(image)
-            let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
-            try? data?.write(to: filename)
-            print("Just Finished 3rd loop")
-        }
-        // Fourth Image Loop
-        if let image = self.getSavedImage(named: oldImageName4){
-            // creating new name
-            let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".4"
-            let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-            let newImageName1 = "image_\(newImageNameTrim).png"
-            
-            // Over writing old image name with new one:
-            let data = UIImagePNGRepresentation(image)
-            let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
-            try? data?.write(to: filename)
-            print("Just Finished 4th loop")
-            
-        }
-
-    // Calling the Terminating method to end background tasks
-       // self.appDidExitBackground()
-        
-    }
-    
-    // This method will Terminate the background tasks
-    func appDidExitBackground() {
-        UIApplication.shared.endBackgroundTask(backgroundTasks)
-        backgroundTasks = UIBackgroundTaskInvalid
-    } */
-    
-
-    
-    // Better way of looking for files inside Documents Directory
-    /*
-    func enumerateDirectory() -> String? {
-        var error: NSError?
-        let filesInDirectory =  fileManager.contentsOfDirectoryAtPath(tmpDir, error: &error) as? [String]
-        
-        if let files = filesInDirectory {
-            if files.count > 0 {
-                if files[0] == fileName {
-                    println("sample.txt found")
-                    return files[0]
-                } else {
-                    println("File not found")
-                    return nil
-                }
-            }
-        }
-        return nil
-    } */
-    
 }
 
 

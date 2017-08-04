@@ -19,6 +19,7 @@ class AuditModel: NSObject, NSCoding {
         
 	
     var name : String
+    var uid : Int // unique Job Number
     var categories : [CategoryModel]
     var locations : [LocationModel]
     
@@ -29,8 +30,9 @@ class AuditModel: NSObject, NSCoding {
         }
     }
     
-    init(withName name : String) {
+    init(withName name : String, uid : Int) {
         self.name = name
+        self.uid = uid
         self.categories = []
         self.locations = []
     }
@@ -41,13 +43,16 @@ class AuditModel: NSObject, NSCoding {
         } else {
             name = ""
         }
-        
+        if let uid = aDecoder.decodeObject(forKey: "uid") as? Int {
+            self.uid = uid
+        } else {
+            uid = 0
+        }
         if let categories = aDecoder.decodeObject(forKey: "categories") as? [CategoryModel] {
             self.categories = categories
         } else {
             categories = []
         }
-		
         if let locations = aDecoder.decodeObject(forKey: "locations") as? [LocationModel] {
             self.locations = locations
         } else {
@@ -57,22 +62,17 @@ class AuditModel: NSObject, NSCoding {
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
+        aCoder.encode(uid, forKey: "uid")
         aCoder.encode(categories, forKey: "categories")
         aCoder.encode(locations, forKey: "locations")
     }
-	
-    class func loadAuditsFromUserDefaults() {
-        if let data = UserDefaults.standard.object(forKey: "audits") as? Data{
-            self.audits = NSKeyedUnarchiver.unarchiveObject(with: data) as! [AuditModel]
-        } else {
-            print("Unable to retrieve audits")
-            audits = []
-        }
+    // the two functions below are added for convinence:
+        // To save an audit, simply call audit.save()
+    func save(){
+        AuditFilesManager.saveAudit(audit: self , uid: self.uid)
     }
-    
-    class func saveAuditsToUserDefaults(){
-        let data = NSKeyedArchiver.archivedData(withRootObject: audits)
-        UserDefaults.standard.set(data, forKey: "audits")
+        // To delete an Audit, call audit.delete()
+    func delete(){
+        AuditFilesManager.deleteAudit(uid: self.uid)
     }
-
 }
