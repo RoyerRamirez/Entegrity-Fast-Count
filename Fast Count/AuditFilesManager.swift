@@ -85,7 +85,7 @@ class AuditFilesManager : FileManager {
     
     // The method below deletes the audit at the given uid
     class func deleteAudit(uid: Int) {
-        deleteAudit(url: getAuditsDirectory().appendingPathComponent("audit-\(uid)", isDirectory: false))
+        deleteAudit(url: getAuditsDirectory().appendingPathComponent("audit_\(uid)", isDirectory: false))
     }
 }
 

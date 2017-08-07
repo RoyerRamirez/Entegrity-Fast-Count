@@ -58,8 +58,8 @@ class NewFacilityViewController: UIViewController {
                             newCat.locations.append(LocationModel(withName: location))
                         }
             }
-            //AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count)
-            print("This is the output after saving: \(AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count))")
+           // _ = AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count)
+            newAudit.save()
             TextField.text = ""
             textField2.text = ""
 			DestViewController.currentAudit = newAudit

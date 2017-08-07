@@ -19,7 +19,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
     var auditNameLabel = String()
     var selectedLocation : LocationModel?
     var currentCategory : CategoryModel!
-    var audits : AuditModel!
+    var currentAudit : AuditModel!
     var newName = String()
     var activityIndicator : UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -112,9 +112,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             DestViewController.RoomLocationLabel = selectedLocation!.name
             DestViewController.CategoryLabel = categoryNameLabel
             DestViewController.auditorText3 = auditorText2
-            //DestViewController.auditNameChange = auditNAmeChange ################################
             DestViewController.AuditNameLabel = auditNameLabel
             DestViewController.currentLocation = selectedLocation!
+            DestViewController.currentAudit = currentAudit!
             
             
         }
@@ -214,7 +214,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
                 
-                // INSERT SAVING LOGIC HERE
+                self.currentAudit?.save()
                 
                 // Sorting the Rooms by name & reloading the list:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
@@ -238,7 +238,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
-                // INSERT SAVING LOGIC HERE
+                self.currentAudit?.save()
                 
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
@@ -270,7 +270,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
                 self.currentCategory.locations.append(LocationModel(withName: newLocName!))
                 
-                // INSERT SAVING LOGIC HERE
+                self.currentAudit?.save()
                 
                 // Sorting the Rooms by name & reloading the List:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})

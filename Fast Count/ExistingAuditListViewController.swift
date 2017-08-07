@@ -18,16 +18,13 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("There are \(AuditModel.audits.count) audits saved in Folder before loading.")
         navigationItem.title = "Existing Audits"
-        AuditFilesManager.listAudits()
+        AuditModel.audits = AuditFilesManager.listAudits()
         tableView.delegate = self
         tableView.dataSource = self
         // Sorting the Category List by name:
         AuditModel.audits.sort(by :{$0.name < $1.name})
         NSLog("\(AuditModel.audits)")
-    
-        print("There are \(AuditModel.audits.count) audits saved in Folder after loading.")
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,7 +72,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
                 let newName = renameAlert.textFields![0].attributedText?.string
 				AuditModel.audits[indexPath.row].name = newName!
 				tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
-                AuditFilesManager.saveAudit(audit: self.selectedAudit!, uid: AuditModel.audits.count)
+                self.selectedAudit?.save()
                 print("There are \(AuditModel.audits.count) audits saved in Folder.")
                 // Sorting the Audit List by name & reloading all Audits:
                 AuditModel.audits.sort(by :{$0.name < $1.name})
@@ -94,11 +91,13 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
+               self.selectedAudit!.delete()
                 AuditModel.audits.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
                 
-                print("There are \(AuditModel.audits.count) audits saved after \(self.selectedAudit) got deleted.")
+                
+                
                
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))

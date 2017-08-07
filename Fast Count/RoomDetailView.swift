@@ -63,10 +63,9 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
     var CategoryLabel = String() // This string has the category Name
     var AuditNameLabel = String() // This string has the Audit Name
     var auditorText3 = String() //This string has the auditor name
-    //var auditNameChange = String() ################################
-    //var imagePicker: UIImagePickerController!
+    var currentAudit : AuditModel!
     var newMedia : Bool?
-    var newDataCoreAdd : Bool?
+    //var newDataCoreAdd : Bool?
     
     
     
@@ -212,10 +211,10 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 			currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
 			
             //AuditModel.saveAuditsToUserDefaults()
-            // INSERT SAVING LOGIC HERE
+            self.currentAudit!.save()
             
             //############# Adding changed TextField to Core Data ############################
-            newDataCoreAdd = false
+            /*newDataCoreAdd = false
             let entityAuditDetail : AuditDetails = NSEntityDescription.insertNewObject(forEntityName: "AuditDetails", into: DatabaseController.getContext()) as! AuditDetails
             
             if textField  == servesTextField {
@@ -273,7 +272,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             }
             if (newDataCoreAdd == true) {
             DatabaseController.saveContext()
-            }
+            } */
             
 		}
         
