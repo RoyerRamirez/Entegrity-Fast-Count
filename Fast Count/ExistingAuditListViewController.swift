@@ -117,7 +117,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             
             //############################# Working with Core Data ###################################################
             
-            //******************************************* Stil Needs Work: Email CSV Strings **************************************************************************************
+            // Still Needs Work: Email CSV Strings
             let mailComposeViewController = self.configuredMailComposeViewController()
             
             if MFMailComposeViewController.canSendMail(){
@@ -127,8 +127,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             } else{
                 // error logic goes here
             }
-            
-            //*********************************************************************************************************************************************************************
+			
             tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             
         })

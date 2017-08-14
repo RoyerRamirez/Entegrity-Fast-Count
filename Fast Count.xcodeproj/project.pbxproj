@@ -263,7 +263,7 @@
 				TargetAttributes = {
 					A4262DC41F020A4200C562A7 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 5LQQ26GHE3;
+						DevelopmentTeam = RN693TYBDK;
 						ProvisioningStyle = Automatic;
 					};
 					A4262DD81F020A4200C562A7 = {
@@ -510,7 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				DEVELOPMENT_TEAM = RN693TYBDK;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
@@ -525,7 +525,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				DEVELOPMENT_TEAM = RN693TYBDK;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";

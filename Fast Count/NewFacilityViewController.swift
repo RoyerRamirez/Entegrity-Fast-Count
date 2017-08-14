@@ -15,6 +15,10 @@ class NewFacilityViewController: UIViewController {
     @IBOutlet var TextField: UITextField!
     @IBOutlet var textField2: UITextField!
     
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		TextField.resignFirstResponder()
+		textField2.resignFirstResponder()
+	}
     
     override func viewDidLoad(){
         
