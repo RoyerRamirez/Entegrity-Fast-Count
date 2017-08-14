@@ -122,35 +122,32 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
         galleryImageView.addGestureRecognizer(UIGalleryButton)
         galleryImageView.isUserInteractionEnabled = true
         
-        // The method below will retreve pictures taken before
-        let selectingImage1 = "image_\(imageTextField1.text!).png"
-        let selectingImage2 = "image_\(imageTextField2.text!).png"
-        let selectingImage3 = "image_\(imageTextField3.text!).png"
-        let selectingImage4 = "image_\(imageTextField4.text!).png"
-        
-        if self.imageView1.image == nil {
-            if let image = getSavedImage(named: selectingImage1){
-                imageView1.image = image
-                imageView1.contentMode = .scaleAspectFit
-                imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            }
-            if let image = getSavedImage(named: selectingImage2){
-                imageView2.image = image
-                imageView2.contentMode = .scaleAspectFit
-                imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                
-            }
-            if let image = getSavedImage(named: selectingImage3){
-                imageView3.image = image
-                imageView3.contentMode = .scaleAspectFit
-                imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            }
-            if let image = getSavedImage(named: selectingImage4){
-                imageView4.image = image
-                imageView4.contentMode = .scaleAspectFit
-                imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-            }
-        }
+		// Load images from KeyedArchiver
+		
+		if let image = currentLocation.image1{
+			imageView1.image = image
+			imageView1.contentMode = .scaleAspectFit
+			imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+		}
+		
+		if let image = currentLocation.image2{
+			imageView2.image = image
+			imageView2.contentMode = .scaleAspectFit
+			imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+			
+		}
+		
+		if let image = currentLocation.image3{
+			imageView3.image = image
+			imageView3.contentMode = .scaleAspectFit
+			imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+		}
+		
+		if let image = currentLocation.image4{
+			imageView4.image = image
+			imageView4.contentMode = .scaleAspectFit
+			imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+		}
     }
 
 	override func didReceiveMemoryWarning() {
@@ -283,10 +280,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
     
-
-    
-    
-    
 // ************************************************ Camera Features ******************************************************************************
     // the method below will calls methods for pulling up the camera when tapping on the camera icon
     func tappedCamera(_ sender: UIImageView){
@@ -311,81 +304,39 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
             newMedia = false
-            
         }
     }
     
     // NEEDS UPDATING
-    /*
+	
     // The method below will tell the app to select the picture choosen from above whether it came from photo gallery or camera
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         self.dismiss(animated: true, completion: nil)
         if mediaType.isEqual(to: kUTTypeImage as String){
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            // The methods below are attempting to determine if a viewImage is empty to place the pic
+			
             if self.imageView1.image == nil {
-                // Begining of saving image to Documents Directory
-         
-                // encoding the image:
-                let imagePath = "image_\(imageTextField1.text!).png"
-                let data = UIImagePNGRepresentation(image)
-                
-                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
-                
-                try? data?.write(to: filename)
-                // pulling image back
-                let retrevedImage = UIImage(contentsOfFile: filename.path)!
-                imageView1.image = retrevedImage
-                imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                
-                // End of saving image to Documents Directory
-            }
-            else if (self.imageView2.image == nil) {
-                // Begining of saving image to Documents Directory
-                
-                // encoding the image:
-                let imagePath = "image_\(imageTextField2.text!).png"
-                let data = UIImagePNGRepresentation(image)
-                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
-                try? data?.write(to: filename)
-                // pulling image back
-                let retrevedImage = UIImage(contentsOfFile: filename.path)!
-                imageView2.image = retrevedImage
-                imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                
-                // End of saving image to Documents Directory
-            }
-            else if (self.imageView3.image == nil){
-                // Begining of saving image to Documents Directory
-                
-                // encoding the image:
-                let imagePath = "image_\(imageTextField3.text!).png"
-                let data = UIImagePNGRepresentation(image)
-                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
-                try? data?.write(to: filename)
-                // pulling image back
-                let retrevedImage = UIImage(contentsOfFile: filename.path)!
-                imageView3.image = retrevedImage
-                //imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                
-                // End of saving image to Documents Directory
-            }
-            else if (self.imageView4.image == nil) {
-                // Begining of saving image to Documents Directory
-                
-                // encoding the image:
-                let imagePath = "image_\(imageTextField4.text!).png"
-                let data = UIImagePNGRepresentation(image)
-                let filename = getDocumentsDirectory().appendingPathComponent(imagePath)
-                try? data?.write(to: filename)
-                // pulling image back
-                let retrevedImage = UIImage(contentsOfFile: filename.path)!
-                imageView4.image = retrevedImage
-                
-                // End of saving image to Documents Directory
-            }
-            else if (self.imageView1.image != nil) && (self.imageView2.image != nil) && (self.imageView3.image != nil) && (self.imageView4.image != nil) {
+				currentLocation.image1 = image
+				imageView1.image = image
+				imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+				currentAudit.save()
+            } else if (self.imageView2.image == nil) {
+				currentLocation.image2 = image
+				imageView2.image = image
+				imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+				currentAudit.save()
+            } else if (self.imageView3.image == nil){
+				currentLocation.image3 = image
+				imageView3.image = image
+				imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+				currentAudit.save()
+            } else if (self.imageView4.image == nil) {
+				currentLocation.image4 = image
+				imageView4.image = image
+				imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+				currentAudit.save()
+            } else if (self.imageView1.image != nil) && (self.imageView2.image != nil) && (self.imageView3.image != nil) && (self.imageView4.image != nil) {
                 /// Implementing Warning Message
                 let picAlert = UIAlertController(title: "Error", message: "Image capacity has been reached. No more images can be displayed. Please contact your App Developer for further assistance.", preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -400,12 +351,11 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             if (newMedia == true) {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(RoomDetailView.image(image:didFinishSavingWithError:contextInfo:)), nil)
                 
-            }
-            else if mediaType.isEqual(to: kUTTypeMovie as String) {
+            } else if mediaType.isEqual(to: kUTTypeMovie as String) {
                 // Code for video here
             }
         }
-    } */
+    }
     
     // the method below will run if there was an error while attempting to pull the camera or photo gallery up
     func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
