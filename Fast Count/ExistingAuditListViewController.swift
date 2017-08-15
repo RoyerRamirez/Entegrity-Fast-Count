@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import CoreData
+import MBProgressHUD
 
 class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
@@ -114,20 +115,21 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 		
         // action three
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
-            
-            // Still Needs Work: Email CSV Strings
-			let mailComposeViewController = self.configuredMailComposeViewController(audit: AuditModel.audits[indexPath.row])
 			
-            if MFMailComposeViewController.canSendMail(){
-                self.present(mailComposeViewController, animated: true, completion: nil)
-                
-                
-            } else{
-                // error logic goes here
-            }
+			let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+			hud.animationType = MBProgressHUDAnimation.zoomIn
 			
-            tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
-            
+			DispatchQueue.main.async(){
+				let mailComposeViewController = self.configuredMailComposeViewController(audit: AuditModel.audits[indexPath.row])
+				
+				if MFMailComposeViewController.canSendMail(){
+					self.present(mailComposeViewController, animated: true, completion: nil)
+				} else{
+					// error logic goes here
+				}
+				
+				tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+			}
         })
 		
         // Colors
@@ -159,6 +161,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 	
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+		MBProgressHUD.hide(for: self.view, animated: true)
     }
     
 }
