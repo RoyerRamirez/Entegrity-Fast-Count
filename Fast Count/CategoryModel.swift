@@ -39,7 +39,7 @@ class CategoryModel: NSObject, NSCoding {
         } else {
             locations = []
         }
-    }
+	}
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")

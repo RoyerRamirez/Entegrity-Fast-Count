@@ -50,6 +50,11 @@ class AuditModel: NSObject, NSCoding {
         }
         if let categories = aDecoder.decodeObject(forKey: "categories") as? [CategoryModel] {
             self.categories = categories
+			for category in categories {
+				for location in category.locations {
+					location.parentCategory = category
+				}
+			}
         } else {
             categories = []
         }

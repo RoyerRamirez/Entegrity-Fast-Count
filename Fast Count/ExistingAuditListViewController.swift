@@ -115,11 +115,9 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         // action three
         let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
             
-            //############################# Working with Core Data ###################################################
-            
             // Still Needs Work: Email CSV Strings
-            let mailComposeViewController = self.configuredMailComposeViewController()
-            
+			let mailComposeViewController = self.configuredMailComposeViewController(audit: AuditModel.audits[indexPath.row])
+			
             if MFMailComposeViewController.canSendMail(){
                 self.present(mailComposeViewController, animated: true, completion: nil)
                 
@@ -140,7 +138,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         return [emailAction, renameAction, deleteAction]
     }
     
-    func configuredMailComposeViewController() -> MFMailComposeViewController {
+	func configuredMailComposeViewController(audit: AuditModel) -> MFMailComposeViewController {
         // Establish the controller from scratch
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
@@ -148,56 +146,17 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         // Set preset information included in the email
         mailComposerVC.setSubject("Audit CSV")
         mailComposerVC.setMessageBody("The Audit CSV File is attached to this email.", isHTML: false)
-        
-        // Turn core data for responses into a .csv file
-        
-        // Pull core data in
-        var CoreDataResultsList = [NSManagedObject]()
-        
-        // Register the proper delegate and managed context
-        let appDelegate =
-            UIApplication.shared.delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        // Pull the data from core data
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
-        do {
-            let results =
-                try managedContext.fetch(fetchRequest)
-            CoreDataResultsList = results as! [NSManagedObject]
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        
-        // Take the managed object array and turn it into a .csv sring to write in the file
-        // In doing this, we are writing just like we would to any string
-        let csvString = writeCoreObjectsToCSV(objects: CoreDataResultsList)
-        let data = csvString.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
-        mailComposerVC.addAttachmentData(data!, mimeType: "text/csv", fileName: "GenericFilename.csv")
-        
+		
+        let data = CSVExport.exportCSV(audit: audit)
+		let archiveData = FileManager.default.contents(atPath: data.imagesArchive.path)!
+//		let archiveData = try! Data(contentsOf: data.imagesArchive)
+        mailComposerVC.addAttachmentData(data.data!, mimeType: "text/csv",
+			fileName: "audit_\(audit.name.replacingOccurrences(of: " ", with: "_")).csv")
+		mailComposerVC.addAttachmentData(archiveData, mimeType: "application/zip", fileName: data.imagesArchive.lastPathComponent)
+		
         return mailComposerVC
     }
-    func writeCoreObjectsToCSV(objects: [NSManagedObject]) -> NSMutableString {
-        // Make sure we have some data to export
-        guard objects.count > 0 else
-        {
-            
-            return ""
-        }
-        
-        let mailString = NSMutableString()
-        
-        
-        mailString.append("Generic Header 1, Generic Header 2, Generic Header 3")
-        
-        for object in objects
-        {
-            // Put "\n" at the beginning so you don't have an extra row at the end
-            mailString.append("\n\(object.value(forKey: "Generic Core Data Key 1")!),\(object.value(forKey: "Generic Core Data Key 2")!), \(object.value(forKey: "Generic Core Data Key 3")!)")
-        }
-        return mailString
-    }
+	
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }

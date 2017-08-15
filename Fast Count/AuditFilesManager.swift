@@ -13,9 +13,9 @@ class AuditFilesManager : FileManager {
     
     // The method below returns a URL of the documents directory.
     class func getDocumentsDirectory() -> URL {
-    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-    let documentsDirectory = paths[0]
-    return documentsDirectory
+		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+		let documentsDirectory = paths[0]
+		return documentsDirectory
     }
     
     // The method below returns a URL of the directory in which all the audits will be saved. This code also creates the directory if it does not exist.
