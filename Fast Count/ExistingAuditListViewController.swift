@@ -92,14 +92,8 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-               self.selectedAudit!.delete()
-                AuditModel.audits.remove(at: indexPath.row)
+                AuditModel.audits.remove(at: indexPath.row).delete()
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                
-                
-                
-                
-               
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
