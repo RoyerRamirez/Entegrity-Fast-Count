@@ -79,14 +79,14 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 
         for key in LocationModel.defaultKeys {
             let cell  = tableView.dequeueReusableCell(withIdentifier: "DataCell") as! DataCellTableViewCell
-            cell.setupCell(key: key, parent: self)
+            cell.setupCell(key: key, parent: self, isDefaultKey: true)
             labels.append(cell.label)
             dataCells.append(cell)
         }
 
 		for key in currentLocation.customKeys {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as! DataCellTableViewCell
-            cell.setupCell(key: key, parent: self)
+            cell.setupCell(key: key, parent: self, isDefaultKey: false)
             dataCells.append(cell)
             labels.append(cell.label)
         }
@@ -267,8 +267,15 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
         tableView.reloadData()
     }
 
-    func renameCustomDataKey(oldKey: String, newKey:String) {
+    func renameCustomDataKey(oldKey: String, newKey: String) {
+        if let value = currentLocation.data[oldKey] {
+            currentLocation.data[oldKey] = nil
+            currentLocation.data[newKey] = value
+        }
 
+        currentAudit.save()
+        loadDataCells()
+        tableView.reloadData()
     }
 
     func removeCustomData(key: String){

@@ -67,13 +67,13 @@ class GalleryTableViewCell: UITableViewCell {
 		imageTextField4.text = totalImageLabelTrim + ".4"
 		
 		// the method below will transform ios camera image into a button:
-		let UICameraButton = UITapGestureRecognizer(target: self, action: #selector(roomDetailView.tappedCamera))
+		let UICameraButton = UITapGestureRecognizer(target: roomDetailView, action: #selector(RoomDetailView.tappedCamera))
 		UICameraButton.delegate = self
 		cameraImageView.addGestureRecognizer(UICameraButton)
 		cameraImageView.isUserInteractionEnabled = true
 		
 		// the method below will transform ios photo gallary image into a button:
-		let UIGalleryButton = UITapGestureRecognizer(target: self, action: #selector(roomDetailView.tappedPhotoGallery))
+		let UIGalleryButton = UITapGestureRecognizer(target: roomDetailView, action: #selector(RoomDetailView.tappedPhotoGallery))
 		UIGalleryButton.delegate = self
 		galleryImageView.addGestureRecognizer(UIGalleryButton)
 		galleryImageView.isUserInteractionEnabled = true
