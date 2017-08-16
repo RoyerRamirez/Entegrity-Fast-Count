@@ -279,7 +279,10 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
     }
 
     func removeCustomData(key: String){
-
+        currentLocation.data[key] = nil
+        currentAudit.save()
+        loadDataCells()
+        tableView.reloadData()
     }
 }
 

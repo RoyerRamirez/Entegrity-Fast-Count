@@ -23,7 +23,7 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
 
         dataTextField.delegate = self
 
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DataCellTableViewCell.renameKey))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DataCellTableViewCell.labelTapped))
         gestureRecognizer.delegate = self
         gestureRecognizer.numberOfTapsRequired = 1
         label.addGestureRecognizer(gestureRecognizer)
@@ -69,11 +69,31 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.isDefaultKey = isDefaultKey
     }
 
-    func renameKey(){
-        if isDefaultKey { // We don't want to let users rename default keys
+    func labelTapped(){
+        if isDefaultKey { // We don't want to let users adjust default keys
             return
         }
 
+        let deleteRowAlert = UIAlertController(title: nil, message: "Delete or rename custom data?", preferredStyle: .actionSheet)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+
+        let renameAction = UIAlertAction(title: "Rename", style: .default, handler: {action in
+            self.renameKey()
+        })
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: {action in
+            self.parent.removeCustomData(key: self.dataTextField.attributeKey)
+        })
+
+        deleteRowAlert.addAction(cancelAction)
+        deleteRowAlert.addAction(renameAction)
+        deleteRowAlert.addAction(deleteAction)
+
+        parent.present(deleteRowAlert, animated: true)
+    }
+
+    func renameKey(){
         let renameRowAlert = UIAlertController(title: "Rename Custom Data", message: "Enter new title for custom data", preferredStyle: UIAlertControllerStyle.alert)
 
         let addAction = UIAlertAction(title: "Rename", style: .default, handler: {(action: UIAlertAction!) in
