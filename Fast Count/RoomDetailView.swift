@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import MobileCoreServices
 
-class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate {
+class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 	var gallery: GalleryTableViewCell!
 
@@ -35,6 +35,7 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 	override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+
 
     // **************** Label/TextField Widths ****************
 
@@ -69,9 +70,11 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
+
     // ***************************** Load Content for TableView ************************************
 
     func loadDataCells() {
+        dataCells = []
         var labels = [UILabel]()
 
         for key in LocationModel.defaultKeys {
@@ -108,27 +111,9 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 		if indexPath.row == 0 {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "DataHeader") as! DataHeaderTableViewCell
 			cell.headerLabel.text = CategoryLabel + ": " + RoomLocationLabel
+            cell.parent = self
 			return cell
 		}
-		
-//		// DEFAULT KEYS
-//		if indexPath.row > 0 && indexPath.row <= LocationModel.defaultKeys.count {
-//			let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as! DataCellTableViewCell
-//			let key = LocationModel.defaultKeys[indexPath.row - 1]
-//			cell.setupCell(key: key, parent: self)
-//
-//			return cell
-//		}
-//
-//		// CUSTOM KEYS
-//		if indexPath.row > LocationModel.defaultKeys.count &&
-//			indexPath.row <= LocationModel.defaultKeys.count + currentLocation.customKeys.count {
-//			let cell = tableView.dequeueReusableCell(withIdentifier: "DataCell") as! DataCellTableViewCell
-//			let key = currentLocation.customKeys[indexPath.row - 1 - LocationModel.defaultKeys.count]
-//            cell.setupCell(key: key, parent: self)
-//
-//			return cell
-//		}
 
         // DATA CELLS
         if indexPath.row > 0 && indexPath.row <= dataCells.count {
@@ -272,6 +257,22 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
             return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
         }
         return nil
+    }
+
+    // *********************************** Custom Data *********************************************
+    func addCustomData(key: String){
+        currentLocation.data[key] = ""
+        currentAudit.save()
+        loadDataCells()
+        tableView.reloadData()
+    }
+
+    func renameCustomDataKey(oldKey: String, newKey:String) {
+
+    }
+
+    func removeCustomData(key: String){
+
     }
 }
 

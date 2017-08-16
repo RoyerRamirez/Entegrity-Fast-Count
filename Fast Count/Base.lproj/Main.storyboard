@@ -500,6 +500,9 @@
                                                 <constraint firstAttribute="width" constant="30" id="YCc-mX-eGr"/>
                                             </constraints>
                                             <state key="normal" title="Button" image="plus"/>
+                                            <connections>
+                                                <action selector="addNewRowTapped:" destination="BRJ-3r-f8R" eventType="touchUpInside" id="gZg-39-auv"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YSK-yq-5gz">
                                             <rect key="frame" x="8" y="4" width="752" height="35"/>
