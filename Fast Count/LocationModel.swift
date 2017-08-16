@@ -96,10 +96,22 @@ class LocationModel: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(data, forKey: "data")
-		aCoder.encode(image1, forKey: "image1")
-		aCoder.encode(image1, forKey: "image2")
-		aCoder.encode(image1, forKey: "image3")
-		aCoder.encode(image1, forKey: "image4")
+
+		if let image = image1 {
+			aCoder.encode(image, forKey: "image1")
+		}
+
+		if let image = image2 {
+			aCoder.encode(image, forKey: "image2")
+		}
+
+		if let image = image3 {
+			aCoder.encode(image, forKey: "image3")
+		}
+
+		if let image = image4 {
+			aCoder.encode(image, forKey: "image4")
+		}
     }
 }
 

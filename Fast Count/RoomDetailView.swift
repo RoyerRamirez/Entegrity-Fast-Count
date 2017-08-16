@@ -203,7 +203,6 @@ class RoomDetailView: UITableViewController, UITextFieldDelegate, UIImagePickerC
 	
     // The method below will tell the app to select the picture choosen from above whether it came
 	// from photo gallery or camera
-	// FOR SOME REASON THIS IS FILLING ALL THE IMAGES WITH THE FIRST ONE
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         self.dismiss(animated: true, completion: nil)
