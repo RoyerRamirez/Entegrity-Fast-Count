@@ -9,6 +9,10 @@
 import UIKit
 
 class LocationModel: NSObject, NSCoding {
+	
+	// All locations will display these keys in RoomDetailView even if they are blank.
+	static let defaultKeys = ["Serves", "ID", "Make", "Model", "Serial", "Year", "Voltage", "Phase",
+	                          "Description", "Condition", "Auditor", "Efficiency", "Notes"]
 
     var name : String
     var data : [String:String] // Dictioary
@@ -18,6 +22,20 @@ class LocationModel: NSObject, NSCoding {
 	var image2 : UIImage?
 	var image3 : UIImage?
 	var image4 : UIImage?
+	
+	// Calculates all keys in data that aren't in defaultKeys
+	var customKeys: [String] {
+		get {
+			var customKeys: [String] = []
+			for (key, _) in data {
+				if !LocationModel.defaultKeys.contains(key) {
+					customKeys.append(key)
+				}
+			}
+			
+			return customKeys
+		}
+	}
     
     override var description: String {
         get {
@@ -29,6 +47,13 @@ class LocationModel: NSObject, NSCoding {
         self.name = name
         data = [:]
     }
+
+	convenience init(withName name: String, auditor: String){
+		self.init(withName: name)
+		if auditor != "" {
+			data["Auditor"] = auditor
+		}
+	}
 	
     required init?(coder aDecoder: NSCoder) {
         if let name = aDecoder.decodeObject(forKey: "name") as? String {

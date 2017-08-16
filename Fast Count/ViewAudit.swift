@@ -223,7 +223,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
                 // Saving the new category
                 self.currentAudit!.save()
-
                 
                 // Sorting the Category List by name & reloading the data
                 self.currentAudit.categories.sort(by :{$0.name < $1.name})

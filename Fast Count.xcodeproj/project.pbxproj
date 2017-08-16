@@ -17,7 +17,11 @@
 		A4262DDE1F020A4200C562A7 /* Fast_CountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DDD1F020A4200C562A7 /* Fast_CountTests.swift */; };
 		A4262DE91F020FE800C562A7 /* NewFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */; };
 		A4262DEB1F020FFA00C562A7 /* ViewAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */; };
+		A42683651F436DAD00B4D9A9 /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42683641F436DAD00B4D9A9 /* RoomDetailView.swift */; };
 		A4355A1C1F1DA96200E7C78F /* AttributeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4355A1B1F1DA96200E7C78F /* AttributeTextField.swift */; };
+		A44294FB1F4286A5002533DD /* DataCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */; };
+		A44294FD1F42877E002533DD /* GalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */; };
+		A456EC751F4395DB009850AB /* GalleryHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456EC741F4395DB009850AB /* GalleryHeaderTableViewCell.swift */; };
 		A4778FAD1F28D0210065D91F /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FAC1F28D0210065D91F /* DatabaseController.swift */; };
 		A4778FB01F28DC5B0065D91F /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4778FAE1F28DC5B0065D91F /* Database.xcdatamodeld */; };
 		A4778FCA1F294A580065D91F /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC21F294A580065D91F /* Category+CoreDataClass.swift */; };
@@ -33,11 +37,10 @@
 		A4923B951F02B1530002C904 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B941F02B1530002C904 /* LocationModel.swift */; };
 		A4923B971F02BCAB0002C904 /* AuditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B961F02BCAB0002C904 /* AuditModel.swift */; };
 		A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */; };
-		A4923B9D1F0338F40002C904 /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B9C1F0338F40002C904 /* RoomDetailView.swift */; };
+		A49715931F438142006B547B /* DataHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49715921F438142006B547B /* DataHeaderTableViewCell.swift */; };
 		A4A5F27C1F4260D30081850D /* CSVExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A5F27B1F4260D30081850D /* CSVExport.swift */; };
 		A4EA704C1F16C7A300FB895A /* AuditModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B961F02BCAB0002C904 /* AuditModel.swift */; };
 		A4EA704D1F16C7A300FB895A /* RoomLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */; };
-		A4EA704F1F16C7A300FB895A /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B9C1F0338F40002C904 /* RoomDetailView.swift */; };
 		A4EA70501F16C7A300FB895A /* ViewAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */; };
 		A4EA70531F16C7A300FB895A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DCA1F020A4200C562A7 /* ViewController.swift */; };
 		A4EA70541F16C7A300FB895A /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B941F02B1530002C904 /* LocationModel.swift */; };
@@ -81,7 +84,11 @@
 		A4262DDF1F020A4300C562A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFacilityViewController.swift; sourceTree = "<group>"; };
 		A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAudit.swift; sourceTree = "<group>"; };
+		A42683641F436DAD00B4D9A9 /* RoomDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailView.swift; sourceTree = "<group>"; };
 		A4355A1B1F1DA96200E7C78F /* AttributeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributeTextField.swift; sourceTree = "<group>"; };
+		A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCellTableViewCell.swift; sourceTree = "<group>"; };
+		A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTableViewCell.swift; sourceTree = "<group>"; };
+		A456EC741F4395DB009850AB /* GalleryHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A4778FAC1F28D0210065D91F /* DatabaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		A4778FAF1F28DC5B0065D91F /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		A4778FC21F294A580065D91F /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -97,7 +104,7 @@
 		A4923B941F02B1530002C904 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		A4923B961F02BCAB0002C904 /* AuditModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditModel.swift; sourceTree = "<group>"; };
 		A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingAuditListViewController.swift; sourceTree = "<group>"; };
-		A4923B9C1F0338F40002C904 /* RoomDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomDetailView.swift; sourceTree = "<group>"; };
+		A49715921F438142006B547B /* DataHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		A4A5F27B1F4260D30081850D /* CSVExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVExport.swift; sourceTree = "<group>"; };
 		A4EA70611F16C7A300FB895A /* Fast Count copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fast Count copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EA70621F16C7A300FB895A /* Fast Count copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Fast Count copy-Info.plist"; path = "/Users/RoyerRamirezRuiz/Desktop/Entegrity Fast-Count/Fast Count /Entegrity-Fast-Count/Fast Count copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -174,6 +181,7 @@
 				A4778FAE1F28DC5B0065D91F /* Database.xcdatamodeld */,
 				A4262DCC1F020A4200C562A7 /* Main.storyboard */,
 				A4A5F1F51F42446E0081850D /* ViewControllers */,
+				A49715911F438120006B547B /* TableViewCells */,
 				A4A5F1F41F42444E0081850D /* Util */,
 				A4923B911F02B0E50002C904 /* Models */,
 				A4778FC11F2946870065D91F /* Database Models */,
@@ -218,6 +226,17 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		A49715911F438120006B547B /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */,
+				A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */,
+				A49715921F438142006B547B /* DataHeaderTableViewCell.swift */,
+				A456EC741F4395DB009850AB /* GalleryHeaderTableViewCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
 		A4A5F1F41F42444E0081850D /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,7 +255,7 @@
 				A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */,
 				A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */,
 				A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */,
-				A4923B9C1F0338F40002C904 /* RoomDetailView.swift */,
+				A42683641F436DAD00B4D9A9 /* RoomDetailView.swift */,
 				A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */,
 			);
 			name = ViewControllers;
@@ -540,15 +559,17 @@
 			files = (
 				A4923B971F02BCAB0002C904 /* AuditModel.swift in Sources */,
 				A4F8B6001F08CF9A0088CAC8 /* RoomLocation.swift in Sources */,
-				A4923B9D1F0338F40002C904 /* RoomDetailView.swift in Sources */,
+				A456EC751F4395DB009850AB /* GalleryHeaderTableViewCell.swift in Sources */,
 				A4262DEB1F020FFA00C562A7 /* ViewAudit.swift in Sources */,
 				A4355A1C1F1DA96200E7C78F /* AttributeTextField.swift in Sources */,
 				A4A5F27C1F4260D30081850D /* CSVExport.swift in Sources */,
 				A4778FCF1F294A580065D91F /* Audit+CoreDataProperties.swift in Sources */,
 				A4262DCB1F020A4200C562A7 /* ViewController.swift in Sources */,
+				A44294FD1F42877E002533DD /* GalleryTableViewCell.swift in Sources */,
 				A4923B951F02B1530002C904 /* LocationModel.swift in Sources */,
 				A4778FD11F294A580065D91F /* Location+CoreDataProperties.swift in Sources */,
 				A4778FD01F294A580065D91F /* Location+CoreDataClass.swift in Sources */,
+				A44294FB1F4286A5002533DD /* DataCellTableViewCell.swift in Sources */,
 				A4778FCB1F294A580065D91F /* Category+CoreDataProperties.swift in Sources */,
 				A4778FCD1F294A580065D91F /* AuditDetails+CoreDataProperties.swift in Sources */,
 				A4778FCE1F294A580065D91F /* Audit+CoreDataClass.swift in Sources */,
@@ -559,8 +580,10 @@
 				A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */,
 				A4923B931F02B1130002C904 /* CategoryModel.swift in Sources */,
 				A47790041F34B16E0065D91F /* AuditFilesManager.swift in Sources */,
+				A49715931F438142006B547B /* DataHeaderTableViewCell.swift in Sources */,
 				A4778FB01F28DC5B0065D91F /* Database.xcdatamodeld in Sources */,
 				A4262DE91F020FE800C562A7 /* NewFacilityViewController.swift in Sources */,
+				A42683651F436DAD00B4D9A9 /* RoomDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +601,6 @@
 			files = (
 				A4EA704C1F16C7A300FB895A /* AuditModel.swift in Sources */,
 				A4EA704D1F16C7A300FB895A /* RoomLocation.swift in Sources */,
-				A4EA704F1F16C7A300FB895A /* RoomDetailView.swift in Sources */,
 				A4EA70501F16C7A300FB895A /* ViewAudit.swift in Sources */,
 				A4EA70531F16C7A300FB895A /* ViewController.swift in Sources */,
 				A4EA70541F16C7A300FB895A /* LocationModel.swift in Sources */,

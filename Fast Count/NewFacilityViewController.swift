@@ -59,7 +59,7 @@ class NewFacilityViewController: UIViewController {
                     let newCat = CategoryModel(withName: category, parent: newAudit)
                     newAudit.categories.append(newCat) //adding to categories list up above
                         for location in ["Room 1", "Room 2", "Room 3"] {
-                            newCat.locations.append(LocationModel(withName: location))
+                            newCat.locations.append(LocationModel(withName: location, auditor: textField2.text!))
                         }
             }
            // _ = AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count)

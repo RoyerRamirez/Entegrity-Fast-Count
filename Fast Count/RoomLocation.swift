@@ -111,7 +111,6 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             let DestViewController : RoomDetailView = segue.destination as! RoomDetailView
             DestViewController.RoomLocationLabel = selectedLocation!.name
             DestViewController.CategoryLabel = categoryNameLabel
-            DestViewController.auditorText3 = auditorText2
             DestViewController.AuditNameLabel = auditNameLabel
             DestViewController.currentLocation = selectedLocation!
             DestViewController.currentAudit = currentAudit!
