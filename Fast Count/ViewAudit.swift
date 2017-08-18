@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import CoreData
+import MBProgressHUD
+
 
 /// Lists the categories
 class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -127,69 +129,49 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Renaming Action
-        let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
-           self.selectedCategory = self.currentAudit.categories[indexPath.row]
-            let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedCategory!.name): ", preferredStyle: UIAlertControllerStyle.alert)
-            renameAlert.addTextField(configurationHandler: nil)
-            renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
-                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
-            }))
+            let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+                let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                hud.animationType = MBProgressHUDAnimation.zoomIn
+                self.selectedCategory = self.currentAudit.categories[indexPath.row]
+                let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedCategory!.name): ", preferredStyle: UIAlertControllerStyle.alert)
+                renameAlert.addTextField(configurationHandler: nil)
+                renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                    MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
+                    tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+                }))
             
-            renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
-                let newName = renameAlert.textFields![0].attributedText?.string
-                self.currentAudit.categories[indexPath.row].name = newName!
-                tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
+                renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+                    let newName = renameAlert.textFields![0].attributedText?.string
+                    self.currentAudit.categories[indexPath.row].name = newName!
+                    tableView.cellForRow(at: indexPath)?.textLabel!.text = newName
                
-                self.currentAudit!.save()
+                    self.currentAudit!.save()
                 
-                // Sorting the Category List by name & reloading the data
-                self.currentAudit.categories.sort(by :{$0.name < $1.name})
-                NSLog("\(self.currentAudit.categories)")
-                tableView.reloadData()
-                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+                    // Sorting the Category List by name & reloading the data
+                    self.currentAudit.categories.sort(by :{$0.name < $1.name})
+                    NSLog("\(self.currentAudit.categories)")
+                    tableView.reloadData()
+                    MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
+                    tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
                 
-            }))
+                }))
             
-            self.present(renameAlert, animated: true, completion: nil)
-        })
+                self.present(renameAlert, animated: true, completion: nil)
+            })
         
         // Delete Action
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
             /// Implementing Warning Message
             let deleteAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete?", preferredStyle: UIAlertControllerStyle.alert)
             
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                self.currentAudit.categories.remove(at: indexPath.row)
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
                 self.currentAudit!.save()
-
-                
-                // ###### Delete Logic for Core Data is below (Currently Not working properly) #######
-                /*var itemBeingRequested = String()
-                itemBeingRequested = "\(self.selectedCategory)"
-                print("preparing to enter 'do' loop")
-
-                //let itemBeingRequested = self.selectedCategory!.name
-                /*
-                    let request: NSFetchRequest<Category> = Category.fetchRequest()
-                    request.predicate = NSPredicate(format:"categoryName == %@", itemBeingRequested)
-                    let searchResults = try? DatabaseController.getContext().fetch(request)
-                    if searchResults?.count != 0 {
-                        for result in searchResults! as [Category]{
-                            for item in result.entity.attributesByName.keys{
-                                //DatabaseController.getContext().delete(item)
-                                //DatabaseController.saveContext()
-
-                                print("YASS!!!")
-                            }
-                        }
-                    }
-                    
-                */
-                 */
-                // ###### End of Deleting Logic for Core Data #######
                 
                 // INSERT DELETE LOGIC HERE FOR PICTURES
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
@@ -197,6 +179,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }))
             deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             self.present(deleteAlert, animated: true, completion: nil)
@@ -205,11 +188,13 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         })
         // Insert Action
         let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
-            
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
             // Inserting Alert
             let newCatAlert = UIAlertController(title: "New Category", message: "Please input a new category name:", preferredStyle: UIAlertControllerStyle.alert)
             newCatAlert.addTextField(configurationHandler: nil)
             newCatAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
@@ -218,7 +203,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let newCat = CategoryModel(withName: newCatName!, parent: self.currentAudit)
                 self.currentAudit.categories.append(newCat) //adding to categories list up above
                 // Creating New Rooms for this Category
-                for location in ["Room 1", "Room 2", "Room 3"] {
+                for location in ["Room 1"] {
                     newCat.locations.append(LocationModel(withName: location))
                 }
                 // Saving the new category
@@ -228,6 +213,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.currentAudit.categories.sort(by :{$0.name < $1.name})
                 NSLog("\(self.currentAudit.categories)")
                 tableView.reloadData()
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             self.present(newCatAlert, animated: true, completion: nil)

@@ -66,6 +66,7 @@ class AuditFilesManager : FileManager {
     
     // The method below runs the code that turns the given instance of AuditModel into the format used by NSKeyedArchiver to save the information. Returns true if the saving succeeded and false if otherwise. Generally you will not need to use this method. Use the next one instead.
     class func saveAudit(audit: AuditModel, url: URL) -> Bool {
+        print("This the audit url being saved: \(url)")
         NSKeyedArchiver.setClassName("FastCountAudit", for: AuditModel.self)
         NSKeyedArchiver.setClassName("FastCountCategory", for: CategoryModel.self)
         NSKeyedArchiver.setClassName("FastCountLocation", for: LocationModel.self)
@@ -75,16 +76,27 @@ class AuditFilesManager : FileManager {
    
     // The method below does the same thing as saveAudit(audit: AuditModel, url: URL) but, like loadAudit(fileName: String), assumes that the audit you want to save is saved in the audit directory. This is added for convenience so that the URL does not have to be retrieved when saving.
     class func saveAudit(audit: AuditModel, uid: Int) -> Bool {
+        print("Save audit number: \(audit.uid)")
+        print("This was the name being saved: audit_\(uid)")
         return saveAudit(audit: audit, url: getAuditsDirectory().appendingPathComponent("audit_\(uid)", isDirectory: false))
     }
     
     // The method below deletes the audit at the given URL.
-    class func deleteAudit(url: URL) {
-        try? FileManager.default.removeItem(at: url)
+    class func deleteAudit(url: URL)  {
+        do {
+            print("This is the audit url final: \(url)")
+            //try FileManager.default.removeItem(at: url)
+            let fileManager = FileManager.default
+            try fileManager.removeItem(at: url)
+        } catch let error as NSError {
+            print("Error has occured: \(error)\n")
+        }
+        
     }
     
     // The method below deletes the audit at the given uid
     class func deleteAudit(uid: Int) {
+        print("This is the audit number: \(uid)")
         deleteAudit(url: getAuditsDirectory().appendingPathComponent("audit_\(uid)", isDirectory: false))
     }
 }

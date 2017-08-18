@@ -23,8 +23,7 @@ class NewFacilityViewController: UIViewController {
     override func viewDidLoad(){
         
         navigationItem.title = "New Audit"
-        /*TextField.autocapitalizationType = .words
-        textField2.autocapitalizationType = .words*/
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,7 +33,7 @@ class NewFacilityViewController: UIViewController {
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = TextField.text!
             DestViewController.auditorText = textField2.text!
-			let newAudit = AuditModel(withName: TextField.text!, uid: AuditModel.audits.count)
+			let newAudit = AuditModel(withName: TextField.text!, uid: AuditModel.audits.count + 1)
 			AuditModel.audits.append(newAudit)
             let CategoriesAutoLoad = ["Air Handling Unit",
                                       "HVAC Equipment",
@@ -58,12 +57,17 @@ class NewFacilityViewController: UIViewController {
             for category in CategoriesAutoLoad {
                     let newCat = CategoryModel(withName: category, parent: newAudit)
                     newAudit.categories.append(newCat) //adding to categories list up above
-                        for location in ["Room 1", "Room 2", "Room 3"] {
+                        for location in ["Room 1"] {
                             newCat.locations.append(LocationModel(withName: location, auditor: textField2.text!))
                         }
             }
-           // _ = AuditFilesManager.saveAudit(audit: newAudit, uid: AuditModel.audits.count)
-            newAudit.save()
+            //newAudit.save()
+            _ = AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
+        
+            
+            print("This is the new Audit uid \(newAudit.uid)")
+            print("This is the new Audit name: \(newAudit)")
+            print("This is the \(AuditModel.audits.count)")
             TextField.text = ""
             textField2.text = ""
 			DestViewController.currentAudit = newAudit

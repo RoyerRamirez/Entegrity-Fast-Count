@@ -1,0 +1,6 @@
+framework module Pods_Fast_Count {
+  umbrella header "Pods-Fast Count-umbrella.h"
+
+  export *
+  module * { export * }
+}

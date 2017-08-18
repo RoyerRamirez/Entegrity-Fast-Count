@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MBProgressHUD
 
 class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -71,13 +72,11 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         /// Fetching Data to make sure no duplicates were formed...Delete the next 5 lines when finished making all the necessary updates
         let fetchRequestLoc2: NSFetchRequest<Location> = Location.fetchRequest()
         let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestLoc2)
-        print("Locations \(searchResults2) saved in our Database sucessfully")
         for result in searchResults2! as [Location]{
             print("TEST123Location \(result.locationName!)")
         }
         
         //#######################################################################################################################################
-         
     }
 
     override func didReceiveMemoryWarning() {
@@ -125,90 +124,19 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Renaming Action
         let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
+            
             self.selectedLocation = self.currentCategory.locations[indexPath.row]
             let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedLocation!.name): ", preferredStyle: UIAlertControllerStyle.alert)
             renameAlert.addTextField(configurationHandler: nil)
             renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
                /// Do nothing here
+                MBProgressHUD.hide(for: self.view, animated: true)
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             renameAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                 self.newName = (renameAlert.textFields![0].attributedText?.string)!
-                
-                // Recreating Name:
-                    // Pic one:
-                    let name1 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".1"
-                    let trim1 = String(name1.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let oldImage1 = "image_\(trim1).png"
-                    // Pic Two:
-                    let name2 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".2"
-                    let trim2 = String(name2.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let oldImage2 = "image_\(trim2).png"
-                    // Pic Three:
-                    let name3 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".3"
-                    let trim3 = String(name3.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let oldImage3 = "image_\(trim3).png"
-                    // Pic Four:
-                    let name4 = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.selectedLocation!.name + ".4"
-                    let trim4 = String(name4.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let oldImage4 = "image_\(trim4).png"
-                
-                
-                
-                // Renaming Image & Deleting Old Pics:
-                // Pic One:
-                if let image = self.getSavedImage(named: oldImage1){
-                    // creating new name
-                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".1"
-                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let newImageName1 = "image_\(newImageNameTrim).png"
-                    
-                    // Over writing old image name with new one:
-                    let data = UIImagePNGRepresentation(image)
-                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName1)
-                    try? data?.write(to: filename)
-                    print("Just Finished 1st loop")
-                }
-                // Pic Two:
-                if let image = self.getSavedImage(named: oldImage2){
-                    // creating new name
-                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".2"
-                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let newImageName2 = "image_\(newImageNameTrim).png"
-                    
-                    // Over writing old image name with new one:
-                    let data = UIImagePNGRepresentation(image)
-                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName2)
-                    try? data?.write(to: filename)
-                    print("Just Finished 2nd loop")
-                }
-                // Pic Three:
-                if let image = self.getSavedImage(named: oldImage3){
-                    // creating new name
-                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".3"
-                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let newImageName3 = "image_\(newImageNameTrim).png"
-                    
-                    // Over writing old image name with new one:
-                    let data = UIImagePNGRepresentation(image)
-                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName3)
-                    try? data?.write(to: filename)
-                    print("Just Finished 3rd loop")
-                }
-                // Pic Four:
-                if let image = self.getSavedImage(named: oldImage4){
-                    // creating new name
-                    let newImageName = self.auditNameLabel + "." + self.categoryNameLabel + "." + self.newName + ".4"
-                    let newImageNameTrim = String(newImageName.characters.filter { !" \n\t\r".characters.contains($0) })
-                    let newImageName4 = "image_\(newImageNameTrim).png"
-                    
-                    // Over writing old image name with new one:
-                    let data = UIImagePNGRepresentation(image)
-                    let filename = self.getDocumentsDirectory().appendingPathComponent(newImageName4)
-                    try? data?.write(to: filename)
-                    print("Just Finished 4th loop")
-                }
-
                 
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
@@ -220,6 +148,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 NSLog("\(self.currentCategory.locations)")
                 tableView.reloadData()
                 
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
                 
             }))
@@ -229,7 +158,8 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Delete Action
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
             /// Implementing Warning Message
             let deleteAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete?", preferredStyle: UIAlertControllerStyle.alert)
             
@@ -240,11 +170,13 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentAudit?.save()
                 
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
             deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
@@ -255,13 +187,15 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         // Insert Action
         let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
-            
-            
+            // Begining of Progress Circle
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
             // Inserting Alert
             let newLocAlert = UIAlertController(title: "New Location", message: "Please input a new location name:", preferredStyle: UIAlertControllerStyle.alert)
             newLocAlert.addTextField(configurationHandler: nil)
             
             newLocAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
@@ -275,6 +209,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
                 NSLog("\(self.currentCategory.locations)")
                 tableView.reloadData()
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             self.present(newLocAlert, animated: true, completion: nil)

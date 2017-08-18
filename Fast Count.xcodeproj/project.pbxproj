@@ -252,11 +252,11 @@
 			isa = PBXGroup;
 			children = (
 				A4262DCA1F020A4200C562A7 /* ViewController.swift */,
-				A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */,
-				A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */,
 				A4262DE81F020FE800C562A7 /* NewFacilityViewController.swift */,
-				A42683641F436DAD00B4D9A9 /* RoomDetailView.swift */,
+				A4923B981F02C3CF0002C904 /* ExistingAuditListViewController.swift */,
+				A4262DEA1F020FFA00C562A7 /* ViewAudit.swift */,
 				A4F8B5FF1F08CF9A0088CAC8 /* RoomLocation.swift */,
+				A42683641F436DAD00B4D9A9 /* RoomDetailView.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 				TargetAttributes = {
 					A4262DC41F020A4200C562A7 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = RN693TYBDK;
+						DevelopmentTeam = 5LQQ26GHE3;
 						ProvisioningStyle = Automatic;
 					};
 					A4262DD81F020A4200C562A7 = {
@@ -740,13 +740,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RN693TYBDK;
+				DEVELOPMENT_TEAM = 5LQQ26GHE3;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -756,13 +756,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = RN693TYBDK;
+				DEVELOPMENT_TEAM = 5LQQ26GHE3;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

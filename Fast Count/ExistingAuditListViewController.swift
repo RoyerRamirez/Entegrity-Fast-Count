@@ -61,11 +61,14 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // action one
 		let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
             self.selectedAudit = AuditModel.audits[indexPath.row]
             let renameAlert = UIAlertController(title: "Rename", message: "Rename \(self.selectedAudit!.name): ", preferredStyle: UIAlertControllerStyle.alert)
 			renameAlert.addTextField(configurationHandler: nil)
 			
             renameAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action: UIAlertAction!) in
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
 				 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
 			}))
 			
@@ -79,6 +82,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
                 AuditModel.audits.sort(by :{$0.name < $1.name})
                 NSLog("\(AuditModel.audits)")
                 tableView.reloadData()
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
 			
@@ -87,20 +91,35 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 		
         // action two
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
-            
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.animationType = MBProgressHUDAnimation.zoomIn
+            self.selectedAudit = AuditModel.audits[indexPath.row]
             /// Implementing Warning Message
             let refreshAlert = UIAlertController(title: "Warning", message: "All data will be purged. Are you sure you want to delete", preferredStyle: UIAlertControllerStyle.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-                AuditModel.audits.remove(at: indexPath.row).delete()
+                
+                AuditModel.audits.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                AuditFilesManager.deleteAudit(uid: self.selectedAudit!.uid)
+                
+                
+                //self.selectedAudit?.delete()
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
+                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
+                
+            }))
+            
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                let testUID = self.selectedAudit!.uid
+                print("Audit uid is: \(self.selectedAudit!.uid)")
+                print("Audit uid for test is: \(testUID)")
+                MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
                 tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
             }))
             
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
-                tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it
-            }))
             
             self.present(refreshAlert, animated: true, completion: nil)
             /// End of Warning Message
@@ -120,6 +139,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 					self.present(mailComposeViewController, animated: true, completion: nil)
 				} else{
 					// error logic goes here
+                    MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
 				}
 				
 				tableView.setEditing(false, animated: true) // hides the slide out bar after pressing on it

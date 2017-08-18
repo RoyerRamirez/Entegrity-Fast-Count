@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import MobileCoreServices
 
+
 class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 	var gallery: GalleryTableViewCell!
@@ -157,8 +158,85 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 		return "Gallery"
 	}
 
-	
     // *********************************** Camera Features *********************************************
+    
+       
+    @IBAction func image1Tapped(_ sender: UITapGestureRecognizer) {
+        if self.gallery.imageView1.image != nil {
+            let imageViewTapped = sender.view as! UIImageView
+            let newImageViewTapped = UIImageView(image: imageViewTapped.image)
+            newImageViewTapped.frame = UIScreen.main.bounds
+            newImageViewTapped.backgroundColor = .gray
+            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.isUserInteractionEnabled = true
+            let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
+            newImageViewTapped.addGestureRecognizer(exitTap)
+            self.view.addSubview(newImageViewTapped)
+            self.navigationController?.isNavigationBarHidden = false
+            self.tabBarController?.tabBar.isHidden = false
+
+        }
+    }
+    @IBAction func image2Tapped(_ sender: UITapGestureRecognizer) {
+        if self.gallery.imageView2.image != nil {
+            let imageViewTapped = sender.view as! UIImageView
+            let newImageViewTapped = UIImageView(image: imageViewTapped.image)
+            newImageViewTapped.frame = UIScreen.main.bounds
+            newImageViewTapped.backgroundColor = .lightGray
+            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.isUserInteractionEnabled = true
+            let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
+            newImageViewTapped.addGestureRecognizer(exitTap)
+            self.view.addSubview(newImageViewTapped)
+            self.navigationController?.isNavigationBarHidden = false
+            self.tabBarController?.tabBar.isHidden = false
+            
+        }
+    }
+    @IBAction func image3Tapped(_ sender: UITapGestureRecognizer) {
+        if self.gallery.imageView3.image != nil {
+            let imageViewTapped = sender.view as! UIImageView
+            let newImageViewTapped = UIImageView(image: imageViewTapped.image)
+            newImageViewTapped.frame = UIScreen.main.bounds
+            newImageViewTapped.backgroundColor = .lightGray
+            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.isUserInteractionEnabled = true
+            let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
+            newImageViewTapped.addGestureRecognizer(exitTap)
+            self.view.addSubview(newImageViewTapped)
+            self.navigationController?.isNavigationBarHidden = false
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
+    
+    @IBAction func image4Tapped(_ sender: UITapGestureRecognizer) {
+        if self.gallery.imageView4.image != nil {
+            let imageViewTapped = sender.view as! UIImageView
+            let newImageViewTapped = UIImageView(image: imageViewTapped.image)
+            newImageViewTapped.frame = UIScreen.main.bounds
+            newImageViewTapped.backgroundColor = .lightGray
+            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.isUserInteractionEnabled = true
+            let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
+            newImageViewTapped.addGestureRecognizer(exitTap)
+            self.view.addSubview(newImageViewTapped)
+            self.navigationController?.isNavigationBarHidden = false
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
+
+
+    func exitFullScreen(_ sender: UITapGestureRecognizer){
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
+    
+    func enterFullScreen(_ sender: UITapGestureRecognizer) {
+       
+    }
+   
+    
 	
     // the method below will calls methods for pulling up the camera when tapping on the camera icon
     func tappedCamera(){
@@ -197,22 +275,27 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             if self.gallery.imageView1.image == nil {
 				currentLocation.image1 = image
 				self.gallery.imageView1.image = image
-				self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                self.gallery.imageView1.contentMode = .scaleAspectFit
+
+				//self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
 				currentAudit.save()
             } else if (self.gallery.imageView2.image == nil) {
 				currentLocation.image2 = image
 				self.gallery.imageView2.image = image
-				self.gallery.imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                self.gallery.imageView2.contentMode = .scaleAspectFit
+				//self.gallery.imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
 				currentAudit.save()
             } else if (self.gallery.imageView3.image == nil){
 				currentLocation.image3 = image
 				self.gallery.imageView3.image = image
-				self.gallery.imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                self.gallery.imageView3.contentMode = .scaleAspectFit
+				//self.gallery.imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
 				currentAudit.save()
             } else if (self.gallery.imageView4.image == nil) {
 				currentLocation.image4 = image
 				self.gallery.imageView4.image = image
-				self.gallery.imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                self.gallery.imageView4.contentMode = .scaleAspectFit
+				//self.gallery.imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
 				currentAudit.save()
             } else if (self.gallery.imageView1.image != nil) && (self.gallery.imageView2.image != nil) && (self.gallery.imageView3.image != nil) && (self.gallery.imageView4.image != nil) {
                 /// Implementing Warning Message
@@ -250,14 +333,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
         self.dismiss(animated: true, completion: nil)
     }
     
-    // The method below will get retreve saved images
-    // Obsolete... Method replaced by new saving system in AuditFilesManager
-    func getSavedImage(named: String) -> UIImage? {
-        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
-        }
-        return nil
-    }
+    
 
     // *********************************** Custom Data *********************************************
     func addCustomData(key: String){

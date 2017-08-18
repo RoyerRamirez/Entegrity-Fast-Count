@@ -43,7 +43,7 @@ class AuditModel: NSObject, NSCoding {
         } else {
             name = ""
         }
-        if let uid = aDecoder.decodeObject(forKey: "uid") as? Int {
+        if let uid = aDecoder.decodeInteger(forKey: "uid") as? Int {
             self.uid = uid
         } else {
             uid = 0
