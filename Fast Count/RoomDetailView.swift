@@ -7,21 +7,24 @@
 //
 
 import UIKit
-import CoreData
 import MobileCoreServices
 
 
 class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 	var gallery: GalleryTableViewCell!
+    
 
     var dataCells: [DataCellTableViewCell] = []
-
+    
+    var currentAudit : AuditModel!
 	var currentLocation : LocationModel!
+    //var currentImage : ImageModel!
+
     var RoomLocationLabel = String() //This string has the Room Location Name
     var CategoryLabel = String() // This string has the category Name
     var AuditNameLabel = String() // This string has the Audit Name
-    var currentAudit : AuditModel!
+
     var newMedia : Bool?
     
     override func viewDidLoad() {
@@ -29,8 +32,11 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 		
         // the method below creates the title for the page
         navigationItem.title = "Audit Detailed Inputs"
-
+        
+        print("\n\nViewDidLoad load preparing to load!!!! \n\n")
         loadDataCells()
+        print("\n\nViewDidLoad loaded correctly!!!! \n\n")
+        
     }
 
 	override func didReceiveMemoryWarning() {
@@ -132,7 +138,11 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 		gallery = tableView.dequeueReusableCell(withIdentifier: "Gallery") as! GalleryTableViewCell
 		gallery.roomDetailView = self
 		return gallery
+        
 	}
+    
+        
+    
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if typeOfCellAt(indexPath: indexPath) == "Gallery" {
@@ -167,7 +177,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             let newImageViewTapped = UIImageView(image: imageViewTapped.image)
             newImageViewTapped.frame = UIScreen.main.bounds
             newImageViewTapped.backgroundColor = .gray
-            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.contentMode = .redraw
             newImageViewTapped.isUserInteractionEnabled = true
             let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
             newImageViewTapped.addGestureRecognizer(exitTap)
@@ -183,7 +193,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             let newImageViewTapped = UIImageView(image: imageViewTapped.image)
             newImageViewTapped.frame = UIScreen.main.bounds
             newImageViewTapped.backgroundColor = .lightGray
-            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.contentMode = .redraw
             newImageViewTapped.isUserInteractionEnabled = true
             let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
             newImageViewTapped.addGestureRecognizer(exitTap)
@@ -199,7 +209,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             let newImageViewTapped = UIImageView(image: imageViewTapped.image)
             newImageViewTapped.frame = UIScreen.main.bounds
             newImageViewTapped.backgroundColor = .lightGray
-            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.contentMode = .redraw
             newImageViewTapped.isUserInteractionEnabled = true
             let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
             newImageViewTapped.addGestureRecognizer(exitTap)
@@ -215,7 +225,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             let newImageViewTapped = UIImageView(image: imageViewTapped.image)
             newImageViewTapped.frame = UIScreen.main.bounds
             newImageViewTapped.backgroundColor = .lightGray
-            newImageViewTapped.contentMode = .scaleAspectFit
+            newImageViewTapped.contentMode = .redraw
             newImageViewTapped.isUserInteractionEnabled = true
             let exitTap = UITapGestureRecognizer(target: self, action: #selector(exitFullScreen))
             newImageViewTapped.addGestureRecognizer(exitTap)
@@ -272,32 +282,38 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
         if mediaType.isEqual(to: kUTTypeImage as String){
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
 			
+            // Uncomment after fixing issues with slowness
+// #################################################################################################
+            
             if self.gallery.imageView1.image == nil {
 				currentLocation.image1 = image
 				self.gallery.imageView1.image = image
                 self.gallery.imageView1.contentMode = .scaleAspectFit
-
-				//self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                //self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
+                currentLocation.lastChange = .IMAGE
 				currentAudit.save()
             } else if (self.gallery.imageView2.image == nil) {
 				currentLocation.image2 = image
 				self.gallery.imageView2.image = image
                 self.gallery.imageView2.contentMode = .scaleAspectFit
 				//self.gallery.imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-				currentAudit.save()
+                currentLocation.lastChange = .IMAGE
+                currentAudit.save()
             } else if (self.gallery.imageView3.image == nil){
 				currentLocation.image3 = image
 				self.gallery.imageView3.image = image
                 self.gallery.imageView3.contentMode = .scaleAspectFit
 				//self.gallery.imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-				currentAudit.save()
+				 currentLocation.lastChange = .IMAGE
+                currentAudit.save()
             } else if (self.gallery.imageView4.image == nil) {
 				currentLocation.image4 = image
 				self.gallery.imageView4.image = image
                 self.gallery.imageView4.contentMode = .scaleAspectFit
 				//self.gallery.imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-				currentAudit.save()
-            } else if (self.gallery.imageView1.image != nil) && (self.gallery.imageView2.image != nil) && (self.gallery.imageView3.image != nil) && (self.gallery.imageView4.image != nil) {
+                currentLocation.lastChange = .IMAGE
+                currentAudit.save()
+            }  else if (self.gallery.imageView1.image != nil) && (self.gallery.imageView2.image != nil) && (self.gallery.imageView3.image != nil) && (self.gallery.imageView4.image != nil) {
                 /// Implementing Warning Message
                 let picAlert = UIAlertController(title: "Error", message: "Image capacity has been reached. No more images can be displayed. Please contact your App Developer for further assistance.", preferredStyle: UIAlertControllerStyle.alert)
                 
@@ -307,7 +323,8 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
                 }))
                 self.present(picAlert, animated: true, completion: nil)
                 /// End of Warning Message
-            }
+            } 
+ // #################################################################################################
 			
             // the method below saves a new picture taken by the camera to the photo gallery
             if (newMedia == true) {
@@ -337,6 +354,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 
     // *********************************** Custom Data *********************************************
     func addCustomData(key: String){
+        currentLocation.lastChange = .DATA
         currentLocation.data[key] = ""
         currentAudit.save()
         loadDataCells()
@@ -344,18 +362,21 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
     }
 
     func renameCustomDataKey(oldKey: String, newKey: String) {
+        currentLocation.lastChange = .DATA
         if let value = currentLocation.data[oldKey] {
             currentLocation.data[oldKey] = nil
             currentLocation.data[newKey] = value
         }
-
+        
         currentAudit.save()
         loadDataCells()
         tableView.reloadData()
     }
 
     func removeCustomData(key: String){
+        currentLocation.lastChange = .DATA
         currentLocation.data[key] = nil
+        
         currentAudit.save()
         loadDataCells()
         tableView.reloadData()

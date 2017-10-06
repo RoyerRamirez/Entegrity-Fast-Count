@@ -59,15 +59,18 @@ class NewFacilityViewController: UIViewController {
                     newAudit.categories.append(newCat) //adding to categories list up above
                         for location in ["Room 1"] {
                             newCat.locations.append(LocationModel(withName: location, auditor: textField2.text!))
+                            
                         }
+                
             }
-            //newAudit.save()
-            _ = AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
-        
+            var tempLocation : LocationModel!
+            tempLocation.lastChange = .DATA
+            //currentLocation.lastChange = .IMAGE
+            //currentAudit.save()
             
-            print("This is the new Audit uid \(newAudit.uid)")
-            print("This is the new Audit name: \(newAudit)")
-            print("This is the \(AuditModel.audits.count)")
+            _ = AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
+            
+            
             TextField.text = ""
             textField2.text = ""
 			DestViewController.currentAudit = newAudit

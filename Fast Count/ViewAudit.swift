@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import CoreData
 import MBProgressHUD
 
 
@@ -37,60 +36,6 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
         currentAudit.categories.sort(by :{$0.name < $1.name})
         NSLog("\(currentAudit.categories)")
         
-        // ########################################### Updating core Data ########################################################################
-       /* var namesInCategory = String()
-        namesInCategory = "\(currentAudit.categories)"
-        
-        var duplicates = String()
-        
-        ////// Must Fetch Data in order to be able to determine if object is already in data base or if it needs to be created.
-        /*
-        // Fetch Request:
-        let fetchRequestCat: NSFetchRequest<Category> = Category.fetchRequest()
-        let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestCat)
-        
-            if searchResults2?.count != 0 {
-                for result in searchResults2! as [Category]{
-                    for item in result.entity.attributesByName.keys{
-                    duplicates.append(item)
-                    }
-                }
-                if namesInCategory != duplicates {
-                    let entityCategory: Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
-                    entityCategory.categoryName = namesInCategory
-                    DatabaseController.saveContext()
-                }
-            } else {
-                let entityCategory: Category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: DatabaseController.getContext()) as! Category
-                entityCategory.categoryName = namesInCategory
-                DatabaseController.saveContext()
-            }*/
-            
-        
-        /*
-        let audit: Audit = NSEntityDescription.insertNewObject(forEntityName: "Audit", into: DatabaseController.getContext()) as! Audit
-        audit.auditName = LabelText */
-        //DatabaseController.saveContext()
-        
-        
-        // fetching the Database
-                //let fetchRequest: NSFetchRequest<Audit> = Audit.fetchRequest()
-        //let fetchRequestCat2: NSFetchRequest<Category> = Category.fetchRequest()
-        /*
-        let searchResults = try? DatabaseController.getContext().fetch(fetchRequest)
-        print("Audit \(searchResults) saved in our Database sucessfully")
-        for result in searchResults! as [Audit]{
-            print("\(result.auditName!)")
-        }*/
-        
-        // Pulling up what is being saving in CoreDate to make sure everything is correct. Delete the next 5 lines when finished making all the necessary updates
-        /*let searchResults3 = try? DatabaseController.getContext().fetch(fetchRequestCat2)
-        print("Category \(searchResults3) saved in our Database sucessfully")
-        for result in searchResults3! as [Category]{
-            print("TEST123 \(result.categoryName!)")
-        }*/
-        */
-        //#######################################################################################################################################
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,7 +74,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Renaming Action
-            let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+            let renameAction = UITableViewRowAction(style: .default, title: "\u{1F58A}\n Rename", handler: { (action, indexPath) in
                 let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                 hud.animationType = MBProgressHUDAnimation.zoomIn
                 self.selectedCategory = self.currentAudit.categories[indexPath.row]
@@ -160,7 +105,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             })
         
         // Delete Action
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .default, title: "\u{1F5D1}\n Delete", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn
             /// Implementing Warning Message
@@ -187,7 +132,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         })
         // Insert Action
-        let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
+        let insertAction = UITableViewRowAction(style: .default, title: "\u{1F5C2}\n Insert", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn
             // Inserting Alert

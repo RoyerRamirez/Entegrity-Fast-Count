@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -191,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sbg-jo-uVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648" y="-674"/>
+            <point key="canvasLocation" x="409" y="-251"/>
         </scene>
         <!--View Audit-->
         <scene sceneID="5kq-zi-SPg">
@@ -273,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="efJ-ZN-ZiX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741" y="579"/>
+            <point key="canvasLocation" x="1462" y="474"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0MA-jJ-rQ8">
@@ -349,18 +348,16 @@
                                 <rect key="frame" x="0.0" y="64" width="768" height="143"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSN-4z-ugQ">
-                                <rect key="frame" x="624" y="222.5" width="124" height="30"/>
-                                <color key="backgroundColor" red="0.43912801150000003" green="0.43902242180000001" blue="0.45139950509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSN-4z-ugQ">
+                                <rect key="frame" x="718" y="222" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.69427204129999998" green="0.80741065739999995" blue="0.20862406489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="33A-1W-iFJ"/>
-                                    <constraint firstAttribute="width" constant="124" id="Pxm-Bu-fQu"/>
+                                    <constraint firstAttribute="width" constant="30" id="Pxm-Bu-fQu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="titleShadowOffset" width="2" height="2"/>
-                                <state key="normal" title="New Audit">
-                                    <color key="titleColor" red="0.69427204129999998" green="0.80741065739999995" blue="0.20862406489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="New Audit" image="plus">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -392,7 +389,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ABQ-os-Vpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="555" y="579"/>
+            <point key="canvasLocation" x="409" y="910"/>
         </scene>
         <!--Room Location-->
         <scene sceneID="fhc-nJ-3lH">
@@ -474,7 +471,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jBt-Ah-Rn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2861" y="579"/>
+            <point key="canvasLocation" x="2492" y="474"/>
         </scene>
         <!--Room Detail View-->
         <scene sceneID="STS-Qq-d4W">
@@ -487,10 +484,10 @@
                         <color key="separatorColor" red="0.43912801150000003" green="0.43902242180000001" blue="0.45139950509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DataHeader" id="BRJ-3r-f8R" customClass="DataHeaderTableViewCell" customModule="Fast_Count" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BRJ-3r-f8R" id="axw-eI-OEI">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WfC-ZR-00l">
@@ -529,10 +526,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DataCell" id="wn0-D9-ULj" customClass="DataCellTableViewCell" customModule="Fast_Count" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="99.5" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="100" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wn0-D9-ULj" id="sKs-WN-IbP">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serves:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0x-Vx-JJJ">
@@ -569,10 +566,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="GalleryHeader" id="ov2-oB-kW8" customClass="GalleryHeaderTableViewCell" customModule="Fast_Count" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="143.5" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="144" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ov2-oB-kW8" id="hUH-3E-jhB">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Gallery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhs-pE-hCR">
@@ -623,10 +620,10 @@
                                 <color key="backgroundColor" red="0.43912801150000003" green="0.43902242180000001" blue="0.45139950509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Gallery" rowHeight="232" id="KYv-fE-8gJ" customClass="GalleryTableViewCell" customModule="Fast_Count" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="187.5" width="768" height="232"/>
+                                <rect key="frame" x="0.0" y="188" width="768" height="232"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KYv-fE-8gJ" id="CcE-pv-cM0">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="232"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="231"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qGZ-4g-WtB">
@@ -728,7 +725,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4165.625" y="539.6484375"/>
+            <point key="canvasLocation" x="3438" y="474"/>
         </scene>
     </scenes>
     <resources>
@@ -738,7 +735,7 @@
         <image name="roll" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Rji-It-piH"/>
-        <segue reference="nML-Hs-GlM"/>
+        <segue reference="f2N-Bs-ZqF"/>
+        <segue reference="dDj-kI-MK3"/>
     </inferredMetricsTieBreakers>
 </document>

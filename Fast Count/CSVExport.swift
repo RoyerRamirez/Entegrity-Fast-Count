@@ -31,6 +31,7 @@ class CSVExport: NSObject {
 						keys.append(key)
 					}
 				}
+                
 				
 				if let image = location.image1 {
 					let name = "\(category.name)_\(location.name)_image1.png"
@@ -55,8 +56,34 @@ class CSVExport: NSObject {
 		}
 		
 		var string = ""
-		
-		for key in keys {
+       
+        //Original export code for creating CSV
+            /*
+         for key in keys {
+            string.append("\(key)")
+            if keys.last == key {
+                string.append("\n")
+            } else {
+                string.append(",")
+            }
+        }
+        for key in keys {
+            for location in locations{
+                if key == "Category"{
+                    string.append("\(location.parentCategory!.name),")
+                    string.append("\(location.name),")
+                    
+                }
+            }
+        }*/
+        
+        // Figure out how to include the location.data[key] into the string
+        
+        
+        
+        /// Original
+            /*
+        for key in keys {
 			string.append("\(key),")
 			for location in locations {
 				if key == "Category" {
@@ -75,8 +102,8 @@ class CSVExport: NSObject {
 					string.append(",")
 				}
 			}
-		}
-		
+		} */
+		//// End of Original
 		let zip = exportZip(images: images, auditName: audit.name)
 		return (string, zip)
 	}

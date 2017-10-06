@@ -32,6 +32,7 @@ class AuditFilesManager : FileManager {
         NSKeyedUnarchiver.setClass(AuditModel.self, forClassName: "FastCountAudit")
         NSKeyedUnarchiver.setClass(CategoryModel.self, forClassName: "FastCountCategory")
         NSKeyedUnarchiver.setClass(LocationModel.self, forClassName: "FastCountLocation")
+        //NSKeyedUnarchiver.setClass(ImageModel.self, forClassName: "FastCountImage")
         let data = try? Data(contentsOf: url)
         if data != nil {
             let audit = NSKeyedUnarchiver.unarchiveObject(with: data!) as? AuditModel
@@ -70,6 +71,7 @@ class AuditFilesManager : FileManager {
         NSKeyedArchiver.setClassName("FastCountAudit", for: AuditModel.self)
         NSKeyedArchiver.setClassName("FastCountCategory", for: CategoryModel.self)
         NSKeyedArchiver.setClassName("FastCountLocation", for: LocationModel.self)
+        //NSKeyedArchiver.setClassName("FastCountImage", for: ImageModel.self)
         let data = NSKeyedArchiver.archivedData(withRootObject: audit) as NSData
         return data.write(to: url, atomically: true)
     }

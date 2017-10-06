@@ -24,7 +24,7 @@ class CategoryModel: NSObject, NSCoding {
 	init(withName name : String, parent: AuditModel) {
         self.name = name
         self.locations = []
-		self.parentAudit = parent
+        self.parentAudit = parent
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,11 +39,12 @@ class CategoryModel: NSObject, NSCoding {
         } else {
             locations = []
         }
-	}
+    }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(locations, forKey: "locations")
+       
     }
     
     

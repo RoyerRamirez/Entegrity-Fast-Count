@@ -9,14 +9,20 @@
 import UIKit
 
 @IBDesignable class AttributeTextField: UITextField {
+    
+    
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override public func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        // The line commented out below allows customization of the cut copy paste menu
+        /*if action == #selector(copy(_:)) || action == #selector(paste(_:))  {
+            return false
+        }*/
+        
+        return false
     }
-    */
+
 
 	@IBInspectable open var attributeKey : String = ""
+    
+    
 }

@@ -20,13 +20,16 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
+        
+    
         dataTextField.delegate = self
 
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(DataCellTableViewCell.labelTapped))
         gestureRecognizer.delegate = self
         gestureRecognizer.numberOfTapsRequired = 1
         label.addGestureRecognizer(gestureRecognizer)
+        
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,10 +41,11 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
 	// Autosave text
 	func textFieldDidEndEditing(_ textField: UITextField) {
 		print("change")
+       
 		if let field = textField as? AttributeTextField {
 			// Only need to update currentLocation for the attribute just edited.
+            parent.currentLocation.lastChange = .DATA
 			parent.currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
-			
 			parent.currentAudit!.save()
 		}
 		
@@ -49,7 +53,8 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let next = nextField {
-            next.becomeFirstResponder()
+           next.becomeFirstResponder()
+            
         } else {
             // close out keyboard if this cell is the last cell
             dataTextField.resignFirstResponder()

@@ -23,6 +23,7 @@ class AuditModel: NSObject, NSCoding {
     var categories : [CategoryModel]
     var locations : [LocationModel]
     
+    
     // Retreving the name associated with the string
     override var description: String {
         get {
@@ -55,6 +56,7 @@ class AuditModel: NSObject, NSCoding {
 					location.parentCategory = category
 				}
 			}
+            
         } else {
             categories = []
         }
@@ -70,6 +72,7 @@ class AuditModel: NSObject, NSCoding {
         aCoder.encode(uid, forKey: "uid")
         aCoder.encode(categories, forKey: "categories")
         aCoder.encode(locations, forKey: "locations")
+       
     }
     // the two functions below are added for convinence:
         // To save an audit, simply call audit.save()

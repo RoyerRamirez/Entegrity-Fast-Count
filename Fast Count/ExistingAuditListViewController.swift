@@ -8,7 +8,6 @@
 
 import UIKit
 import MessageUI
-import CoreData
 import MBProgressHUD
 
 class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
@@ -60,7 +59,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // action one
-		let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+		let renameAction = UITableViewRowAction(style: .default, title: "\u{1F58A}\n Rename", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn
             self.selectedAudit = AuditModel.audits[indexPath.row]
@@ -90,7 +89,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 		})
 		
         // action two
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .default, title: "\u{1F5D1}\n Delete", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn
             self.selectedAudit = AuditModel.audits[indexPath.row]
@@ -125,9 +124,9 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             /// End of Warning Message
             
         })
-		
+        
         // action three
-        let emailAction = UITableViewRowAction(style: .default, title: "Email", handler: { (action, indexPath) in
+        let emailAction = UITableViewRowAction(style: .default, title: "\u{1F4E7} \n Email", handler: { (action, indexPath) in
 			
 			let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
 			hud.animationType = MBProgressHUDAnimation.zoomIn
@@ -150,6 +149,8 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         renameAction.backgroundColor = UIColor.blue
         deleteAction.backgroundColor = UIColor.red
         emailAction.backgroundColor = UIColor.black
+        
+        
         
         return [emailAction, renameAction, deleteAction]
     }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import MBProgressHUD
 
 class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -37,46 +36,6 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         // Sorting the Rooms by name:
         currentCategory.locations.sort(by :{$0.name < $1.name})
         NSLog("\(currentCategory.locations)")
-        
-        // ########################################### Updating core Data ########################################################################
-        var namesInRoomLocation = String()
-        namesInRoomLocation = "\(currentCategory.locations)"
-        
-        var duplicates = String()
-        
-        ////// Must Fetch Data in order to be able to determine if object is already in data base or if it needs to be created.
-        
-        // Fetch Request:
-        let fetchRequestLoc: NSFetchRequest<Location> = Location.fetchRequest()
-        let searchResults = try? DatabaseController.getContext().fetch(fetchRequestLoc)
-        
-            if searchResults?.count != 0 {
-                for result in searchResults! as [Location]{
-                    for item in result.entity.attributesByName.keys{
-                        duplicates.append(item)
-                    }
-                }
-                if namesInRoomLocation != duplicates {
-                    let entityLocation: Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
-                    entityLocation.locationName = namesInRoomLocation
-                    DatabaseController.saveContext()
-                }
-            } else {
-                let entityLocation: Location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: DatabaseController.getContext()) as! Location
-                entityLocation.locationName = namesInRoomLocation
-                DatabaseController.saveContext()
-            }
-            
-        
-        
-        /// Fetching Data to make sure no duplicates were formed...Delete the next 5 lines when finished making all the necessary updates
-        let fetchRequestLoc2: NSFetchRequest<Location> = Location.fetchRequest()
-        let searchResults2 = try? DatabaseController.getContext().fetch(fetchRequestLoc2)
-        for result in searchResults2! as [Location]{
-            print("TEST123Location \(result.locationName!)")
-        }
-        
-        //#######################################################################################################################################
     }
 
     override func didReceiveMemoryWarning() {
@@ -119,11 +78,10 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
 
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         // Renaming Action
-        let renameAction = UITableViewRowAction(style: .default, title: "Rename", handler: { (action, indexPath) in
+        let renameAction = UITableViewRowAction(style: .default, title: "\u{1F58A}\n Rename", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn
             
@@ -141,6 +99,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
                 
+                self.selectedLocation!.lastChange = .DATA
                 self.currentAudit?.save()
                 
                 // Sorting the Rooms by name & reloading the list:
@@ -157,7 +116,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         })
         
         // Delete Action
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+        let deleteAction = UITableViewRowAction(style: .default, title: "\u{1F5D1}\n Delete", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn
             /// Implementing Warning Message
@@ -167,6 +126,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 
+                self.selectedLocation?.lastChange = .DATA
                 self.currentAudit?.save()
                 
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
@@ -186,7 +146,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
         })
         
         // Insert Action
-        let insertAction = UITableViewRowAction(style: .default, title: "Insert", handler: { (action, indexPath) in
+        let insertAction = UITableViewRowAction(style: .default, title: "\u{1F5C2}\n Insert", handler: { (action, indexPath) in
             // Begining of Progress Circle
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.animationType = MBProgressHUDAnimation.zoomIn

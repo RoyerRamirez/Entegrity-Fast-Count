@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		471EC293E4F5993523CB7943 /* Pods_Fast_CountTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EEE134DCB6C1EC099A89D7 /* Pods_Fast_CountTests.framework */; };
 		65D9DD9A5927D4C8F0F3418D /* Pods_Fast_Count.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693D533A9250DED4260C9F16 /* Pods_Fast_Count.framework */; };
+		A40964561F8806930044E7EC /* AuditsImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40964551F8806930044E7EC /* AuditsImageModel.swift */; };
 		A4262DC91F020A4200C562A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DC81F020A4200C562A7 /* AppDelegate.swift */; };
 		A4262DCB1F020A4200C562A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DCA1F020A4200C562A7 /* ViewController.swift */; };
 		A4262DCE1F020A4200C562A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4262DCC1F020A4200C562A7 /* Main.storyboard */; };
@@ -22,16 +23,6 @@
 		A44294FB1F4286A5002533DD /* DataCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */; };
 		A44294FD1F42877E002533DD /* GalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */; };
 		A456EC751F4395DB009850AB /* GalleryHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A456EC741F4395DB009850AB /* GalleryHeaderTableViewCell.swift */; };
-		A4778FAD1F28D0210065D91F /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FAC1F28D0210065D91F /* DatabaseController.swift */; };
-		A4778FB01F28DC5B0065D91F /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4778FAE1F28DC5B0065D91F /* Database.xcdatamodeld */; };
-		A4778FCA1F294A580065D91F /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC21F294A580065D91F /* Category+CoreDataClass.swift */; };
-		A4778FCB1F294A580065D91F /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC31F294A580065D91F /* Category+CoreDataProperties.swift */; };
-		A4778FCC1F294A580065D91F /* AuditDetails+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC41F294A580065D91F /* AuditDetails+CoreDataClass.swift */; };
-		A4778FCD1F294A580065D91F /* AuditDetails+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC51F294A580065D91F /* AuditDetails+CoreDataProperties.swift */; };
-		A4778FCE1F294A580065D91F /* Audit+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC61F294A580065D91F /* Audit+CoreDataClass.swift */; };
-		A4778FCF1F294A580065D91F /* Audit+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC71F294A580065D91F /* Audit+CoreDataProperties.swift */; };
-		A4778FD01F294A580065D91F /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC81F294A580065D91F /* Location+CoreDataClass.swift */; };
-		A4778FD11F294A580065D91F /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4778FC91F294A580065D91F /* Location+CoreDataProperties.swift */; };
 		A47790041F34B16E0065D91F /* AuditFilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47790031F34B16D0065D91F /* AuditFilesManager.swift */; };
 		A4923B931F02B1130002C904 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B921F02B1130002C904 /* CategoryModel.swift */; };
 		A4923B951F02B1530002C904 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4923B941F02B1530002C904 /* LocationModel.swift */; };
@@ -72,6 +63,7 @@
 		5437DAAE4620C01FE393C5F4 /* Pods-Fast CountTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fast CountTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fast CountTests/Pods-Fast CountTests.release.xcconfig"; sourceTree = "<group>"; };
 		693D533A9250DED4260C9F16 /* Pods_Fast_Count.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fast_Count.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85EEE134DCB6C1EC099A89D7 /* Pods_Fast_CountTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fast_CountTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A40964551F8806930044E7EC /* AuditsImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditsImageModel.swift; sourceTree = "<group>"; };
 		A4262DC51F020A4200C562A7 /* Fast Count.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fast Count.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4262DC81F020A4200C562A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4262DCA1F020A4200C562A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,16 +81,6 @@
 		A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataCellTableViewCell.swift; sourceTree = "<group>"; };
 		A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryTableViewCell.swift; sourceTree = "<group>"; };
 		A456EC741F4395DB009850AB /* GalleryHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		A4778FAC1F28D0210065D91F /* DatabaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
-		A4778FAF1F28DC5B0065D91F /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
-		A4778FC21F294A580065D91F /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4778FC31F294A580065D91F /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4778FC41F294A580065D91F /* AuditDetails+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AuditDetails+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4778FC51F294A580065D91F /* AuditDetails+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AuditDetails+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4778FC61F294A580065D91F /* Audit+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Audit+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4778FC71F294A580065D91F /* Audit+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Audit+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4778FC81F294A580065D91F /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A4778FC91F294A580065D91F /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A47790031F34B16D0065D91F /* AuditFilesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuditFilesManager.swift; sourceTree = "<group>"; };
 		A4923B921F02B1130002C904 /* CategoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		A4923B941F02B1530002C904 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
@@ -178,13 +160,11 @@
 			isa = PBXGroup;
 			children = (
 				A4262DC81F020A4200C562A7 /* AppDelegate.swift */,
-				A4778FAE1F28DC5B0065D91F /* Database.xcdatamodeld */,
 				A4262DCC1F020A4200C562A7 /* Main.storyboard */,
 				A4A5F1F51F42446E0081850D /* ViewControllers */,
 				A49715911F438120006B547B /* TableViewCells */,
 				A4A5F1F41F42444E0081850D /* Util */,
 				A4923B911F02B0E50002C904 /* Models */,
-				A4778FC11F2946870065D91F /* Database Models */,
 				A4262DCF1F020A4200C562A7 /* Assets.xcassets */,
 				A4262DD11F020A4200C562A7 /* LaunchScreen.storyboard */,
 				A4262DD41F020A4200C562A7 /* Info.plist */,
@@ -201,27 +181,13 @@
 			path = "Fast CountTests";
 			sourceTree = "<group>";
 		};
-		A4778FC11F2946870065D91F /* Database Models */ = {
-			isa = PBXGroup;
-			children = (
-				A4778FC21F294A580065D91F /* Category+CoreDataClass.swift */,
-				A4778FC31F294A580065D91F /* Category+CoreDataProperties.swift */,
-				A4778FC41F294A580065D91F /* AuditDetails+CoreDataClass.swift */,
-				A4778FC51F294A580065D91F /* AuditDetails+CoreDataProperties.swift */,
-				A4778FC61F294A580065D91F /* Audit+CoreDataClass.swift */,
-				A4778FC71F294A580065D91F /* Audit+CoreDataProperties.swift */,
-				A4778FC81F294A580065D91F /* Location+CoreDataClass.swift */,
-				A4778FC91F294A580065D91F /* Location+CoreDataProperties.swift */,
-			);
-			name = "Database Models";
-			sourceTree = "<group>";
-		};
 		A4923B911F02B0E50002C904 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A4923B961F02BCAB0002C904 /* AuditModel.swift */,
 				A4923B921F02B1130002C904 /* CategoryModel.swift */,
 				A4923B941F02B1530002C904 /* LocationModel.swift */,
-				A4923B961F02BCAB0002C904 /* AuditModel.swift */,
+				A40964551F8806930044E7EC /* AuditsImageModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -229,10 +195,10 @@
 		A49715911F438120006B547B /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */,
-				A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */,
 				A49715921F438142006B547B /* DataHeaderTableViewCell.swift */,
+				A44294FA1F4286A5002533DD /* DataCellTableViewCell.swift */,
 				A456EC741F4395DB009850AB /* GalleryHeaderTableViewCell.swift */,
+				A44294FC1F42877E002533DD /* GalleryTableViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -242,7 +208,6 @@
 			children = (
 				A47790031F34B16D0065D91F /* AuditFilesManager.swift */,
 				A4355A1B1F1DA96200E7C78F /* AttributeTextField.swift */,
-				A4778FAC1F28D0210065D91F /* DatabaseController.swift */,
 				A4A5F27B1F4260D30081850D /* CSVExport.swift */,
 			);
 			name = Util;
@@ -563,25 +528,16 @@
 				A4262DEB1F020FFA00C562A7 /* ViewAudit.swift in Sources */,
 				A4355A1C1F1DA96200E7C78F /* AttributeTextField.swift in Sources */,
 				A4A5F27C1F4260D30081850D /* CSVExport.swift in Sources */,
-				A4778FCF1F294A580065D91F /* Audit+CoreDataProperties.swift in Sources */,
 				A4262DCB1F020A4200C562A7 /* ViewController.swift in Sources */,
 				A44294FD1F42877E002533DD /* GalleryTableViewCell.swift in Sources */,
 				A4923B951F02B1530002C904 /* LocationModel.swift in Sources */,
-				A4778FD11F294A580065D91F /* Location+CoreDataProperties.swift in Sources */,
-				A4778FD01F294A580065D91F /* Location+CoreDataClass.swift in Sources */,
 				A44294FB1F4286A5002533DD /* DataCellTableViewCell.swift in Sources */,
-				A4778FCB1F294A580065D91F /* Category+CoreDataProperties.swift in Sources */,
-				A4778FCD1F294A580065D91F /* AuditDetails+CoreDataProperties.swift in Sources */,
-				A4778FCE1F294A580065D91F /* Audit+CoreDataClass.swift in Sources */,
-				A4778FCC1F294A580065D91F /* AuditDetails+CoreDataClass.swift in Sources */,
 				A4262DC91F020A4200C562A7 /* AppDelegate.swift in Sources */,
-				A4778FAD1F28D0210065D91F /* DatabaseController.swift in Sources */,
-				A4778FCA1F294A580065D91F /* Category+CoreDataClass.swift in Sources */,
 				A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */,
 				A4923B931F02B1130002C904 /* CategoryModel.swift in Sources */,
+				A40964561F8806930044E7EC /* AuditsImageModel.swift in Sources */,
 				A47790041F34B16E0065D91F /* AuditFilesManager.swift in Sources */,
 				A49715931F438142006B547B /* DataHeaderTableViewCell.swift in Sources */,
-				A4778FB01F28DC5B0065D91F /* Database.xcdatamodeld in Sources */,
 				A4262DE91F020FE800C562A7 /* NewFacilityViewController.swift in Sources */,
 				A42683651F436DAD00B4D9A9 /* RoomDetailView.swift in Sources */,
 			);
@@ -741,7 +697,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -757,7 +715,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -867,20 +827,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A4778FAE1F28DC5B0065D91F /* Database.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A4778FAF1F28DC5B0065D91F /* Database.xcdatamodel */,
-			);
-			currentVersion = A4778FAF1F28DC5B0065D91F /* Database.xcdatamodel */;
-			name = Database.xcdatamodeld;
-			path = ../Database.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A4262DBD1F020A4200C562A7 /* Project object */;
 }
