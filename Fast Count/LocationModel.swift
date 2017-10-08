@@ -9,8 +9,6 @@
 import UIKit
 
 class LocationModel: NSObject, NSCoding {
-	
-    
 	// All locations will display these keys in RoomDetailView even if they are blank.
 	static let defaultKeys = ["Serves", "ID", "Make", "Model", "Serial", "Year", "Voltage", "Phase",
 	                          "Description", "Condition", "Auditor", "Efficiency", "Notes"]
@@ -29,7 +27,9 @@ class LocationModel: NSObject, NSCoding {
     var image3Id : Int?
     var image4Id : Int?
     
-    
+    // Set to true before saving if changes made were to images
+    var saveImages: Bool = false
+    // Depecrated, should be removed soon
     var lastChange : ChangeType!
 
 	
@@ -77,7 +77,24 @@ class LocationModel: NSObject, NSCoding {
         } else {
             data = [:]
         }
-        //if aDecoder.containsValue(forKey: "image1")
+        
+        if let id = aDecoder.decodeObject(forKey: "image1Id") as? Int {
+            self.image1Id = id
+        }
+        
+        if let id = aDecoder.decodeObject(forKey: "image2Id") as? Int {
+            self.image2Id = id
+        }
+        
+        if let id = aDecoder.decodeObject(forKey: "image3Id") as? Int {
+            self.image3Id = id
+        }
+        
+        if let id = aDecoder.decodeObject(forKey: "image4Id") as? Int {
+            self.image4Id = id
+        }
+        
+        // Also about to be depecrated ----------------------------------------------
             if let image = aDecoder.decodeObject(forKey: "image1") as? UIImage {
                 self.image1 = image
             } else {
@@ -101,12 +118,10 @@ class LocationModel: NSObject, NSCoding {
             } else {
                 image4 = nil
             }
-
-        
-        
-        
+        // -------------------------------------------------------------------------
 	}
     
+    // Depecrated
     enum ChangeType {
         //case NAME
         case DATA
@@ -114,36 +129,31 @@ class LocationModel: NSObject, NSCoding {
     }
    
     func encode(with aCoder: NSCoder) {
-        
         aCoder.encode(name, forKey: "name")
         aCoder.encode(data, forKey: "data")
-        if lastChange == nil {
-            return
+        
+        if saveImages {
+            /*
+             Our Problem:
+                 We only want to load the images up when the audit is opened, and we want to unload them
+                 when the audit is closed. Once the audit is opened, we don't want to have to load them
+                 again.
+             
+             Our Solution:
+             (1)
+                 Have a single static variable of AuditImagesModel that will be set when a single audit
+                 is loaded. That way the old audit images will be unloaded when another audit is loaded.
+                 This will be nil until an audit is loaded for the first time the app is run.
+             
+             Any other solutions?
+             
+             
+             */
+            
+            aCoder.encode(image1Id, forKey: ("image1Id"))
+            aCoder.encode(image2Id, forKey: ("image2Id"))
+            aCoder.encode(image3Id, forKey: ("image3Id"))
+            aCoder.encode(image4Id, forKey: ("image4Id"))
         }
-        
-        switch lastChange! {
-        case .DATA:
-            aCoder.encode(name, forKey: "name")
-            aCoder.encode(data, forKey: "data")
-        default:
-            if let image = image1   {
-                aCoder.encode(image, forKey: "image1")
-            }
-            if let image = image2 {
-                aCoder.encode(image, forKey: "image2")
-            }
-            if let image = image3 {
-                aCoder.encode(image, forKey: "image3")
-            }
-            if let image = image4 {
-                aCoder.encode(image, forKey: "image4")
-            }
-        }
-        
-        
     }
-    
 }
-
-
-

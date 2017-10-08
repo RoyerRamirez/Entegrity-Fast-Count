@@ -28,7 +28,7 @@ class NewFacilityViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        if segue.identifier == "AddToTableViewAudit"{
+        if segue.identifier == "AddToTableViewAudit" {
 			
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = TextField.text!
@@ -63,13 +63,12 @@ class NewFacilityViewController: UIViewController {
                         }
                 
             }
-            var tempLocation : LocationModel!
-            tempLocation.lastChange = .DATA
+//            var tempLocation : LocationModel!
+//            tempLocation.lastChange = .DATA
             //currentLocation.lastChange = .IMAGE
             //currentAudit.save()
             
-            _ = AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
-            
+            AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
             
             TextField.text = ""
             textField2.text = ""

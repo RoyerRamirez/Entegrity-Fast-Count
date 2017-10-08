@@ -15,7 +15,6 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
     @IBOutlet var tableView: UITableView!
     var selectedAudit : AuditModel?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Existing Audits"
@@ -54,6 +53,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
+            DestViewController.auditImages = AuditFilesManager.loadAuditImages(uid: selectedAudit!.uid)
 		}
 	}
 

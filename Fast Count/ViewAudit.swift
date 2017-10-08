@@ -22,20 +22,21 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var currentAudit : AuditModel!
     var selectedCategory : CategoryModel?
     
+    var auditImages: AuditImagesModel!
     
     override func viewDidLoad() {
         navigationItem.title = "Categories"
         Label.text = LabelText // Facility Label
-       
+        
         for cat in currentAudit.categories {
             cat.parentAudit = currentAudit
         }
+        
         tableView.delegate = self
         tableView.dataSource = self
         // Sorting the Category List by name:
         currentAudit.categories.sort(by :{$0.name < $1.name})
         NSLog("\(currentAudit.categories)")
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -131,6 +132,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
             /// End of Warning Message
             
         })
+        
         // Insert Action
         let insertAction = UITableViewRowAction(style: .default, title: "\u{1F5C2}\n Insert", handler: { (action, indexPath) in
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)

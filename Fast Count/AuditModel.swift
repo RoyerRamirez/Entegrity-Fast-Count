@@ -16,13 +16,11 @@ class AuditModel: NSObject, NSCoding {
 	// to this list, and when our ExistingAuditViewController loads the list up, it'll reference 
 	// this list rather than one that it has. 
 	static var audits : [AuditModel] = []
-        
-	
+
     var name : String
     var uid : Int // unique Job Number
     var categories : [CategoryModel]
     var locations : [LocationModel]
-    
     
     // Retreving the name associated with the string
     override var description: String {

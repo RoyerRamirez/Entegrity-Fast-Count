@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		471EC293E4F5993523CB7943 /* Pods_Fast_CountTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85EEE134DCB6C1EC099A89D7 /* Pods_Fast_CountTests.framework */; };
 		65D9DD9A5927D4C8F0F3418D /* Pods_Fast_Count.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693D533A9250DED4260C9F16 /* Pods_Fast_Count.framework */; };
-		A40964561F8806930044E7EC /* AuditsImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40964551F8806930044E7EC /* AuditsImageModel.swift */; };
+		A40964561F8806930044E7EC /* AuditImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40964551F8806930044E7EC /* AuditImagesModel.swift */; };
 		A4262DC91F020A4200C562A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DC81F020A4200C562A7 /* AppDelegate.swift */; };
 		A4262DCB1F020A4200C562A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4262DCA1F020A4200C562A7 /* ViewController.swift */; };
 		A4262DCE1F020A4200C562A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4262DCC1F020A4200C562A7 /* Main.storyboard */; };
@@ -63,7 +63,7 @@
 		5437DAAE4620C01FE393C5F4 /* Pods-Fast CountTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fast CountTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fast CountTests/Pods-Fast CountTests.release.xcconfig"; sourceTree = "<group>"; };
 		693D533A9250DED4260C9F16 /* Pods_Fast_Count.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fast_Count.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85EEE134DCB6C1EC099A89D7 /* Pods_Fast_CountTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fast_CountTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A40964551F8806930044E7EC /* AuditsImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditsImageModel.swift; sourceTree = "<group>"; };
+		A40964551F8806930044E7EC /* AuditImagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditImagesModel.swift; sourceTree = "<group>"; };
 		A4262DC51F020A4200C562A7 /* Fast Count.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fast Count.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4262DC81F020A4200C562A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4262DCA1F020A4200C562A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 				A4923B961F02BCAB0002C904 /* AuditModel.swift */,
 				A4923B921F02B1130002C904 /* CategoryModel.swift */,
 				A4923B941F02B1530002C904 /* LocationModel.swift */,
-				A40964551F8806930044E7EC /* AuditsImageModel.swift */,
+				A40964551F8806930044E7EC /* AuditImagesModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -315,7 +315,7 @@
 				TargetAttributes = {
 					A4262DC41F020A4200C562A7 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 5LQQ26GHE3;
+						DevelopmentTeam = RN693TYBDK;
 						ProvisioningStyle = Automatic;
 					};
 					A4262DD81F020A4200C562A7 = {
@@ -535,7 +535,7 @@
 				A4262DC91F020A4200C562A7 /* AppDelegate.swift in Sources */,
 				A4923B991F02C3CF0002C904 /* ExistingAuditListViewController.swift in Sources */,
 				A4923B931F02B1130002C904 /* CategoryModel.swift in Sources */,
-				A40964561F8806930044E7EC /* AuditsImageModel.swift in Sources */,
+				A40964561F8806930044E7EC /* AuditImagesModel.swift in Sources */,
 				A47790041F34B16E0065D91F /* AuditFilesManager.swift in Sources */,
 				A49715931F438142006B547B /* DataHeaderTableViewCell.swift in Sources */,
 				A4262DE91F020FE800C562A7 /* NewFacilityViewController.swift in Sources */,
@@ -696,7 +696,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				DEVELOPMENT_TEAM = RN693TYBDK;
 				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -704,7 +704,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -714,7 +714,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 5LQQ26GHE3;
+				DEVELOPMENT_TEAM = RN693TYBDK;
 				ENABLE_TESTABILITY = NO;
 				INFOPLIST_FILE = "Fast Count/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -722,7 +722,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Entegrity.Fast-Count";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

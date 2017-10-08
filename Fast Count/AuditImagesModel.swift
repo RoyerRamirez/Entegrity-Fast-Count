@@ -9,9 +9,11 @@
 import Foundation
 import UIKit
 
-class AuditsImageModel: NSObject, NSCoding {
+class AuditImagesModel: NSObject, NSCoding {
+    static var auditImages: AuditImagesModel!
+    
     // keys, int --> unique identifier, value --> UIImage
-    var images: [Int:UIImage] = [];
+    var images: [Int:UIImage] = [:];
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(images, forKey: "images")
@@ -21,6 +23,17 @@ class AuditsImageModel: NSObject, NSCoding {
         images = aDecoder.decodeObject(forKey: "images") as! Dictionary
     }
     
-    
-    
+    func getImage(id: Int) -> UIImage? {
+        return images[id]
+    }
+
+    func saveImage(id: Int?, image: UIImage) {
+        if let theID = id {
+            images[theID] = image
+        } else {
+            images[images.keys.count] = image
+        }
+        
+        // save file
+    }
 }
