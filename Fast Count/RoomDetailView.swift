@@ -290,28 +290,24 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 				self.gallery.imageView1.image = image
                 self.gallery.imageView1.contentMode = .scaleAspectFit
                 //self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                currentLocation.lastChange = .IMAGE
 				currentAudit.save()
             } else if (self.gallery.imageView2.image == nil) {
 				currentLocation.image2 = image
 				self.gallery.imageView2.image = image
                 self.gallery.imageView2.contentMode = .scaleAspectFit
 				//self.gallery.imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                currentLocation.lastChange = .IMAGE
                 currentAudit.save()
             } else if (self.gallery.imageView3.image == nil){
 				currentLocation.image3 = image
 				self.gallery.imageView3.image = image
                 self.gallery.imageView3.contentMode = .scaleAspectFit
 				//self.gallery.imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-				 currentLocation.lastChange = .IMAGE
                 currentAudit.save()
             } else if (self.gallery.imageView4.image == nil) {
 				currentLocation.image4 = image
 				self.gallery.imageView4.image = image
                 self.gallery.imageView4.contentMode = .scaleAspectFit
 				//self.gallery.imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                currentLocation.lastChange = .IMAGE
                 currentAudit.save()
             }  else if (self.gallery.imageView1.image != nil) && (self.gallery.imageView2.image != nil) && (self.gallery.imageView3.image != nil) && (self.gallery.imageView4.image != nil) {
                 /// Implementing Warning Message
@@ -354,7 +350,6 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 
     // *********************************** Custom Data *********************************************
     func addCustomData(key: String){
-        currentLocation.lastChange = .DATA
         currentLocation.data[key] = ""
         currentAudit.save()
         loadDataCells()
@@ -362,7 +357,6 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
     }
 
     func renameCustomDataKey(oldKey: String, newKey: String) {
-        currentLocation.lastChange = .DATA
         if let value = currentLocation.data[oldKey] {
             currentLocation.data[oldKey] = nil
             currentLocation.data[newKey] = value
@@ -374,7 +368,6 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
     }
 
     func removeCustomData(key: String){
-        currentLocation.lastChange = .DATA
         currentLocation.data[key] = nil
         
         currentAudit.save()

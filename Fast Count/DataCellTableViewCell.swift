@@ -44,7 +44,6 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
        
 		if let field = textField as? AttributeTextField {
 			// Only need to update currentLocation for the attribute just edited.
-            parent.currentLocation.lastChange = .DATA
 			parent.currentLocation.data[field.attributeKey] = (field.text == nil ? "" : field.text!)
 			parent.currentAudit!.save()
 		}

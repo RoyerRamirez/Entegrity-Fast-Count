@@ -10,30 +10,51 @@ import Foundation
 import UIKit
 
 class AuditImagesModel: NSObject, NSCoding {
-    static var auditImages: AuditImagesModel!
+    static var currentAuditImages: AuditImagesModel!
     
     // keys, int --> unique identifier, value --> UIImage
     var images: [Int:UIImage] = [:];
+    
+    var uid: Int64
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(images, forKey: "images")
+        aCoder.encode(uid, forKey: "uid")
     }
     
     required init?(coder aDecoder: NSCoder) {
         images = aDecoder.decodeObject(forKey: "images") as! Dictionary
+        uid = aDecoder.decodeInt64(forKey: "uid")
     }
     
-    func getImage(id: Int) -> UIImage? {
-        return images[id]
+    required init(uid: Int64) {
+        self.uid = uid
+    }
+    
+    func getImage(id: Int?) -> UIImage? {
+        if let unwrapped = id {
+            return images[unwrapped]
+        }
+        return nil
     }
 
-    func saveImage(id: Int?, image: UIImage) {
+    // Adds image to dictionary and if no id number is supplied, a new one will be created and returned.
+    // Returns nil if no id is created.
+    func saveImage(id: Int?, image: UIImage?) -> Int? {
         if let theID = id {
-            images[theID] = image
+            if let imageUW = image {
+                images[theID] = imageUW
+            } else {
+                images.removeValue(forKey: theID)
+            }
         } else {
-            images[images.keys.count] = image
+            if let imageUW = image {
+                images[images.keys.count] = imageUW
+                return images.keys.count
+            }
         }
         
-        // save file
+        
+        return nil
     }
 }

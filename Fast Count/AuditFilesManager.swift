@@ -8,8 +8,9 @@
 
 import Foundation
 
-
 class AuditFilesManager : FileManager {
+    // check stored value with this to ensure file format is up to date
+    static let CURRENT_VERSION = 1
     
     // The method below returns a URL of the documents directory.
     class func getDocumentsDirectory() -> URL {
@@ -50,6 +51,17 @@ class AuditFilesManager : FileManager {
         NSKeyedUnarchiver.setClass(CategoryModel.self, forClassName: "FastCountCategory")
         NSKeyedUnarchiver.setClass(LocationModel.self, forClassName: "FastCountLocation")
         //NSKeyedUnarchiver.setClass(ImageModel.self, forClassName: "FastCountImage")
+        
+        if let uid = AuditFilesManager.getUIDFromURL(url: url) {
+            if let auditImages = AuditFilesManager.loadAuditImages(uid: uid) {
+                AuditImagesModel.currentAuditImages = auditImages
+            } else {
+                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: Int64(uid))
+            }
+        } else {
+            return nil
+        }
+        
         let data = try? Data(contentsOf: url)
         if data != nil {
             let audit = NSKeyedUnarchiver.unarchiveObject(with: data!) as? AuditModel
@@ -153,7 +165,16 @@ class AuditFilesManager : FileManager {
         } catch let error as NSError {
             print("Error has occured: \(error)\n")
         }
+    }
+    
+    class func getUIDFromURL(url: URL) -> Int?{
+        let filename = url.lastPathComponent
+        if filename.hasPrefix("audit_") {
+            let idStr = filename.substring(from: String.Index.init(encodedOffset: 6))
+            return Int(idStr)
+        }
         
+        return nil
     }
 }
 

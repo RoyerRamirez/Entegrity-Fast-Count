@@ -53,7 +53,11 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = selectedAudit!.name
 			DestViewController.currentAudit = selectedAudit!
-            DestViewController.auditImages = AuditFilesManager.loadAuditImages(uid: selectedAudit!.uid)
+            if let auditImages = AuditFilesManager.loadAuditImages(uid: selectedAudit!.uid) {
+                AuditImagesModel.currentAuditImages = auditImages
+            } else {
+                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: Int64(selectedAudit!.uid))
+            }
 		}
 	}
 

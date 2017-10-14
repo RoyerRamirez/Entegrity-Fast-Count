@@ -17,10 +17,51 @@ class LocationModel: NSObject, NSCoding {
     var data : [String:String] // Dictioary
     var parentCategory : CategoryModel?
 	
-    var image1 : UIImage?
-    var image2 : UIImage?
-    var image3 : UIImage?
-    var image4 : UIImage?
+    // Make the new image structure compatible with the old system by using computed fields.
+    // These variables aren't ever storing anything; they're just running other code when location.image1 is set or gotten.
+    var image1 : UIImage? {
+        get {
+            return AuditImagesModel.currentAuditImages.getImage(id: image1Id)
+        }
+        set(newValue) {
+            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image1Id, image: newValue) {
+                image1Id = id
+            }
+            
+        }
+    }
+    
+    var image2 : UIImage? {
+        get {
+            return AuditImagesModel.currentAuditImages.getImage(id: image2Id)
+        }
+        set(newValue) {
+            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image2Id, image: newValue) {
+                image2Id = id
+            }
+        }
+    }
+    
+    var image3 : UIImage? {
+        get {
+            return AuditImagesModel.currentAuditImages.getImage(id: image3Id)
+        }
+        set(newValue) {
+            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image3Id, image: newValue) {
+                image3Id = id
+            }
+        }
+    }
+    var image4 : UIImage? {
+        get {
+            return AuditImagesModel.currentAuditImages.getImage(id: image4Id)
+        }
+        set(newValue) {
+            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image4Id, image: newValue) {
+                image4Id = id
+            }
+        }
+    }
     
     var image1Id : Int?
     var image2Id : Int?
@@ -29,8 +70,6 @@ class LocationModel: NSObject, NSCoding {
     
     // Set to true before saving if changes made were to images
     var saveImages: Bool = false
-    // Depecrated, should be removed soon
-    var lastChange : ChangeType!
 
 	
 	// Calculates all keys in data that aren't in defaultKeys
@@ -78,6 +117,28 @@ class LocationModel: NSObject, NSCoding {
             data = [:]
         }
         
+        // Support for old versions of the app
+        if let image = aDecoder.decodeObject(forKey: "image1") as? UIImage {
+            print("Found an image saved in the audit file")
+            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+        }
+        
+        if let image = aDecoder.decodeObject(forKey: "image2") as? UIImage {
+            print("Found an image saved in the audit file")
+            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+        }
+        
+        if let image = aDecoder.decodeObject(forKey: "image3") as? UIImage {
+            print("Found an image saved in the audit file")
+            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+        }
+        
+        if let image = aDecoder.decodeObject(forKey: "image4") as? UIImage {
+            print("Found an image saved in the audit file")
+            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+        }
+
+        // Image IDs
         if let id = aDecoder.decodeObject(forKey: "image1Id") as? Int {
             self.image1Id = id
         }
@@ -93,63 +154,13 @@ class LocationModel: NSObject, NSCoding {
         if let id = aDecoder.decodeObject(forKey: "image4Id") as? Int {
             self.image4Id = id
         }
-        
-        // Also about to be depecrated ----------------------------------------------
-            if let image = aDecoder.decodeObject(forKey: "image1") as? UIImage {
-                self.image1 = image
-            } else {
-                image1 = nil
-            }
-            
-            if let image = aDecoder.decodeObject(forKey: "image2") as? UIImage {
-                self.image2 = image
-            } else {
-                image2 = nil
-            }
-            
-            if let image = aDecoder.decodeObject(forKey: "image3") as? UIImage {
-                self.image3 = image
-            } else {
-                image3 = nil
-            }
-            
-            if let image = aDecoder.decodeObject(forKey: "image4") as? UIImage {
-                self.image4 = image
-            } else {
-                image4 = nil
-            }
-        // -------------------------------------------------------------------------
 	}
-    
-    // Depecrated
-    enum ChangeType {
-        //case NAME
-        case DATA
-        case IMAGE
-    }
    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(data, forKey: "data")
         
         if saveImages {
-            /*
-             Our Problem:
-                 We only want to load the images up when the audit is opened, and we want to unload them
-                 when the audit is closed. Once the audit is opened, we don't want to have to load them
-                 again.
-             
-             Our Solution:
-             (1)
-                 Have a single static variable of AuditImagesModel that will be set when a single audit
-                 is loaded. That way the old audit images will be unloaded when another audit is loaded.
-                 This will be nil until an audit is loaded for the first time the app is run.
-             
-             Any other solutions?
-             
-             
-             */
-            
             aCoder.encode(image1Id, forKey: ("image1Id"))
             aCoder.encode(image2Id, forKey: ("image2Id"))
             aCoder.encode(image3Id, forKey: ("image3Id"))

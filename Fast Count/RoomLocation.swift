@@ -98,8 +98,6 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
-                
-                self.selectedLocation!.lastChange = .DATA
                 self.currentAudit?.save()
                 
                 // Sorting the Rooms by name & reloading the list:
@@ -125,8 +123,6 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                
-                self.selectedLocation?.lastChange = .DATA
                 self.currentAudit?.save()
                 
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
