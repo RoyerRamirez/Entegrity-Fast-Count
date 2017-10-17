@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 class AuditImagesModel: NSObject, NSCoding {
-    static var currentAuditImages: AuditImagesModel!
+    static var currentAuditImages: AuditImagesModel?
     
     // keys, int --> unique identifier, value --> UIImage
     var images: [Int:UIImage] = [:];
     
-    var uid: Int64
+    var uid: Int
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(images, forKey: "images")
@@ -24,10 +24,10 @@ class AuditImagesModel: NSObject, NSCoding {
     
     required init?(coder aDecoder: NSCoder) {
         images = aDecoder.decodeObject(forKey: "images") as! Dictionary
-        uid = aDecoder.decodeInt64(forKey: "uid")
+        uid = aDecoder.decodeInteger(forKey: "uid")
     }
     
-    required init(uid: Int64) {
+    required init(uid: Int) {
         self.uid = uid
     }
     

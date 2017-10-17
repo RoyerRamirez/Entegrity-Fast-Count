@@ -22,6 +22,9 @@ class AuditModel: NSObject, NSCoding {
     var categories : [CategoryModel]
     var locations : [LocationModel]
     
+    // Set to true before saving if changes made were to images
+    var saveImages: Bool = false
+    
     // Retreving the name associated with the string
     override var description: String {
         get {
@@ -42,11 +45,9 @@ class AuditModel: NSObject, NSCoding {
         } else {
             name = ""
         }
-        if let uid = aDecoder.decodeObject(forKey: "uid") as? Int {
-            self.uid = uid
-        } else {
-            uid = 0
-        }
+        
+        self.uid = aDecoder.decodeInteger(forKey: "uid")
+        
         if let categories = aDecoder.decodeObject(forKey: "categories") as? [CategoryModel] {
             self.categories = categories
 			for category in categories {
@@ -66,16 +67,26 @@ class AuditModel: NSObject, NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(uid, forKey: "uid")
-        aCoder.encode(categories, forKey: "categories")
-        aCoder.encode(locations, forKey: "locations")
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.uid, forKey: "uid")
+        aCoder.encode(self.categories, forKey: "categories")
+        aCoder.encode(self.locations, forKey: "locations")
        
     }
     // the two functions below are added for convinence:
         // To save an audit, simply call audit.save()
     func save(){
         AuditFilesManager.saveAudit(audit: self , uid: self.uid)
+    }
+    
+    func saveWithImages(){
+        self.saveImages = true
+        AuditFilesManager.saveAudit(audit: self , uid: self.uid)
+        self.saveImages = false
+        
+        if AuditImagesModel.currentAuditImages != nil {
+            AuditFilesManager.saveAuditImages(auditImages: AuditImagesModel.currentAuditImages!, uid: self.uid)
+        }
     }
         // To delete an Audit, call audit.delete()
     func delete(){

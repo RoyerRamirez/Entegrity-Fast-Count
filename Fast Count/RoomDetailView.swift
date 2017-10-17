@@ -290,25 +290,25 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 				self.gallery.imageView1.image = image
                 self.gallery.imageView1.contentMode = .scaleAspectFit
                 //self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-				currentAudit.save()
+				currentAudit.saveWithImages()
             } else if (self.gallery.imageView2.image == nil) {
 				currentLocation.image2 = image
 				self.gallery.imageView2.image = image
                 self.gallery.imageView2.contentMode = .scaleAspectFit
 				//self.gallery.imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                currentAudit.save()
+                currentAudit.saveWithImages()
             } else if (self.gallery.imageView3.image == nil){
 				currentLocation.image3 = image
 				self.gallery.imageView3.image = image
                 self.gallery.imageView3.contentMode = .scaleAspectFit
 				//self.gallery.imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                currentAudit.save()
+                currentAudit.saveWithImages()
             } else if (self.gallery.imageView4.image == nil) {
 				currentLocation.image4 = image
 				self.gallery.imageView4.image = image
                 self.gallery.imageView4.contentMode = .scaleAspectFit
 				//self.gallery.imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
-                currentAudit.save()
+                currentAudit.saveWithImages()
             }  else if (self.gallery.imageView1.image != nil) && (self.gallery.imageView2.image != nil) && (self.gallery.imageView3.image != nil) && (self.gallery.imageView4.image != nil) {
                 /// Implementing Warning Message
                 let picAlert = UIAlertController(title: "Error", message: "Image capacity has been reached. No more images can be displayed. Please contact your App Developer for further assistance.", preferredStyle: UIAlertControllerStyle.alert)

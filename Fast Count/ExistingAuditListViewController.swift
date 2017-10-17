@@ -45,7 +45,6 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
         tableView.deselectRow(at: indexPath, animated: true)
         selectedAudit = AuditModel.audits[indexPath.item]
         self.performSegue(withIdentifier: "toViewAudit", sender: self)
-        
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -56,7 +55,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
             if let auditImages = AuditFilesManager.loadAuditImages(uid: selectedAudit!.uid) {
                 AuditImagesModel.currentAuditImages = auditImages
             } else {
-                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: Int64(selectedAudit!.uid))
+                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: selectedAudit!.uid)
             }
 		}
 	}

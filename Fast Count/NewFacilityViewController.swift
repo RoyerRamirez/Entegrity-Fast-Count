@@ -33,7 +33,7 @@ class NewFacilityViewController: UIViewController {
             let DestViewController : ViewAudit = segue.destination as! ViewAudit
 			DestViewController.LabelText = TextField.text!
             DestViewController.auditorText = textField2.text!
-			let newAudit = AuditModel(withName: TextField.text!, uid: AuditModel.audits.count + 1)
+			let newAudit = AuditModel(withName: TextField.text!, uid: AuditFilesManager.generateNewUID())
 			AuditModel.audits.append(newAudit)
             let CategoriesAutoLoad = ["Air Handling Unit",
                                       "HVAC Equipment",

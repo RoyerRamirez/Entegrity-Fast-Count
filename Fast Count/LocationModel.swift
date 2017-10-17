@@ -21,10 +21,10 @@ class LocationModel: NSObject, NSCoding {
     // These variables aren't ever storing anything; they're just running other code when location.image1 is set or gotten.
     var image1 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages.getImage(id: image1Id)
+            return AuditImagesModel.currentAuditImages?.getImage(id: image1Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image1Id, image: newValue) {
+            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image1Id, image: newValue) {
                 image1Id = id
             }
             
@@ -33,10 +33,10 @@ class LocationModel: NSObject, NSCoding {
     
     var image2 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages.getImage(id: image2Id)
+            return AuditImagesModel.currentAuditImages?.getImage(id: image2Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image2Id, image: newValue) {
+            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image2Id, image: newValue) {
                 image2Id = id
             }
         }
@@ -44,20 +44,20 @@ class LocationModel: NSObject, NSCoding {
     
     var image3 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages.getImage(id: image3Id)
+            return AuditImagesModel.currentAuditImages?.getImage(id: image3Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image3Id, image: newValue) {
+            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image3Id, image: newValue) {
                 image3Id = id
             }
         }
     }
     var image4 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages.getImage(id: image4Id)
+            return AuditImagesModel.currentAuditImages?.getImage(id: image4Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages.saveImage(id: image4Id, image: newValue) {
+            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image4Id, image: newValue) {
                 image4Id = id
             }
         }
@@ -67,10 +67,6 @@ class LocationModel: NSObject, NSCoding {
     var image2Id : Int?
     var image3Id : Int?
     var image4Id : Int?
-    
-    // Set to true before saving if changes made were to images
-    var saveImages: Bool = false
-
 	
 	// Calculates all keys in data that aren't in defaultKeys
 	var customKeys: [String] {
@@ -120,22 +116,22 @@ class LocationModel: NSObject, NSCoding {
         // Support for old versions of the app
         if let image = aDecoder.decodeObject(forKey: "image1") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
         }
         
         if let image = aDecoder.decodeObject(forKey: "image2") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
         }
         
         if let image = aDecoder.decodeObject(forKey: "image3") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
         }
         
         if let image = aDecoder.decodeObject(forKey: "image4") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages.saveImage(id: nil, image: image)!
+            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
         }
 
         // Image IDs
@@ -160,11 +156,23 @@ class LocationModel: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(data, forKey: "data")
         
-        if saveImages {
-            aCoder.encode(image1Id, forKey: ("image1Id"))
-            aCoder.encode(image2Id, forKey: ("image2Id"))
-            aCoder.encode(image3Id, forKey: ("image3Id"))
-            aCoder.encode(image4Id, forKey: ("image4Id"))
+        if parentCategory?.parentAudit?.saveImages != nil && parentCategory!.parentAudit!.saveImages {
+            if image1Id != nil {
+                aCoder.encode(image1Id, forKey: ("image1Id"))
+            }
+            
+            if image2Id != nil {
+                aCoder.encode(image2Id, forKey: ("image2Id"))
+            }
+            
+            if image3Id != nil {
+                aCoder.encode(image3Id, forKey: ("image3Id"))
+            }
+            
+            if image4Id != nil {
+                aCoder.encode(image4Id, forKey: ("image4Id"))
+            }
         }
+        
     }
 }

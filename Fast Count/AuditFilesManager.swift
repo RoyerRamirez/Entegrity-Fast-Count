@@ -56,7 +56,7 @@ class AuditFilesManager : FileManager {
             if let auditImages = AuditFilesManager.loadAuditImages(uid: uid) {
                 AuditImagesModel.currentAuditImages = auditImages
             } else {
-                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: Int64(uid))
+                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: uid)
             }
         } else {
             return nil
@@ -151,6 +151,10 @@ class AuditFilesManager : FileManager {
         return imagesData.write(to: url, atomically: true)
     }
     
+    class func saveAuditImages(auditImages: AuditImagesModel, uid: Int) -> Bool {
+        return saveAuditImages(auditImages: auditImages, url: getAuditImagesDirectory().appendingPathComponent("audit_\(uid)"))
+    }
+    
     class func deleteAuditImages(uid: Int) {
         deleteFile(url: getAuditImagesDirectory().appendingPathComponent("audit_\(uid)", isDirectory: false))
     }
@@ -175,6 +179,23 @@ class AuditFilesManager : FileManager {
         }
         
         return nil
+    }
+    
+    class func generateNewUID() -> Int {
+        var takenUIDs = [Int]()
+        var newUID : Int!
+        var i = 0
+        
+        for audit in AuditModel.audits {
+            takenUIDs.append(audit.uid)
+        }
+        
+        repeat {
+            newUID = i
+            i += 1
+        } while takenUIDs.contains(newUID)
+        
+        return newUID
     }
 }
 
