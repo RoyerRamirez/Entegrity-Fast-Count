@@ -13,9 +13,6 @@ class GalleryTableViewCell: UITableViewCell {
 	var roomDetailView: RoomDetailView! {
 		didSet {
 			// Load images from KeyedArchiver
-			
-            //Uncomment after fixing issues with slowness
-// #################################################################################################
 			if let image = roomDetailView.currentLocation.image1{
 				imageView1.image = image
 				imageView1.contentMode = .scaleAspectFit
@@ -37,7 +34,6 @@ class GalleryTableViewCell: UITableViewCell {
 				imageView4.image = image
 				imageView4.contentMode = .scaleAspectFit
 			}
-// #################################################################################################
 		}
 	}
 	

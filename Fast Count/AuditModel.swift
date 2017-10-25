@@ -19,8 +19,27 @@ class AuditModel: NSObject, NSCoding {
 
     var name : String
     var uid : Int // unique Job Number
-    var categories : [CategoryModel]
-    var locations : [LocationModel]
+    var categories : [CategoryModel] = []
+    var locations : [LocationModel] = []
+    
+    private var privImages : AuditImagesModel? // Separate privately accessed variable set only when the images are needed.
+    
+    var images: AuditImagesModel! { // Will not be encoded with rest of file
+        get {
+            if self.privImages == nil{
+                if let images = AuditFilesManager.loadAuditImages(uid: self.uid) {
+                    self.images = images
+                } else {
+                    self.privImages = AuditImagesModel(uid: self.uid)
+                }
+            }
+            
+            return self.privImages
+        }
+        set (newValue) {
+            self.privImages = newValue
+        }
+    }
     
     // Set to true before saving if changes made were to images
     var saveImages: Bool = false
@@ -48,21 +67,22 @@ class AuditModel: NSObject, NSCoding {
         
         self.uid = aDecoder.decodeInteger(forKey: "uid")
         
+        super.init()
+        
         if let categories = aDecoder.decodeObject(forKey: "categories") as? [CategoryModel] {
             self.categories = categories
 			for category in categories {
+                category.parentAudit = self
 				for location in category.locations {
 					location.parentCategory = category
+                    location.forwardCompatibleImages()
 				}
 			}
             
-        } else {
-            categories = []
         }
+        
         if let locations = aDecoder.decodeObject(forKey: "locations") as? [LocationModel] {
             self.locations = locations
-        } else {
-            locations = []
         }
     }
     
@@ -84,8 +104,8 @@ class AuditModel: NSObject, NSCoding {
         AuditFilesManager.saveAudit(audit: self , uid: self.uid)
         self.saveImages = false
         
-        if AuditImagesModel.currentAuditImages != nil {
-            AuditFilesManager.saveAuditImages(auditImages: AuditImagesModel.currentAuditImages!, uid: self.uid)
+        if self.privImages != nil && self.privImages!.images.count > 0{
+            AuditFilesManager.saveAuditImages(auditImages: self.privImages!, uid: self.uid)
         }
     }
         // To delete an Audit, call audit.delete()

@@ -52,20 +52,9 @@ class AuditFilesManager : FileManager {
         NSKeyedUnarchiver.setClass(LocationModel.self, forClassName: "FastCountLocation")
         //NSKeyedUnarchiver.setClass(ImageModel.self, forClassName: "FastCountImage")
         
-        if let uid = AuditFilesManager.getUIDFromURL(url: url) {
-            if let auditImages = AuditFilesManager.loadAuditImages(uid: uid) {
-                AuditImagesModel.currentAuditImages = auditImages
-            } else {
-                AuditImagesModel.currentAuditImages = AuditImagesModel(uid: uid)
-            }
-        } else {
-            return nil
-        }
-        
         let data = try? Data(contentsOf: url)
         if data != nil {
-            let audit = NSKeyedUnarchiver.unarchiveObject(with: data!) as? AuditModel
-            return audit
+            return NSKeyedUnarchiver.unarchiveObject(with: data!) as? AuditModel
         }
         return nil
     }

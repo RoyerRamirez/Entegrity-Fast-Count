@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class AuditImagesModel: NSObject, NSCoding {
-    static var currentAuditImages: AuditImagesModel?
     
     // keys, int --> unique identifier, value --> UIImage
     var images: [Int:UIImage] = [:];
@@ -49,12 +48,29 @@ class AuditImagesModel: NSObject, NSCoding {
             }
         } else {
             if let imageUW = image {
-                images[images.keys.count] = imageUW
-                return images.keys.count
+                let newUID = generateNewUID()
+                images[newUID] = imageUW
+                return newUID
             }
         }
         
-        
         return nil
+    }
+    
+    func generateNewUID() -> Int {
+        var takenUIDs = [Int]()
+        var newUID : Int!
+        var i = 0
+        
+        for uid in images.keys {
+            takenUIDs.append(uid)
+        }
+        
+        repeat {
+            newUID = i
+            i += 1
+        } while takenUIDs.contains(newUID)
+        
+        return newUID
     }
 }

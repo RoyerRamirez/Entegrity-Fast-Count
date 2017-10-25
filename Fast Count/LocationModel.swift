@@ -21,10 +21,10 @@ class LocationModel: NSObject, NSCoding {
     // These variables aren't ever storing anything; they're just running other code when location.image1 is set or gotten.
     var image1 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages?.getImage(id: image1Id)
+            return parentCategory!.parentAudit!.images.getImage(id: image1Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image1Id, image: newValue) {
+            if let id = parentCategory!.parentAudit!.images.saveImage(id: image1Id, image: newValue) {
                 image1Id = id
             }
             
@@ -33,10 +33,10 @@ class LocationModel: NSObject, NSCoding {
     
     var image2 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages?.getImage(id: image2Id)
+            return parentCategory!.parentAudit!.images.getImage(id: image2Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image2Id, image: newValue) {
+            if let id = parentCategory!.parentAudit!.images.saveImage(id: image2Id, image: newValue) {
                 image2Id = id
             }
         }
@@ -44,24 +44,30 @@ class LocationModel: NSObject, NSCoding {
     
     var image3 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages?.getImage(id: image3Id)
+            return parentCategory!.parentAudit!.images.getImage(id: image3Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image3Id, image: newValue) {
+            if let id = parentCategory!.parentAudit!.images.saveImage(id: image3Id, image: newValue) {
                 image3Id = id
             }
         }
     }
     var image4 : UIImage? {
         get {
-            return AuditImagesModel.currentAuditImages?.getImage(id: image4Id)
+            return parentCategory!.parentAudit!.images.getImage(id: image4Id)
         }
         set(newValue) {
-            if let id = AuditImagesModel.currentAuditImages?.saveImage(id: image4Id, image: newValue) {
+            if let id = parentCategory!.parentAudit!.images.saveImage(id: image4Id, image: newValue) {
                 image4Id = id
             }
         }
     }
+    
+    // forward compatibility
+    var image1tmp : UIImage?
+    var image2tmp : UIImage?
+    var image3tmp : UIImage?
+    var image4tmp : UIImage?
     
     var image1Id : Int?
     var image2Id : Int?
@@ -116,22 +122,22 @@ class LocationModel: NSObject, NSCoding {
         // Support for old versions of the app
         if let image = aDecoder.decodeObject(forKey: "image1") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
+            self.image1tmp = image
         }
         
         if let image = aDecoder.decodeObject(forKey: "image2") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
+            self.image2tmp = image
         }
         
         if let image = aDecoder.decodeObject(forKey: "image3") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
+            self.image3tmp = image
         }
         
         if let image = aDecoder.decodeObject(forKey: "image4") as? UIImage {
             print("Found an image saved in the audit file")
-            self.image1Id = AuditImagesModel.currentAuditImages?.saveImage(id: nil, image: image)!
+            self.image4tmp = image
         }
 
         // Image IDs
@@ -173,6 +179,38 @@ class LocationModel: NSObject, NSCoding {
                 aCoder.encode(image4Id, forKey: ("image4Id"))
             }
         }
+    }
+    
+    // run after self.parentCategory is set to ensure images of old file format are kept with new format
+    func forwardCompatibleImages() {
+        var saveAudit = false
         
+        if let image = self.image1tmp {
+            self.image1 = image
+            self.image1tmp = nil
+            saveAudit = true
+        }
+        
+        if let image = self.image2tmp {
+            self.image2 = image
+            self.image2tmp = nil
+            saveAudit = true
+        }
+        
+        if let image = self.image3tmp {
+            self.image3 = image
+            self.image3tmp = nil
+            saveAudit = true
+        }
+        
+        if let image = self.image4tmp {
+            self.image4 = image
+            self.image4tmp = nil
+            saveAudit = true
+        }
+        
+        if saveAudit {
+            parentCategory!.parentAudit!.saveWithImages()
+        }
     }
 }
