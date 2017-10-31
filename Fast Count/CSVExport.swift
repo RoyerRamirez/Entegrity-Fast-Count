@@ -57,33 +57,31 @@ class CSVExport: NSObject {
 		
 		var string = ""
        
-        //Original export code for creating CSV
-            /*
-         for key in keys {
-            string.append("\(key)")
-            if keys.last == key {
-                string.append("\n")
-            } else {
-                string.append(",")
-            }
+        //Corrected export code for creating CSV
+        for key in keys{
+            string.append("\(key),")
         }
-        for key in keys {
-            for location in locations{
-                if key == "Category"{
-                    string.append("\(location.parentCategory!.name),")
-                    string.append("\(location.name),")
-                    
+        string.append("\n")
+        
+        
+        for location in locations {
+            string.append("\(location.parentCategory!.name),")
+            string.append("\(location.name),")
+            for key in keys {
+                if let value = location.data[key] {
+                        string.append(value)
+                        string.append(",")
                 }
             }
-        }*/
-        
-        // Figure out how to include the location.data[key] into the string
-        
+            string.append("\n")
+        }
         
         
-        /// Original
-            /*
-        for key in keys {
+        
+     
+        /// Commented Code below rotates the axis (The x becomes y, and the y becomes x)
+        
+        /*for key in keys {
 			string.append("\(key),")
 			for location in locations {
 				if key == "Category" {
@@ -102,8 +100,9 @@ class CSVExport: NSObject {
 					string.append(",")
 				}
 			}
-		} */
-		//// End of Original
+		}*/
+		//// End of Original code
+        
 		let zip = exportZip(images: images, auditName: audit.name)
 		return (string, zip)
 	}

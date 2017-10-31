@@ -98,7 +98,10 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
-                self.currentAudit?.save()
+                
+                //self.currentAudit?.save()
+                self.currentAudit.saveWithImages()
+                //AuditFilesManager.saveAudit(audit: self.currentAudit, uid: self.currentAudit.uid)
                 
                 // Sorting the Rooms by name & reloading the list:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
@@ -123,7 +126,8 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                self.currentAudit?.save()
+                self.currentAudit.saveWithImages()
+                
                 
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
                 MBProgressHUD.hide(for: self.view, animated: true) // stops the progress circle
@@ -159,7 +163,8 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
                 self.currentCategory.locations.append(LocationModel(withName: newLocName!))
                 
-                self.currentAudit?.save()
+                //self.currentAudit?.save()
+                self.currentAudit.saveWithImages()
                 
                 // Sorting the Rooms by name & reloading the List:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})

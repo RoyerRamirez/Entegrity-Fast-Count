@@ -14,7 +14,6 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 
 	var gallery: GalleryTableViewCell!
     
-
     var dataCells: [DataCellTableViewCell] = []
     
     var currentAudit : AuditModel!
@@ -282,9 +281,6 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
         if mediaType.isEqual(to: kUTTypeImage as String){
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
 			
-            // Uncomment after fixing issues with slowness
-// #################################################################################################
-            
             if self.gallery.imageView1.image == nil {
 				currentLocation.image1 = image
 				self.gallery.imageView1.image = image
@@ -320,8 +316,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
                 self.present(picAlert, animated: true, completion: nil)
                 /// End of Warning Message
             } 
- // #################################################################################################
-			
+ 			
             // the method below saves a new picture taken by the camera to the photo gallery
             if (newMedia == true) {
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(RoomDetailView.image(image:didFinishSavingWithError:contextInfo:)), nil)
@@ -369,7 +364,6 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 
     func removeCustomData(key: String){
         currentLocation.data[key] = nil
-        
         currentAudit.save()
         loadDataCells()
         tableView.reloadData()

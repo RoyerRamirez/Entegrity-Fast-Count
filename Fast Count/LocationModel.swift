@@ -21,6 +21,7 @@ class LocationModel: NSObject, NSCoding {
     // These variables aren't ever storing anything; they're just running other code when location.image1 is set or gotten.
     var image1 : UIImage? {
         get {
+            // error here!!! Fix!
             return parentCategory!.parentAudit!.images.getImage(id: image1Id)
         }
         set(newValue) {
