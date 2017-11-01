@@ -161,7 +161,7 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             newLocAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
-                self.currentCategory.locations.append(LocationModel(withName: newLocName!))
+                self.currentCategory.locations.append(LocationModel(withName: newLocName!, parentCategory: self.currentCategory))
                 
                 //self.currentAudit?.save()
                 self.currentAudit.saveWithImages()

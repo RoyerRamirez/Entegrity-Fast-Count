@@ -95,13 +95,14 @@ class LocationModel: NSObject, NSCoding {
         }
     }
     
-	init(withName name:String) {
+    init(withName name: String, parentCategory: CategoryModel) {
         self.name = name
+        self.parentCategory = parentCategory
         data = [:]
     }
 
-	convenience init(withName name: String, auditor: String){
-		self.init(withName: name)
+    convenience init(withName name: String, parentCategory: CategoryModel, auditor: String){
+        self.init(withName: name, parentCategory: parentCategory)
 		if auditor != "" {
 			data["Auditor"] = auditor
 		}
@@ -163,22 +164,20 @@ class LocationModel: NSObject, NSCoding {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(data, forKey: "data")
         
-        if parentCategory?.parentAudit?.saveImages != nil && parentCategory!.parentAudit!.saveImages {
-            if image1Id != nil {
-                aCoder.encode(image1Id, forKey: ("image1Id"))
-            }
-            
-            if image2Id != nil {
-                aCoder.encode(image2Id, forKey: ("image2Id"))
-            }
-            
-            if image3Id != nil {
-                aCoder.encode(image3Id, forKey: ("image3Id"))
-            }
-            
-            if image4Id != nil {
-                aCoder.encode(image4Id, forKey: ("image4Id"))
-            }
+        if image1Id != nil {
+            aCoder.encode(image1Id, forKey: ("image1Id"))
+        }
+        
+        if image2Id != nil {
+            aCoder.encode(image2Id, forKey: ("image2Id"))
+        }
+        
+        if image3Id != nil {
+            aCoder.encode(image3Id, forKey: ("image3Id"))
+        }
+        
+        if image4Id != nil {
+            aCoder.encode(image4Id, forKey: ("image4Id"))
         }
     }
     

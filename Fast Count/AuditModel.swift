@@ -41,9 +41,6 @@ class AuditModel: NSObject, NSCoding {
         }
     }
     
-    // Set to true before saving if changes made were to images
-    var saveImages: Bool = false
-    
     // Retreving the name associated with the string
     override var description: String {
         get {
@@ -100,9 +97,7 @@ class AuditModel: NSObject, NSCoding {
     }
     
     func saveWithImages(){
-        self.saveImages = true
         AuditFilesManager.saveAudit(audit: self , uid: self.uid)
-        self.saveImages = false
         
         if self.privImages != nil && self.privImages!.images.count > 0{
             AuditFilesManager.saveAuditImages(auditImages: self.privImages!, uid: self.uid)

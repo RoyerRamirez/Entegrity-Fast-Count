@@ -151,7 +151,7 @@ class ViewAudit: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.currentAudit.categories.append(newCat) //adding to categories list up above
                 // Creating New Rooms for this Category
                 for location in ["Room 1"] {
-                    newCat.locations.append(LocationModel(withName: location))
+                    newCat.locations.append(LocationModel(withName: location, parentCategory: newCat))
                 }
                 // Saving the new category
                 self.currentAudit!.save()
