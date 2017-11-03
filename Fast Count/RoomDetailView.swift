@@ -269,7 +269,8 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             imagePicker.mediaTypes = [kUTTypeImage as String]
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
-            newMedia = false
+            newMedia = false // This prevents existing images from being re-saved.
+            print("\nExiting tappedPhotoGallery Function. \n")
         }
     }
 	
@@ -282,28 +283,29 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
 			
             if self.gallery.imageView1.image == nil {
+                print("\nEntered the first saving loop \n ")
 				currentLocation.image1 = image
 				self.gallery.imageView1.image = image
                 self.gallery.imageView1.contentMode = .scaleAspectFit
-                //self.gallery.imageView1.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
 				currentAudit.saveWithImages()
+                
             } else if (self.gallery.imageView2.image == nil) {
+                print("\nEntered the second saving loop \n ")
 				currentLocation.image2 = image
 				self.gallery.imageView2.image = image
                 self.gallery.imageView2.contentMode = .scaleAspectFit
-				//self.gallery.imageView2.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 currentAudit.saveWithImages()
             } else if (self.gallery.imageView3.image == nil){
+                print("\nEntered the third saving loop \n ")
 				currentLocation.image3 = image
 				self.gallery.imageView3.image = image
                 self.gallery.imageView3.contentMode = .scaleAspectFit
-				//self.gallery.imageView3.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 currentAudit.saveWithImages()
             } else if (self.gallery.imageView4.image == nil) {
+                print("\nEntered the fourth saving loop \n ")
 				currentLocation.image4 = image
 				self.gallery.imageView4.image = image
                 self.gallery.imageView4.contentMode = .scaleAspectFit
-				//self.gallery.imageView4.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2))
                 currentAudit.saveWithImages()
             }  else if (self.gallery.imageView1.image != nil) && (self.gallery.imageView2.image != nil) && (self.gallery.imageView3.image != nil) && (self.gallery.imageView4.image != nil) {
                 /// Implementing Warning Message
@@ -319,7 +321,9 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
  			
             // the method below saves a new picture taken by the camera to the photo gallery
             if (newMedia == true) {
+                print("\nEntered this final loop \n")
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(RoomDetailView.image(image:didFinishSavingWithError:contextInfo:)), nil)
+                newMedia = false
             } else if mediaType.isEqual(to: kUTTypeMovie as String) {
                 // Code for video here
             }

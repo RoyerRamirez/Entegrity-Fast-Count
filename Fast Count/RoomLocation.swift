@@ -99,9 +99,9 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.currentCategory.locations[indexPath.row].name = self.newName
                 tableView.cellForRow(at: indexPath)?.textLabel!.text = self.newName
                 
-                //self.currentAudit?.save()
-                self.currentAudit.saveWithImages()
-                //AuditFilesManager.saveAudit(audit: self.currentAudit, uid: self.currentAudit.uid)
+                self.currentAudit?.save()
+                //self.currentAudit.saveWithImages()
+                
                 
                 // Sorting the Rooms by name & reloading the list:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
@@ -126,7 +126,8 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
             deleteAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
                 self.currentCategory.locations.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                self.currentAudit.saveWithImages()
+                self.currentAudit?.save()
+                //self.currentAudit.saveWithImages()
                 
                 
                 // MUST IMPLEMENT DELETING LOGIC HERE FOR PICTURES
@@ -163,8 +164,8 @@ class RoomLocation: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let newLocName = newLocAlert.textFields![0].attributedText?.string
                 self.currentCategory.locations.append(LocationModel(withName: newLocName!, parentCategory: self.currentCategory))
                 
-                //self.currentAudit?.save()
-                self.currentAudit.saveWithImages()
+                // Use this method for saving, because when a new room is added, images are not present within that room.
+                self.currentAudit?.save()
                 
                 // Sorting the Rooms by name & reloading the List:
                 self.currentCategory.locations.sort(by :{$0.name < $1.name})
