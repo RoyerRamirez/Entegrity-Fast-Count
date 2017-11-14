@@ -73,7 +73,7 @@ class DataCellTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.isDefaultKey = isDefaultKey
     }
 
-    func labelTapped(){
+    @objc func labelTapped(){
         if isDefaultKey { // We don't want to let users adjust default keys
             return
         }

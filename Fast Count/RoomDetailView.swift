@@ -235,7 +235,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
     }
 
 
-    func exitFullScreen(_ sender: UITapGestureRecognizer){
+    @objc func exitFullScreen(_ sender: UITapGestureRecognizer){
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
@@ -331,7 +331,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
     }
     
     // the method below will run if there was an error while attempting to pull the camera or photo gallery up
-    func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
+    @objc func image(image: UIImage, didFinishSavingWithError error: NSErrorPointer, contextInfo:UnsafeRawPointer) {
         if error != nil {
             let alert = UIAlertController(title: "Save Failed", message: "Failed to save image", preferredStyle: UIAlertControllerStyle.alert)
             let cancelAction = UIAlertAction(title: "OK",style: .cancel, handler: nil)

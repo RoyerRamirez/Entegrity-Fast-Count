@@ -68,7 +68,7 @@ class NewFacilityViewController: UIViewController {
             //currentLocation.lastChange = .IMAGE
             //currentAudit.save()
             
-            AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
+            _ = AuditFilesManager.saveAudit(audit: newAudit, uid: newAudit.uid)
             
             TextField.text = ""
             textField2.text = ""

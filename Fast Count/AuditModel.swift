@@ -93,14 +93,14 @@ class AuditModel: NSObject, NSCoding {
     // the two functions below are added for convinence:
         // To save an audit, simply call audit.save()
     func save(){
-        AuditFilesManager.saveAudit(audit: self , uid: self.uid)
+        _ = AuditFilesManager.saveAudit(audit: self , uid: self.uid)
     }
     
     func saveWithImages(){
-        AuditFilesManager.saveAudit(audit: self , uid: self.uid)
+       _ = AuditFilesManager.saveAudit(audit: self , uid: self.uid)
         
         if self.privImages != nil && self.privImages!.images.count > 0{
-            AuditFilesManager.saveAuditImages(auditImages: self.privImages!, uid: self.uid)
+        _ = AuditFilesManager.saveAuditImages(auditImages: self.privImages!, uid: self.uid)
         }
     }
         // To delete an Audit, call audit.delete()

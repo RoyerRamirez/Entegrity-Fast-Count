@@ -21,11 +21,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="lgu-ke-exj">
-                                <rect key="frame" x="0.0" y="128" width="768" height="211"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Entegrity Logo - Cover" translatesAutoresizingMaskIntoConstraints="NO" id="lgu-ke-exj">
+                                <rect key="frame" x="0.0" y="64" width="768" height="275"/>
                                 <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="211" id="ByR-hM-Kko"/>
+                                    <constraint firstAttribute="height" constant="275" id="ByR-hM-Kko"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tby-Sq-zcX">
@@ -87,7 +87,7 @@
                             <constraint firstItem="x4p-cf-byV" firstAttribute="top" secondItem="lgu-ke-exj" secondAttribute="bottom" constant="8" id="PZl-V8-k5X"/>
                             <constraint firstItem="lgu-ke-exj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="a2R-qG-GtD"/>
                             <constraint firstAttribute="trailing" secondItem="tby-Sq-zcX" secondAttribute="trailing" constant="143" id="b4B-Sc-0Lf"/>
-                            <constraint firstItem="lgu-ke-exj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="64" id="ixu-Nh-ikS"/>
+                            <constraint firstItem="lgu-ke-exj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="ixu-Nh-ikS"/>
                             <constraint firstAttribute="trailing" secondItem="lgu-ke-exj" secondAttribute="trailing" id="nHU-qu-lTu"/>
                             <constraint firstItem="x4p-cf-byV" firstAttribute="top" secondItem="lgu-ke-exj" secondAttribute="bottom" constant="8" symbolic="YES" id="zbU-BS-WQ5"/>
                         </constraints>
@@ -732,7 +732,7 @@
         <image name="roll" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dDj-kI-MK3"/>
+        <segue reference="nML-Hs-GlM"/>
         <segue reference="Rji-It-piH"/>
     </inferredMetricsTieBreakers>
 </document>
