@@ -19,7 +19,7 @@ Dependencies are required for compiling this app.
 7. Open `Fast Count.xcworkspace`. **DO NOT USE FAST COUNT.XCODEPROJ ANYMORE FOR DEVELOPMENT.**
 8. Click Run.
 
-## Author
+## Authors
 
 * [Jasper Reddin](https://github.com/DrOverbuild)
 * [Royer Ramirez Ruiz](https://github.com/RoyerRamirez)
