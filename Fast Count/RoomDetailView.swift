@@ -1,6 +1,7 @@
 //
 //  RoomDetailView.swift
 //  Fast Count
+// 
 //
 //  Created by Royer Ramirez Ruiz on 6/27/17.
 //  Copyright © 2017 EntegrityEnergyPartners. All rights reserved.
@@ -32,9 +33,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
         // the method below creates the title for the page
         navigationItem.title = "Audit Detailed Inputs"
         
-        print("\n\nViewDidLoad load preparing to load!!!! \n\n")
         loadDataCells()
-        print("\n\nViewDidLoad loaded correctly!!!! \n\n")
         
     }
 

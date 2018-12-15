@@ -2,6 +2,7 @@
 //  ExistingAuditListViewController.swift
 //  Fast Count
 //
+//
 //  Created by Royer Ramirez Ruiz on 6/27/17.
 //  Copyright © 2017 EntegrityEnergyPartners. All rights reserved.
 //
@@ -165,7 +166,7 @@ class ExistingAuditListViewController: UIViewController, UITableViewDelegate, UI
 		
         let data = CSVExport.exportCSV(audit: audit)
 		let archiveData = FileManager.default.contents(atPath: data.imagesArchive.path)!
-//		let archiveData = try! Data(contentsOf: data.imagesArchive)
+        // let archiveData = try! Data(contentsOf: data.imagesArchive)
         mailComposerVC.addAttachmentData(data.data!, mimeType: "text/csv",
 			fileName: "audit_\(audit.name.replacingOccurrences(of: " ", with: "_")).csv")
 		mailComposerVC.addAttachmentData(archiveData, mimeType: "application/zip", fileName: data.imagesArchive.lastPathComponent)

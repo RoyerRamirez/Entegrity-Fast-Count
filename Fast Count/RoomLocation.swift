@@ -2,6 +2,7 @@
 //  RoomLocation.swift
 //  Fast Count
 //
+//
 //  Created by Royer Ramirez Ruiz on 7/2/17.
 //  Copyright © 2017 EntegrityEnergyPartners. All rights reserved.
 //
