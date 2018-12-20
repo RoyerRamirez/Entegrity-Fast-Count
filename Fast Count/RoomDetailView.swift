@@ -133,7 +133,7 @@ class RoomDetailView: UITableViewController, UIImagePickerControllerDelegate, UI
 		}
 		
 		// IMAGE GALLERY
-		gallery = tableView.dequeueReusableCell(withIdentifier: "Gallery") as! GalleryTableViewCell
+        gallery = (tableView.dequeueReusableCell(withIdentifier: "Gallery") as! GalleryTableViewCell)
 		gallery.roomDetailView = self
 		return gallery
         
